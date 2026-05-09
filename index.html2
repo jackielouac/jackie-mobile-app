@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>GR8 Software Solutions</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f4f8fc;
+    color:#1a1a1a;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#cfe9ff 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#dff4ff 0%,transparent 30%),
+    linear-gradient(135deg,#f4f8fc,#ffffff);
+    z-index:-5;
+}
+
+/* CONTAINER */
+
+.app{
+    max-width:1200px;
+    margin:auto;
+    padding:24px;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:800;
+    color:#0a53be;
+}
+
+.logo span{
+    color:#4f8dfc;
+}
+
+.nav-links{
+    display:flex;
+    gap:24px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#0a53be;
+}
+
+/* HERO */
+
+.hero{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+    min-height:85vh;
+}
+
+.hero-text h1{
+    font-size:74px;
+    line-height:1;
+    color:#0a53be;
+    font-weight:900;
+}
+
+.hero-text p{
+    margin-top:24px;
+    line-height:1.9;
+    font-size:18px;
+    color:#444;
+}
+
+.hero-buttons{
+    margin-top:35px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:16px 28px;
+    border-radius:16px;
+    border:none;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.primary{
+    background:#0a53be;
+    color:white;
+    box-shadow:0 10px 25px rgba(10,83,190,.25);
+}
+
+.primary:hover{
+    transform:translateY(-3px);
+    background:#08439b;
+}
+
+.secondary{
+    background:white;
+    color:#0a53be;
+    border:2px solid #0a53be;
+}
+
+.secondary:hover{
+    transform:translateY(-3px);
+}
+
+/* HERO IMAGE */
+
+.hero-image{
+    position:relative;
+}
+
+.hero-image img{
+    width:100%;
+    border-radius:28px;
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+/* SECTION */
+
+.section{
+    margin-top:100px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:54px;
+    color:#0a53be;
+    margin-bottom:20px;
+    font-weight:900;
+}
+
+.section-subtitle{
+    text-align:center;
+    max-width:760px;
+    margin:auto;
+    line-height:1.9;
+    color:#555;
+    font-size:17px;
+}
+
+/* CARDS */
+
+.cards{
+    margin-top:50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+}
+
+.card{
+    background:white;
+    padding:32px;
+    border-radius:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    color:#0a53be;
+    margin-bottom:16px;
+    font-size:24px;
+}
+
+.card p{
+    color:#555;
+    line-height:1.8;
+}
+
+/* PRODUCTS */
+
+.products{
+    margin-top:50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:24px;
+}
+
+.product-box{
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.product-box h3{
+    color:#0a53be;
+    margin-bottom:18px;
+    font-size:26px;
+}
+
+.product-box ul{
+    padding-left:18px;
+    line-height:2;
+    color:#444;
+}
+
+/* TEAM */
+
+.team{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.team-member{
+    background:white;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.team-member img{
+    width:100%;
+    height:340px;
+    object-fit:cover;
+}
+
+.team-content{
+    padding:24px;
+}
+
+.team-content h3{
+    color:#0a53be;
+    margin-bottom:8px;
+}
+
+.team-content p{
+    color:#666;
+}
+
+/* CONTACT */
+
+.contact-box{
+    margin-top:50px;
+    background:#0a53be;
+    padding:50px;
+    border-radius:30px;
+    color:white;
+    text-align:center;
+}
+
+.contact-box h2{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.contact-box p{
+    line-height:1.8;
+    font-size:18px;
+}
+
+.contact-buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.contact-btn{
+    background:white;
+    color:#0a53be;
+    padding:15px 24px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:80px;
+    padding:30px 0;
+    text-align:center;
+    color:#666;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .hero-text h1{
+        font-size:54px;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero-text h1{
+        font-size:42px;
+    }
+
+    .section-title{
+        font-size:38px;
+    }
+
+    .contact-box{
+        padding:35px 24px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            GR8<span>.</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+    </div>
+
+    <!-- HERO -->
+
+    <section class="hero" id="about">
+
+        <div class="hero-text">
+
+            <h1>
+                GR8 Software Solutions
+            </h1>
+
+            <p>
+                Integr8 Software Solutions, Inc. is a trusted software
+                development company established in 2015 to deliver
+                reliable computerized systems and ERP solutions for
+                cooperatives, lending institutions, retail businesses,
+                real estate companies, and various industries across
+                the Philippines.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#products" class="btn primary">
+                    View Products
+                </a>
+
+                <a href="#contact" class="btn secondary">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop">
+
+        </div>
+
+    </section>
+
+    <!-- SERVICES -->
+
+    <section class="section" id="services">
+
+        <h2 class="section-title">
+            What We Offer
+        </h2>
+
+        <p class="section-subtitle">
+            We provide scalable and innovative software solutions
+            tailored for modern businesses and organizations.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>ERP Solutions</h3>
+
+                <p>
+                    Complete ERP systems for accounting,
+                    inventory, billing, payroll, and operations
+                    management.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Custom Development</h3>
+
+                <p>
+                    Tailored software applications designed
+                    specifically for your business processes
+                    and operational needs.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Cloud Systems</h3>
+
+                <p>
+                    Secure cloud-based and on-premise
+                    systems with reliable performance
+                    and accessibility.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <section class="section" id="products">
+
+        <h2 class="section-title">
+            Our Products
+        </h2>
+
+        <p class="section-subtitle">
+            Business solutions built to simplify operations,
+            improve productivity, and support growth.
+        </p>
+
+        <div class="products">
+
+            <div class="product-box">
+
+                <h3>GR8Books</h3>
+
+                <ul>
+                    <li>Accounting Software</li>
+                    <li>Inventory Management</li>
+                    <li>Billing & Reporting</li>
+                    <li>Financial Monitoring</li>
+                </ul>
+
+            </div>
+
+            <div class="product-box">
+
+                <h3>Payroll & HRIS</h3>
+
+                <ul>
+                    <li>Employee Management</li>
+                    <li>Payroll Processing</li>
+                    <li>Attendance Monitoring</li>
+                    <li>Government Compliance</li>
+                </ul>
+
+            </div>
+
+            <div class="product-box">
+
+                <h3>POS System</h3>
+
+                <ul>
+                    <li>Retail & Grocery POS</li>
+                    <li>Sales Monitoring</li>
+                    <li>Inventory Tracking</li>
+                    <li>Customer Management</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TEAM -->
+
+    <section class="section" id="team">
+
+        <h2 class="section-title">
+            Our Team
+        </h2>
+
+        <p class="section-subtitle">
+            Our team is driven by innovation, collaboration,
+            and commitment to delivering excellent software solutions.
+        </p>
+
+        <div class="team">
+
+            <div class="team-member">
+
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="team-content">
+
+                    <h3>Paul Andrew Santamaria</h3>
+
+                    <p>President</p>
+
+                </div>
+
+            </div>
+
+            <div class="team-member">
+
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="team-content">
+
+                    <h3>Anjomarc Topacio</h3>
+
+                    <p>IT Director</p>
+
+                </div>
+
+            </div>
+
+            <div class="team-member">
+
+                <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="team-content">
+
+                    <h3>Mikko Crizaldo</h3>
+
+                    <p>IT Director</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="section" id="contact">
+
+        <div class="contact-box">
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p>
+                Ready to transform your business operations
+                with modern software solutions?
+                Get in touch with our team today.
+            </p>
+
+            <div class="contact-buttons">
+
+                <a href="tel:+639171197231" class="contact-btn">
+                    📞 0917-119-7231
+                </a>
+
+                <a href="https://www.integr8.com.ph" class="contact-btn">
+                    🌐 Visit Website
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        © 2026 GR8 Software Solutions • All Rights Reserved
+    </div>
+
+</div>
+
+</body>
+</html>
