@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JackietFlix Movies, free stream, ano tara?</title>
+<title>JackietFlix Movies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <style>
 
@@ -12,7 +15,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -21,7 +28,7 @@ body{
     overflow-x:hidden;
 }
 
-/* APPLE STYLE BACKGROUND */
+/* BACKGROUND */
 
 body::before{
     content:"";
@@ -31,15 +38,15 @@ body::before{
     radial-gradient(circle at top left,#ff4fd8 0%,transparent 25%),
     radial-gradient(circle at bottom right,#7b61ff 0%,transparent 25%),
     linear-gradient(145deg,#0a0a14,#141428,#090914);
-    z-index:-3;
+    z-index:-5;
 }
 
-/* BLUR LIGHTS */
+/* GLOW EFFECTS */
 
 .glow{
     position:fixed;
-    width:250px;
-    height:250px;
+    width:260px;
+    height:260px;
     border-radius:50%;
     filter:blur(120px);
     opacity:.35;
@@ -48,14 +55,14 @@ body::before{
 
 .glow1{
     background:#ff4fd8;
-    top:-50px;
-    left:-50px;
+    top:-80px;
+    left:-80px;
 }
 
 .glow2{
     background:#7b61ff;
-    bottom:-50px;
-    right:-50px;
+    bottom:-80px;
+    right:-80px;
 }
 
 /* APP */
@@ -71,50 +78,103 @@ body::before{
 
 .header{
     text-align:center;
-    margin-top:25px;
+    padding-top:20px;
 }
 
+/* LOGO */
+
 .logo{
-    width:95px;
-    height:95px;
+    width:100px;
+    height:100px;
     margin:auto;
-    border-radius:30px;
+    border-radius:32px;
     background:linear-gradient(135deg,#ff4fd8,#7b61ff);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:42px;
+    font-size:44px;
     box-shadow:0 15px 40px rgba(123,97,255,.45);
+
+    animation:floatLogo 5s ease-in-out infinite;
 }
+
+@keyframes floatLogo{
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* TITLE */
 
 .header h1{
-    margin-top:18px;
-    font-size:38px;
-    font-weight:700;
+    margin-top:20px;
+    font-size:40px;
+    font-weight:800;
+    line-height:1.1;
 }
 
-.header span{
-    background:linear-gradient(90deg,#ff4fd8,#9f7bff);
+.header h1 span{
+    background:linear-gradient(90deg,#ffffff,#ff8cf9,#9f7bff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-.header p{
-    margin-top:10px;
+/* SUBTITLE */
+
+.subtitle{
+    margin-top:14px;
     color:#d6d6e8;
-    line-height:1.6;
+    line-height:1.7;
     font-size:15px;
 }
 
-/* FEATURED MOVIE */
+/* LIVE BADGE */
+
+.live-badge{
+    display:inline-block;
+    margin-top:18px;
+    padding:10px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+    font-size:13px;
+    letter-spacing:1px;
+
+    animation:livePulse 2s infinite;
+}
+
+@keyframes livePulse{
+    0%{
+        box-shadow:0 0 0 rgba(255,79,216,0);
+    }
+
+    50%{
+        box-shadow:0 0 18px rgba(255,79,216,.6);
+    }
+
+    100%{
+        box-shadow:0 0 0 rgba(255,79,216,0);
+    }
+}
+
+/* HERO */
 
 .hero-card{
     margin-top:28px;
     border-radius:32px;
     overflow:hidden;
     position:relative;
-    height:240px;
-    box-shadow:0 15px 35px rgba(0,0,0,.4);
+    height:260px;
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
 }
 
 .hero-card img{
@@ -123,83 +183,141 @@ body::before{
     object-fit:cover;
 }
 
-.overlay{
+.hero-overlay{
     position:absolute;
     inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+    background:linear-gradient(to top,rgba(0,0,0,.88),transparent);
     display:flex;
     align-items:flex-end;
-    padding:22px;
+    padding:24px;
 }
 
-.overlay h2{
-    font-size:28px;
-    margin-bottom:8px;
+.hero-overlay h2{
+    font-size:32px;
+    margin-bottom:10px;
 }
 
-.overlay p{
+.hero-overlay p{
     color:#ddd;
+    line-height:1.6;
     font-size:14px;
-    line-height:1.5;
 }
 
 /* BUTTONS */
 
 .buttons{
-    margin-top:25px;
+    margin-top:28px;
     display:flex;
     flex-direction:column;
     gap:14px;
 }
 
 .btn{
+    position:relative;
+    overflow:hidden;
+
     padding:18px;
     border:none;
     border-radius:22px;
     font-size:16px;
     font-weight:700;
     cursor:pointer;
-    transition:.3s;
+    transition:.35s;
+    text-decoration:none;
+    text-align:center;
 }
 
 .btn:hover{
-    transform:translateY(-2px);
+    transform:translateY(-3px) scale(1.02);
 }
 
-.signup{
+/* SHINE */
+
+.btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+    transform:skewX(-25deg);
+
+    animation:shine 4s infinite;
+}
+
+@keyframes shine{
+    0%{
+        left:-120%;
+    }
+
+    100%{
+        left:150%;
+    }
+}
+
+/* PRIMARY */
+
+.primary{
     background:linear-gradient(135deg,#ff4fd8,#7b61ff);
     color:white;
+
+    box-shadow:
+    0 10px 30px rgba(255,79,216,.3),
+    0 10px 35px rgba(123,97,255,.3);
+
+    animation:pulseGlow 2.5s infinite;
 }
 
-.login{
+@keyframes pulseGlow{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.03);
+        box-shadow:
+        0 0 25px rgba(255,79,216,.6),
+        0 0 40px rgba(123,97,255,.4);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* SECONDARY */
+
+.secondary{
     background:rgba(255,255,255,.08);
     color:white;
     border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(10px);
-}
-
-.subscribe{
-    background:white;
-    color:#111111;
+    backdrop-filter:blur(12px);
 }
 
 /* SECTION */
 
 .section-title{
-    margin-top:35px;
-    margin-bottom:18px;
-    font-size:24px;
-    font-weight:700;
+    margin-top:40px;
+    margin-bottom:20px;
+    font-size:26px;
+    font-weight:800;
 }
 
-/* TRENDING MOVIES */
+/* MOVIES */
 
 .movies-scroll{
     display:flex;
     gap:16px;
     overflow-x:auto;
     scroll-behavior:smooth;
-    padding-bottom:10px;
+    padding-bottom:12px;
 }
 
 .movies-scroll::-webkit-scrollbar{
@@ -207,28 +325,57 @@ body::before{
 }
 
 .movie-box{
-    min-width:170px;
+    min-width:180px;
     background:rgba(255,255,255,.08);
     border:1px solid rgba(255,255,255,.08);
     border-radius:28px;
     overflow:hidden;
-    backdrop-filter:blur(20px);
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
-    transition:.3s;
+    backdrop-filter:blur(18px);
+    box-shadow:0 12px 28px rgba(0,0,0,.25);
+
+    transition:.35s;
 }
 
 .movie-box:hover{
-    transform:scale(1.03);
+    transform:translateY(-8px) scale(1.04);
+
+    box-shadow:
+    0 15px 35px rgba(255,79,216,.25),
+    0 15px 35px rgba(123,97,255,.25);
+}
+
+/* FLOATING MOVIES */
+
+.movie-box:nth-child(2){
+    animation:floatMovie 4s ease-in-out infinite;
+}
+
+.movie-box:nth-child(4){
+    animation:floatMovie 5s ease-in-out infinite;
+}
+
+@keyframes floatMovie{
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
 }
 
 .movie-box img{
     width:100%;
-    height:220px;
+    height:230px;
     object-fit:cover;
 }
 
 .movie-content{
-    padding:15px;
+    padding:16px;
 }
 
 .movie-content h3{
@@ -237,18 +384,16 @@ body::before{
 }
 
 .movie-content p{
-    color:#d4d4e4;
+    color:#d5d5e6;
     font-size:13px;
-    line-height:1.5;
+    line-height:1.6;
 }
-
-/* TAG */
 
 .tag{
     display:inline-block;
-    margin-top:10px;
+    margin-top:12px;
     padding:7px 12px;
-    border-radius:50px;
+    border-radius:999px;
     background:rgba(255,255,255,.12);
     font-size:12px;
 }
@@ -259,7 +404,7 @@ body::before{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.65);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
     display:none;
     justify-content:center;
     align-items:center;
@@ -272,10 +417,11 @@ body::before{
     max-width:360px;
     background:rgba(255,255,255,.08);
     border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(20px);
-    border-radius:32px;
+    border-radius:30px;
     padding:30px;
-    animation:popup .3s ease;
+    backdrop-filter:blur(20px);
+
+    animation:popup .35s ease;
 }
 
 @keyframes popup{
@@ -283,6 +429,7 @@ body::before{
         transform:scale(.8);
         opacity:0;
     }
+
     to{
         transform:scale(1);
         opacity:1;
@@ -291,8 +438,9 @@ body::before{
 
 .popup-box h2{
     text-align:center;
-    margin-bottom:20px;
-    font-size:28px;
+    margin-bottom:22px;
+    font-size:30px;
+
     background:linear-gradient(90deg,#ff4fd8,#7b61ff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -300,11 +448,11 @@ body::before{
 
 .popup-box input{
     width:100%;
-    padding:15px;
-    margin-bottom:15px;
+    padding:16px;
+    margin-bottom:14px;
     border:none;
     outline:none;
-    border-radius:16px;
+    border-radius:18px;
     background:rgba(255,255,255,.1);
     color:white;
     font-size:15px;
@@ -316,26 +464,25 @@ body::before{
 
 .popup-btn{
     width:100%;
-    padding:15px;
+    padding:16px;
     border:none;
-    border-radius:16px;
+    border-radius:18px;
     background:linear-gradient(135deg,#ff4fd8,#7b61ff);
     color:white;
     font-size:16px;
-    font-weight:bold;
+    font-weight:700;
     cursor:pointer;
-    margin-top:5px;
 }
 
 .close-btn{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
-    border-radius:16px;
+    border-radius:18px;
     background:white;
     color:#111;
-    font-weight:bold;
     margin-top:12px;
+    font-weight:700;
     cursor:pointer;
 }
 
@@ -350,21 +497,20 @@ body::before{
     height:220px;
     background:white;
     padding:10px;
-    border-radius:20px;
-    margin:15px auto;
+    border-radius:22px;
+    margin:18px auto;
 }
 
 .price{
-    font-size:30px;
-    font-weight:700;
+    font-size:34px;
+    font-weight:800;
     color:#ff77e9;
-    margin-top:10px;
 }
 
 .small{
     color:#ddd;
-    margin-top:8px;
-    line-height:1.5;
+    margin-top:10px;
+    line-height:1.6;
     font-size:14px;
 }
 
@@ -374,8 +520,22 @@ body::before{
     text-align:center;
     color:#aaa;
     font-size:13px;
-    margin-top:40px;
+    margin-top:45px;
     padding-bottom:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .header h1{
+        font-size:34px;
+    }
+
+    .hero-overlay h2{
+        font-size:28px;
+    }
+
 }
 
 </style>
@@ -394,229 +554,40 @@ body::before{
 
         <div class="logo">🎬</div>
 
-        <h1><span>Jackie in Flex</span> </h1>
+        <h1>
+            <span>JackietFlix</span>
+        </h1>
 
-        <section class="hero">
-  <div class="overlay"></div>
+        <p class="subtitle">
+            Stream trending movies, anime, K-drama,
+            horror, comedy, romance and exclusive
+            entertainment in ultra HD anytime,
+            anywhere.
+        </p>
 
-  <div class="hero-content">
-    <span class="badge">✨ Free First Month Access</span>
+        <div class="live-badge">
+            ● LIVE STREAMING IN HD
+        </div>
 
-    <h1>
-      Stream Trending Movies & Premium Entertainment
-    </h1>
-
-    <p class="subtitle">
-      Watch blockbuster hits, anime, K-drama, horror, romance, comedy,
-      documentaries, and exclusive series in stunning HD quality —
-      anytime, anywhere.
-    </p>
-
-    <div class="buttons">
-      <a href="#" class="btn-primary">Start Watching Free</a>
-      <a href="#" class="btn-secondary">Browse Titles</a>
     </div>
 
-    <div class="features">
-      <div class="feature">🎬 All Genres Available</div>
-      <div class="feature">📺 HD Smooth Streaming</div>
-      <div class="feature">📱 Mobile & Smart TV Ready</div>
-      <div class="feature">🔥 Exclusive Trending Content</div>
-    </div>
-  </div>
-</section>
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-  "Segoe UI", sans-serif;
-}
-
-body{
-  background:#000;
-}
-
-/* HERO SECTION */
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px;
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,0,0,0.9),
-      rgba(20,0,30,0.85),
-      rgba(70,0,120,0.65)
-    ),
-    url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1600&auto=format&fit=crop')
-    center/cover no-repeat;
-}
-
-/* BLUR OVERLAY */
-.overlay{
-  position:absolute;
-  inset:0;
-  backdrop-filter: blur(2px);
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.7)
-  );
-}
-
-/* CONTENT */
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:900px;
-  text-align:center;
-  color:white;
-}
-
-/* BADGE */
-.badge{
-  display:inline-block;
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.2);
-  color:#ffb6ff;
-  font-size:14px;
-  margin-bottom:25px;
-  backdrop-filter: blur(12px);
-}
-
-/* TITLE */
-.hero h1{
-  font-size:clamp(42px, 7vw, 78px);
-  line-height:1.05;
-  font-weight:700;
-  margin-bottom:25px;
-
-  background:linear-gradient(to right, #ffffff, #ff8cf9, #a855f7);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* DESCRIPTION */
-.subtitle{
-  font-size:18px;
-  line-height:1.8;
-  color:rgba(255,255,255,0.8);
-  max-width:760px;
-  margin:auto;
-  margin-bottom:40px;
-}
-
-/* BUTTONS */
-.buttons{
-  display:flex;
-  gap:18px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:50px;
-}
-
-.btn-primary,
-.btn-secondary{
-  text-decoration:none;
-  padding:16px 28px;
-  border-radius:18px;
-  font-weight:600;
-  transition:0.3s ease;
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,#ff4fd8,#8b5cf6);
-  color:white;
-  box-shadow:
-    0 10px 30px rgba(168,85,247,0.45);
-}
-
-.btn-primary:hover{
-  transform:translateY(-3px) scale(1.02);
-  box-shadow:
-    0 14px 40px rgba(255,79,216,0.5);
-}
-
-.btn-secondary{
-  border:1px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.06);
-  color:white;
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover{
-  background:rgba(255,255,255,0.12);
-  transform:translateY(-3px);
-}
-
-/* FEATURES */
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-}
-
-.feature{
-  padding:18px;
-  border-radius:22px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.08);
-  color:#f3f3f3;
-  backdrop-filter: blur(14px);
-
-  transition:0.3s ease;
-}
-
-.feature:hover{
-  transform:translateY(-5px);
-  background:rgba(255,255,255,0.1);
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .hero{
-    padding:25px;
-  }
-
-  .subtitle{
-    font-size:16px;
-  }
-
-  .buttons{
-    flex-direction:column;
-    align-items:center;
-  }
-
-  .btn-primary,
-  .btn-secondary{
-    width:100%;
-    max-width:320px;
-    text-align:center;
-  }
-}
-</style>
-
-    <!-- FEATURED -->
+    <!-- HERO -->
 
     <div class="hero-card">
 
-        <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1200&auto=format&fit=crop" alt="Movie">
+        <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1200&auto=format&fit=crop">
 
-        <div class="overlay">
+        <div class="hero-overlay">
 
             <div>
+
                 <h2>Future World</h2>
-                <p>Watch the newest blockbuster movies in Ultra HD.</p>
+
+                <p>
+                    Watch blockbuster movies and trending
+                    series in premium cinematic quality.
+                </p>
+
             </div>
 
         </div>
@@ -627,101 +598,129 @@ body{
 
     <div class="buttons">
 
-        <button class="btn signup" onclick="openPopup('signupPopup')">
+        <a href="#trending" class="btn primary">
+            Start Watching Free
+        </a>
+
+        <a href="#trending" class="btn secondary">
+            Browse Titles
+        </a>
+
+        <button class="btn secondary"
+        onclick="openPopup('signupPopup')">
+
             Create Account
+
         </button>
 
-        <button class="btn login" onclick="openPopup('loginPopup')">
+        <button class="btn secondary"
+        onclick="openPopup('loginPopup')">
+
             Login
+
         </button>
 
-        <button class="btn subscribe" onclick="openPopup('subscribePopup')">
-            Subscribe ₱69.00/ Month
+        <button class="btn"
+        style="background:white;color:#111;"
+        onclick="openPopup('subscribePopup')">
+
+            Subscribe ₱69 / Month
+
         </button>
 
     </div>
 
     <!-- TRENDING -->
 
-    <h2 class="section-title">🔥 Trending Movies</h2>
+    <h2 class="section-title" id="trending">
+        🔥 Trending Movies
+    </h2>
 
     <div class="movies-scroll">
 
-        <!-- MOVIE 1 -->
+        <!-- MOVIE -->
 
         <div class="movie-box">
 
-            <img src="25fb1756-a6df-43d3-adce-35f91216a094.jpg" alt="Movie">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop">
 
             <div class="movie-content">
 
-                <h3>Sample Movie 1</h3>
+                <h3>Midnight City</h3>
 
                 <p>
-                   Walang forever sa mundo , pero dito sa JackietFlix Movies, may forever na pelikula para sa'yo.
+                    Experience futuristic action and cinematic adventure.
                 </p>
 
-                <div class="tag">Trending</div>
+                <div class="tag">
+                    Trending
+                </div>
 
             </div>
 
         </div>
 
-        <!-- MOVIE 2 -->
+        <!-- MOVIE -->
 
         <div class="movie-box">
 
-            <img src="2205a911-d17f-45f3-9099-7d580ccbc24e.jpg">
+            <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop">
 
             <div class="movie-content">
 
                 <h3>Dark Horizon</h3>
 
                 <p>
-                    Explore mysterious galaxies and cinematic adventures.
+                    Explore mysterious galaxies and hidden worlds.
                 </p>
 
-                <div class="tag">New Release</div>
+                <div class="tag">
+                    New Release
+                </div>
 
             </div>
 
         </div>
 
-        <!-- MOVIE 3 -->
+        <!-- MOVIE -->
 
         <div class="movie-box">
 
-            <img src="2205a911-d17f-45f3-9099-7d580ccb">
+            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1200&auto=format&fit=crop">
 
             <div class="movie-content">
 
                 <h3>Velocity</h3>
 
                 <p>
-                    High-speed racing heartbeats and adrenaline-pumping action.
+                    High-speed adrenaline racing with stunning visuals.
                 </p>
 
-                <div class="tag">4K HD</div>
+                <div class="tag">
+                    4K HD
+                </div>
 
             </div>
 
         </div>
 
-        <!-- MOVIE 4 -->
+        <!-- MOVIE -->
 
         <div class="movie-box">
 
-            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=900&auto=format&fit=crop" alt="Movie">
+            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1200&auto=format&fit=crop">
 
             <div class="movie-content">
 
                 <h3>Moonlight</h3>
 
                 <p>
-                    Cadlum-Balilla best produced movie. 
+                    Emotional storytelling with premium cinematic scenes.
                 </p>
 
-                <div class="tag">Popular</div>
+                <div class="tag">
+                    Popular
+                </div>
 
             </div>
 
@@ -732,7 +731,7 @@ body{
     <!-- FOOTER -->
 
     <div class="footer">
-        ©2026 JackietFlex Movies • #1 Streaming App - WorldWide
+        ©2026 JackietFlix Movies • Premium Streaming Experience
     </div>
 
 </div>
@@ -746,20 +745,27 @@ body{
         <h2>Create Account</h2>
 
         <input type="text" placeholder="Full Name">
+
         <input type="email" placeholder="Email Address">
+
         <input type="password" placeholder="Password">
 
-        <button class="popup-btn">Sign Up</button>
+        <button class="popup-btn">
+            Sign Up
+        </button>
 
-        <button class="close-btn" onclick="closePopup('signupPopup')">
+        <button class="close-btn"
+        onclick="closePopup('signupPopup')">
+
             Close
+
         </button>
 
     </div>
 
 </div>
 
-<!-- LOGIN POPUP -->
+<!-- LOGIN -->
 
 <div class="popup" id="loginPopup">
 
@@ -768,19 +774,25 @@ body{
         <h2>Login</h2>
 
         <input type="email" placeholder="Email Address">
+
         <input type="password" placeholder="Password">
 
-        <button class="popup-btn">Login Now</button>
+        <button class="popup-btn">
+            Login Now
+        </button>
 
-        <button class="close-btn" onclick="closePopup('loginPopup')">
+        <button class="close-btn"
+        onclick="closePopup('loginPopup')">
+
             Close
+
         </button>
 
     </div>
 
 </div>
 
-<!-- SUBSCRIBE POPUP -->
+<!-- SUBSCRIBE -->
 
 <div class="popup" id="subscribePopup">
 
@@ -788,21 +800,26 @@ body{
 
         <h2>Premium Subscription</h2>
 
-        <div class="price">₱69 / Month</div>
+        <div class="price">
+            ₱69 / Month
+        </div>
 
         <p class="small">
-            Scan the QR code using GCash, Maya,
-            or any banking app.
+            Scan the QR code using GCash,
+            Maya or any banking app.
         </p>
 
-        <img src="https://i.pinimg.com/736x/ee/c9/9a/eec99a787e8b61a0549fb033269167aa.jpg" alt="QR">
+        <img src="https://i.pinimg.com/736x/ee/c9/9a/eec99a787e8b61a0549fb033269167aa.jpg">
 
         <button class="popup-btn">
             Scan to Complete
         </button>
 
-        <button class="close-btn" onclick="closePopup('subscribePopup')">
+        <button class="close-btn"
+        onclick="closePopup('subscribePopup')">
+
             Close
+
         </button>
 
     </div>
@@ -819,8 +836,21 @@ function closePopup(id){
     document.getElementById(id).style.display = "none";
 }
 
+window.onclick = function(e){
+
+    const popups = document.querySelectorAll(".popup");
+
+    popups.forEach(function(popup){
+
+        if(e.target === popup){
+            popup.style.display = "none";
+        }
+
+    });
+
+}
+
 </script>
 
 </body>
-
 </html>
