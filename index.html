@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quelou ERP - AJ Accounting Ultimate</title>
+<title>Quelou ERP, AJ Accounting System </title>
 
 <style>
 
@@ -39,7 +39,7 @@ body::before{
 }
 
 .sidebar{
-    width:280px;
+    width:300px;
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(20px);
     padding:25px;
@@ -54,9 +54,9 @@ body::before{
 }
 
 .logo-icon{
-    width:60px;
-    height:60px;
-    border-radius:18px;
+    width:65px;
+    height:65px;
+    border-radius:20px;
     background:linear-gradient(135deg,#1d4ed8,#14b8a6);
     display:flex;
     align-items:center;
@@ -81,6 +81,7 @@ body::before{
     cursor:pointer;
     transition:.3s;
     font-size:15px;
+    font-weight:600;
 }
 
 .menu button:hover{
@@ -104,7 +105,7 @@ body::before{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
     gap:20px;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .card{
@@ -156,6 +157,7 @@ body::before{
     background:rgba(255,255,255,.06);
     border-radius:25px;
     padding:24px;
+    margin-bottom:25px;
 }
 
 table{
@@ -186,7 +188,7 @@ table td{
 
 .popup-box{
     width:95%;
-    max-width:600px;
+    max-width:650px;
     background:#111827;
     padding:30px;
     border-radius:24px;
@@ -273,6 +275,57 @@ table td{
     cursor:pointer;
 }
 
+.process-flow{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.flow-step{
+    flex:1;
+    min-width:220px;
+    background:rgba(255,255,255,.06);
+    border-radius:22px;
+    padding:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.flow-step:hover{
+    transform:translateY(-5px);
+    background:linear-gradient(135deg,#1d4ed8,#14b8a6);
+}
+
+.step-no{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1d4ed8,#14b8a6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.flow-arrow{
+    font-size:28px;
+    opacity:.5;
+}
+
+.ai-box{
+    margin-top:25px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(20,184,166,.12);
+    border:1px solid rgba(20,184,166,.3);
+}
+
+.ai-box h3{
+    margin-bottom:10px;
+}
+
 @media(max-width:900px){
 
     .app{
@@ -291,22 +344,24 @@ table td{
 
 <body>
 
-<!-- LOGIN -->
-
 <div class="login-screen" id="loginScreen">
 
     <div class="login-box">
 
-        <h1 style="margin-bottom:10px;">AJ Accounting</h1>
+        <h1 style="margin-bottom:10px;">
+            AJ Accounting
+        </h1>
 
         <p style="margin-bottom:20px;color:#bfc7d9;">
-            Quelou ERP Ultimate
+            Quelou ERP Ultimate AI
         </p>
 
-        <input type="text" id="username"
+        <input type="text"
+        id="username"
         placeholder="Username">
 
-        <input type="password" id="password"
+        <input type="password"
+        id="password"
         placeholder="Password">
 
         <button class="login-btn"
@@ -320,11 +375,7 @@ table td{
 
 </div>
 
-<!-- APP -->
-
 <div class="app">
-
-    <!-- SIDEBAR -->
 
     <div class="sidebar">
 
@@ -339,7 +390,7 @@ table td{
                 <h2>Quelou ERP</h2>
 
                 <p style="color:#b8c0d4;">
-                    AJ Accounting
+                    AI Accounting System
                 </p>
 
             </div>
@@ -348,10 +399,12 @@ table td{
 
         <div class="menu">
 
-            <button>📊 Dashboard</button>
+            <button>
+                📊 Dashboard
+            </button>
 
             <button onclick="openPopup('customerPopup')">
-                👥 Customer Maintenance
+                👥 Customer Masterfile
             </button>
 
             <button onclick="openPopup('invoicePopup')">
@@ -366,6 +419,10 @@ table td{
                 📈 Reports
             </button>
 
+            <button onclick="runAISuggestions()">
+                🤖 AI Suggestions
+            </button>
+
             <button onclick="openPopup('formPopup')">
                 🧩 Form Maker
             </button>
@@ -378,18 +435,18 @@ table td{
 
     </div>
 
-    <!-- MAIN -->
-
     <div class="main">
 
         <div class="topbar">
 
             <div>
 
-                <h1>Accounting Dashboard</h1>
+                <h1>
+                    Accounting Dashboard
+                </h1>
 
                 <p style="color:#b7bfd2;">
-                    Manage invoices and collections
+                    Smart Billing & Collection Management
                 </p>
 
             </div>
@@ -400,8 +457,6 @@ table td{
             </div>
 
         </div>
-
-        <!-- CARDS -->
 
         <div class="cards">
 
@@ -443,7 +498,77 @@ table td{
 
         </div>
 
-        <!-- ACTIONS -->
+        <!-- PROCESS FLOW -->
+
+        <div class="table-box">
+
+            <h2 style="margin-bottom:20px;">
+                🚀 Accounting Process Flow
+            </h2>
+
+            <div class="process-flow">
+
+                <div class="flow-step"
+                onclick="openPopup('customerPopup')">
+
+                    <div class="step-no">1</div>
+
+                    <h3>Customer Masterfile</h3>
+
+                    <p>
+                        Add customer details
+                    </p>
+
+                </div>
+
+                <div class="flow-arrow">➜</div>
+
+                <div class="flow-step"
+                onclick="openPopup('invoicePopup')">
+
+                    <div class="step-no">2</div>
+
+                    <h3>Create Invoice</h3>
+
+                    <p>
+                        Generate billing invoice
+                    </p>
+
+                </div>
+
+                <div class="flow-arrow">➜</div>
+
+                <div class="flow-step"
+                onclick="openPopup('receiptPopup')">
+
+                    <div class="step-no">3</div>
+
+                    <h3>Collection Receipt</h3>
+
+                    <p>
+                        Receive payment
+                    </p>
+
+                </div>
+
+                <div class="flow-arrow">➜</div>
+
+                <div class="flow-step"
+                onclick="generateSalesReport()">
+
+                    <div class="step-no">4</div>
+
+                    <h3>Financial Reports</h3>
+
+                    <p>
+                        Generate accounting reports
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <div class="actions">
 
@@ -468,9 +593,14 @@ table td{
 
             </button>
 
-        </div>
+            <button class="secondary"
+            onclick="exportData()">
 
-        <!-- TABLE -->
+                Export Backup
+
+            </button>
+
+        </div>
 
         <div class="table-box">
 
@@ -498,6 +628,18 @@ table td{
 
         </div>
 
+        <div class="ai-box">
+
+            <h3>
+                🤖 AI Business Insights
+            </h3>
+
+            <p id="aiInsight">
+                System ready.
+            </p>
+
+        </div>
+
     </div>
 
 </div>
@@ -508,19 +650,23 @@ table td{
 
     <div class="popup-box">
 
-        <h2>Customer Maintenance</h2>
+        <h2>Customer Masterfile</h2>
 
-        <input type="text" id="custName"
+        <input type="text"
+        id="custName"
         placeholder="Customer Name">
 
-        <input type="text" id="custAddress"
+        <input type="text"
+        id="custAddress"
         placeholder="Address">
 
-        <input type="text" id="custTIN"
+        <input type="text"
+        id="custTIN"
         placeholder="TIN">
 
-        <input type="text" id="custContact"
-        placeholder="Contact">
+        <input type="text"
+        id="custContact"
+        placeholder="Contact Number">
 
         <div class="popup-buttons">
 
@@ -554,15 +700,18 @@ table td{
 
         <select id="invCustomer"></select>
 
-        <input type="text" id="invNumber"
+        <input type="text"
+        id="invNumber"
         placeholder="Invoice Number">
 
-        <input type="date" id="invDate">
+        <input type="date"
+        id="invDate">
 
         <textarea id="invDetails"
         placeholder="Invoice Details"></textarea>
 
-        <input type="number" id="invAmount"
+        <input type="number"
+        id="invAmount"
         placeholder="Amount">
 
         <div class="popup-buttons">
@@ -595,13 +744,29 @@ table td{
 
         <h2>Collection Receipt</h2>
 
-        <input type="text" id="recCustomer"
+        <select id="receiptInvoiceSelect"
+        onchange="loadInvoiceToReceipt()">
+
+            <option>
+                Select Invoice
+            </option>
+
+        </select>
+
+        <input type="text"
+        id="recCustomer"
         placeholder="Customer Name">
 
-        <input type="text" id="recNumber"
+        <input type="text"
+        id="recInvoiceNumber"
+        placeholder="Invoice Number">
+
+        <input type="text"
+        id="recNumber"
         placeholder="Receipt Number">
 
-        <input type="number" id="recAmount"
+        <input type="number"
+        id="recAmount"
         placeholder="Amount">
 
         <select id="recMethod">
@@ -609,6 +774,7 @@ table td{
             <option>Cash</option>
             <option>GCash</option>
             <option>Bank Transfer</option>
+            <option>Check</option>
 
         </select>
 
@@ -645,34 +811,37 @@ table td{
 
         <h2>System Settings</h2>
 
-        <input type="text" id="companyName"
+        <input type="text"
+        id="companyName"
         placeholder="Company Name">
 
-        <input type="text" id="companyAddress"
+        <input type="text"
+        id="companyAddress"
         placeholder="Company Address">
 
-        <input type="text" id="companyTIN"
+        <input type="text"
+        id="companyTIN"
         placeholder="Company TIN">
-
-        <input type="file" id="companyLogo">
 
         <hr style="margin:20px 0;">
 
         <h3 style="margin-bottom:15px;">
-            Add System User
+            Add User
         </h3>
 
-        <input type="text" id="newUsername"
+        <input type="text"
+        id="newUsername"
         placeholder="Username">
 
-        <input type="password" id="newPassword"
+        <input type="password"
+        id="newPassword"
         placeholder="Password">
 
         <select id="userRole">
 
             <option>Admin</option>
-            <option>Cashier</option>
             <option>Accounting</option>
+            <option>Cashier</option>
 
         </select>
 
@@ -706,7 +875,8 @@ table td{
 
         <h2>Custom Form Maker</h2>
 
-        <input type="text" id="formTitle"
+        <input type="text"
+        id="formTitle"
         placeholder="Form Title">
 
         <textarea id="formBody"
@@ -742,8 +912,8 @@ let users =
 JSON.parse(localStorage.getItem("users")) || [
 
     {
-        username:"jackie-gelic",
-        password:"1028",
+        username:"admin",
+        password:"admin123",
         role:"Admin"
     }
 
@@ -761,8 +931,8 @@ JSON.parse(localStorage.getItem("receipts")) || [];
 let settings =
 JSON.parse(localStorage.getItem("settings")) || {
 
-    companyName:"SAMPLE COMPANY",
-    companyAddress:"621 J. Dimabiling, Cavite",
+    companyName:"AJ ACCOUNTING",
+    companyAddress:"Cavite",
     companyTIN:"123-123-123"
 
 };
@@ -797,8 +967,14 @@ function login(){
         .innerHTML = found.username;
 
         loadCustomers();
+
+        loadInvoiceSelections();
+
         renderInvoices();
+
         updateCards();
+
+        runAISuggestions();
 
     }else{
 
@@ -918,9 +1094,70 @@ function saveInvoice(){
 
     renderInvoices();
 
+    loadInvoiceSelections();
+
     updateCards();
 
     closePopup("invoicePopup");
+
+    alert("Invoice Saved");
+
+}
+
+/* LOAD INVOICE LIST */
+
+function loadInvoiceSelections(){
+
+    let select =
+    document.getElementById("receiptInvoiceSelect");
+
+    select.innerHTML = `
+
+    <option value="">
+        Select Invoice
+    </option>
+
+    `;
+
+    invoices.forEach((inv,index)=>{
+
+        select.innerHTML += `
+
+        <option value="${index}">
+
+            ${inv.number} -
+            ${inv.customer}
+
+        </option>
+
+        `;
+
+    });
+
+}
+
+/* AUTO LOAD */
+
+function loadInvoiceToReceipt(){
+
+    let index =
+    document.getElementById("receiptInvoiceSelect")
+    .value;
+
+    let inv = invoices[index];
+
+    if(inv){
+
+        document.getElementById("recCustomer")
+        .value = inv.customer;
+
+        document.getElementById("recInvoiceNumber")
+        .value = inv.number;
+
+        document.getElementById("recAmount")
+        .value = inv.amount;
+
+    }
 
 }
 
@@ -932,6 +1169,9 @@ function saveReceipt(){
 
         customer:
         document.getElementById("recCustomer").value,
+
+        invoice:
+        document.getElementById("recInvoiceNumber").value,
 
         number:
         document.getElementById("recNumber").value,
@@ -949,14 +1189,35 @@ function saveReceipt(){
 
     receipts.push(receipt);
 
+    invoices.forEach(inv=>{
+
+        if(
+            inv.number === receipt.invoice
+        ){
+
+            inv.status = "PAID";
+
+        }
+
+    });
+
     localStorage.setItem(
         "receipts",
         JSON.stringify(receipts)
     );
 
+    localStorage.setItem(
+        "invoices",
+        JSON.stringify(invoices)
+    );
+
+    renderInvoices();
+
     updateCards();
 
     closePopup("receiptPopup");
+
+    alert("Receipt Saved");
 
 }
 
@@ -1017,7 +1278,7 @@ function renderInvoices(){
 
 }
 
-/* UPDATE DASHBOARD */
+/* DASHBOARD */
 
 function updateCards(){
 
@@ -1061,144 +1322,35 @@ function previewInvoice(index){
 
     let inv = invoices[index];
 
-    let customer =
-    customers.find(c=>
-
-        c.name === inv.customer
-
-    );
-
     let win =
-    window.open("","","width=1000,height=800");
+    window.open("","","width=900,height=800");
 
     win.document.write(`
 
     <html>
 
-    <head>
+    <body style="font-family:Arial;padding:30px;">
 
-    <title>Billing Statement</title>
+    <h1>${settings.companyName}</h1>
 
-    <style>
+    <p>${settings.companyAddress}</p>
 
-    body{
-        font-family:Arial;
-        padding:30px;
-    }
+    <h2>BILLING STATEMENT</h2>
 
-    .box{
-        border:2px solid black;
-        padding:20px;
-    }
+    <hr>
 
-    table{
-        width:100%;
-        border-collapse:collapse;
-        margin-top:20px;
-    }
+    <p><b>Customer:</b> ${inv.customer}</p>
 
-    table,th,td{
-        border:1px solid black;
-    }
+    <p><b>Invoice #:</b> ${inv.number}</p>
 
-    th,td{
-        padding:10px;
-    }
+    <p><b>Date:</b> ${inv.date}</p>
 
-    .right{
-        text-align:right;
-    }
+    <p><b>Details:</b> ${inv.details}</p>
 
-    button{
-        padding:12px 18px;
-        border:none;
-        background:#1d4ed8;
-        color:white;
-        margin-top:20px;
-    }
-
-    </style>
-
-    </head>
-
-    <body>
-
-    <div class="box">
-
-        <center>
-
-            <h2>${settings.companyName}</h2>
-
-            <p>${settings.companyAddress}</p>
-
-            <p>TIN: ${settings.companyTIN}</p>
-
-            <h1>BILLING STATEMENT</h1>
-
-        </center>
-
-        <br>
-
-        <p>
-        <b>Customer:</b>
-        ${inv.customer}
-        </p>
-
-        <p>
-        <b>Address:</b>
-        ${customer ? customer.address : ""}
-        </p>
-
-        <p>
-        <b>TIN:</b>
-        ${customer ? customer.tin : ""}
-        </p>
-
-        <p>
-        <b>Invoice #:</b>
-        ${inv.number}
-        </p>
-
-        <p>
-        <b>Date:</b>
-        ${inv.date}
-        </p>
-
-        <table>
-
-            <tr>
-
-                <th>Description</th>
-                <th>Amount</th>
-
-            </tr>
-
-            <tr>
-
-                <td>${inv.details}</td>
-
-                <td class="right">
-
-                    ₱${Number(inv.amount)
-                    .toLocaleString()}
-
-                </td>
-
-            </tr>
-
-        </table>
-
-        <br>
-
-        <h2 class="right">
-
-            TOTAL :
-            ₱${Number(inv.amount)
-            .toLocaleString()}
-
-        </h2>
-
-    </div>
+    <h2>
+        TOTAL :
+        ₱${Number(inv.amount).toLocaleString()}
+    </h2>
 
     <button onclick="window.print()">
         Print
@@ -1305,6 +1457,98 @@ function saveCustomForm(){
     );
 
     alert("Custom Form Saved");
+
+}
+
+/* AI */
+
+function runAISuggestions(){
+
+    let pending =
+    invoices.filter(i=>
+
+        i.status === "PENDING"
+
+    );
+
+    let receivable = 0;
+
+    pending.forEach(p=>{
+
+        receivable += Number(p.amount);
+
+    });
+
+    let msg = "";
+
+    if(receivable > 50000){
+
+        msg +=
+        "⚠ High receivables detected.<br><br>";
+
+    }
+
+    if(pending.length > 3){
+
+        msg +=
+        "📌 Multiple unpaid invoices found.<br><br>";
+
+    }
+
+    if(customers.length === 0){
+
+        msg +=
+        "👥 Add customer records.<br><br>";
+
+    }
+
+    if(msg === ""){
+
+        msg =
+        "✅ Business operations look healthy.";
+
+    }
+
+    document.getElementById("aiInsight")
+    .innerHTML = msg;
+
+}
+
+/* EXPORT */
+
+function exportData(){
+
+    let data = {
+
+        customers,
+        invoices,
+        receipts,
+        settings,
+        users,
+        customForms
+
+    };
+
+    let blob = new Blob(
+
+        [JSON.stringify(data,null,2)],
+
+        {
+            type:"application/json"
+        }
+
+    );
+
+    let a =
+    document.createElement("a");
+
+    a.href =
+    URL.createObjectURL(blob);
+
+    a.download =
+    "quelou_erp_backup.json";
+
+    a.click();
 
 }
 
