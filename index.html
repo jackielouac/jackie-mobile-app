@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quelou ERP, AJ Accounting System </title>
+<title>Quelou ERP - AJ Accounting System</title>
 
 <style>
 
@@ -188,16 +188,12 @@ table td{
 
 .popup-box{
     width:95%;
-    max-width:650px;
+    max-width:700px;
     background:#111827;
     padding:30px;
     border-radius:24px;
     max-height:90vh;
     overflow:auto;
-}
-
-.popup-box h2{
-    margin-bottom:20px;
 }
 
 .popup-box input,
@@ -275,57 +271,6 @@ table td{
     cursor:pointer;
 }
 
-.process-flow{
-    display:flex;
-    gap:15px;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-.flow-step{
-    flex:1;
-    min-width:220px;
-    background:rgba(255,255,255,.06);
-    border-radius:22px;
-    padding:20px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.flow-step:hover{
-    transform:translateY(-5px);
-    background:linear-gradient(135deg,#1d4ed8,#14b8a6);
-}
-
-.step-no{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#1d4ed8,#14b8a6);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.flow-arrow{
-    font-size:28px;
-    opacity:.5;
-}
-
-.ai-box{
-    margin-top:25px;
-    padding:20px;
-    border-radius:20px;
-    background:rgba(20,184,166,.12);
-    border:1px solid rgba(20,184,166,.3);
-}
-
-.ai-box h3{
-    margin-bottom:10px;
-}
-
 @media(max-width:900px){
 
     .app{
@@ -344,6 +289,8 @@ table td{
 
 <body>
 
+<!-- LOGIN -->
+
 <div class="login-screen" id="loginScreen">
 
     <div class="login-box">
@@ -353,7 +300,7 @@ table td{
         </h1>
 
         <p style="margin-bottom:20px;color:#bfc7d9;">
-            Quelou ERP Ultimate AI
+            Quelou System
         </p>
 
         <input type="text"
@@ -375,7 +322,11 @@ table td{
 
 </div>
 
+<!-- APP -->
+
 <div class="app">
+
+    <!-- SIDEBAR -->
 
     <div class="sidebar">
 
@@ -399,10 +350,6 @@ table td{
 
         <div class="menu">
 
-            <button>
-                📊 Dashboard
-            </button>
-
             <button onclick="openPopup('customerPopup')">
                 👥 Customer Masterfile
             </button>
@@ -415,25 +362,11 @@ table td{
                 💵 Collection Receipt
             </button>
 
-            <button onclick="generateSalesReport()">
-                📈 Reports
-            </button>
-
-            <button onclick="runAISuggestions()">
-                🤖 AI Suggestions
-            </button>
-
-            <button onclick="openPopup('formPopup')">
-                🧩 Form Maker
-            </button>
-
-            <button onclick="openPopup('settingsPopup')">
-                ⚙ Settings
-            </button>
-
         </div>
 
     </div>
+
+    <!-- MAIN -->
 
     <div class="main">
 
@@ -446,7 +379,7 @@ table td{
                 </h1>
 
                 <p style="color:#b7bfd2;">
-                    Smart Billing & Collection Management
+                    Smart Billing & Collection
                 </p>
 
             </div>
@@ -457,6 +390,8 @@ table td{
             </div>
 
         </div>
+
+        <!-- CARDS -->
 
         <div class="cards">
 
@@ -487,120 +422,9 @@ table td{
 
             </div>
 
-            <div class="card">
-
-                <h3>Customers</h3>
-
-                <div class="value red"
-                id="customerCount">0</div>
-
-            </div>
-
         </div>
 
-        <!-- PROCESS FLOW -->
-
-        <div class="table-box">
-
-            <h2 style="margin-bottom:20px;">
-                🚀 Accounting Process Flow
-            </h2>
-
-            <div class="process-flow">
-
-                <div class="flow-step"
-                onclick="openPopup('customerPopup')">
-
-                    <div class="step-no">1</div>
-
-                    <h3>Customer Masterfile</h3>
-
-                    <p>
-                        Add customer details
-                    </p>
-
-                </div>
-
-                <div class="flow-arrow">➜</div>
-
-                <div class="flow-step"
-                onclick="openPopup('invoicePopup')">
-
-                    <div class="step-no">2</div>
-
-                    <h3>Create Invoice</h3>
-
-                    <p>
-                        Generate billing invoice
-                    </p>
-
-                </div>
-
-                <div class="flow-arrow">➜</div>
-
-                <div class="flow-step"
-                onclick="openPopup('receiptPopup')">
-
-                    <div class="step-no">3</div>
-
-                    <h3>Collection Receipt</h3>
-
-                    <p>
-                        Receive payment
-                    </p>
-
-                </div>
-
-                <div class="flow-arrow">➜</div>
-
-                <div class="flow-step"
-                onclick="generateSalesReport()">
-
-                    <div class="step-no">4</div>
-
-                    <h3>Financial Reports</h3>
-
-                    <p>
-                        Generate accounting reports
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="actions">
-
-            <button class="primary"
-            onclick="openPopup('invoicePopup')">
-
-                + Invoice
-
-            </button>
-
-            <button class="secondary"
-            onclick="openPopup('receiptPopup')">
-
-                + Receipt
-
-            </button>
-
-            <button class="secondary"
-            onclick="generateSalesReport()">
-
-                Generate Report
-
-            </button>
-
-            <button class="secondary"
-            onclick="exportData()">
-
-                Export Backup
-
-            </button>
-
-        </div>
+        <!-- TABLE -->
 
         <div class="table-box">
 
@@ -619,24 +443,13 @@ table td{
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Preview</th>
+                        <th>Accounting Entry</th>
 
                     </tr>
 
                 </tbody>
 
             </table>
-
-        </div>
-
-        <div class="ai-box">
-
-            <h3>
-                🤖 AI Business Insights
-            </h3>
-
-            <p id="aiInsight">
-                System ready.
-            </p>
 
         </div>
 
@@ -747,10 +560,6 @@ table td{
         <select id="receiptInvoiceSelect"
         onchange="loadInvoiceToReceipt()">
 
-            <option>
-                Select Invoice
-            </option>
-
         </select>
 
         <input type="text"
@@ -768,15 +577,6 @@ table td{
         <input type="number"
         id="recAmount"
         placeholder="Amount">
-
-        <select id="recMethod">
-
-            <option>Cash</option>
-            <option>GCash</option>
-            <option>Bank Transfer</option>
-            <option>Check</option>
-
-        </select>
 
         <textarea id="recRemarks"
         placeholder="Remarks"></textarea>
@@ -803,96 +603,24 @@ table td{
 
 </div>
 
-<!-- SETTINGS -->
+<!-- ACCOUNTING ENTRY -->
 
-<div class="popup" id="settingsPopup">
+<div class="popup" id="entryPopup">
 
     <div class="popup-box">
 
-        <h2>System Settings</h2>
+        <h2>
+            AI Suggested Accounting Entry
+        </h2>
 
-        <input type="text"
-        id="companyName"
-        placeholder="Company Name">
-
-        <input type="text"
-        id="companyAddress"
-        placeholder="Company Address">
-
-        <input type="text"
-        id="companyTIN"
-        placeholder="Company TIN">
-
-        <hr style="margin:20px 0;">
-
-        <h3 style="margin-bottom:15px;">
-            Add User
-        </h3>
-
-        <input type="text"
-        id="newUsername"
-        placeholder="Username">
-
-        <input type="password"
-        id="newPassword"
-        placeholder="Password">
-
-        <select id="userRole">
-
-            <option>Admin</option>
-            <option>Accounting</option>
-            <option>Cashier</option>
-
-        </select>
-
-        <div class="popup-buttons">
-
-            <button class="primary"
-            onclick="saveSettings()">
-
-                Save Settings
-
-            </button>
-
-            <button class="secondary"
-            onclick="addUser()">
-
-                Add User
-
-            </button>
+        <div id="entryContent">
 
         </div>
 
-    </div>
-
-</div>
-
-<!-- FORM MAKER -->
-
-<div class="popup" id="formPopup">
-
-    <div class="popup-box">
-
-        <h2>Custom Form Maker</h2>
-
-        <input type="text"
-        id="formTitle"
-        placeholder="Form Title">
-
-        <textarea id="formBody"
-        placeholder="Custom Form Content"></textarea>
-
         <div class="popup-buttons">
 
-            <button class="primary"
-            onclick="saveCustomForm()">
-
-                Save Form
-
-            </button>
-
             <button class="secondary"
-            onclick="closePopup('formPopup')">
+            onclick="closePopup('entryPopup')">
 
                 Close
 
@@ -912,9 +640,8 @@ let users =
 JSON.parse(localStorage.getItem("users")) || [
 
     {
-        username:"admin",
-        password:"admin123",
-        role:"Admin"
+        username:"jackie",
+        password:"@dm1nEvo"
     }
 
 ];
@@ -927,18 +654,6 @@ JSON.parse(localStorage.getItem("invoices")) || [];
 
 let receipts =
 JSON.parse(localStorage.getItem("receipts")) || [];
-
-let settings =
-JSON.parse(localStorage.getItem("settings")) || {
-
-    companyName:"AJ ACCOUNTING",
-    companyAddress:"Cavite",
-    companyTIN:"123-123-123"
-
-};
-
-let customForms =
-JSON.parse(localStorage.getItem("customForms")) || [];
 
 /* LOGIN */
 
@@ -974,8 +689,6 @@ function login(){
 
         updateCards();
 
-        runAISuggestions();
-
     }else{
 
         alert("Invalid Login");
@@ -984,7 +697,7 @@ function login(){
 
 }
 
-/* POPUPS */
+/* POPUP */
 
 function openPopup(id){
 
@@ -1028,8 +741,6 @@ function saveCustomer(){
     );
 
     loadCustomers();
-
-    updateCards();
 
     closePopup("customerPopup");
 
@@ -1104,7 +815,7 @@ function saveInvoice(){
 
 }
 
-/* LOAD INVOICE LIST */
+/* LOAD INVOICE */
 
 function loadInvoiceSelections(){
 
@@ -1179,9 +890,6 @@ function saveReceipt(){
         amount:
         document.getElementById("recAmount").value,
 
-        method:
-        document.getElementById("recMethod").value,
-
         remarks:
         document.getElementById("recRemarks").value
 
@@ -1191,9 +899,7 @@ function saveReceipt(){
 
     invoices.forEach(inv=>{
 
-        if(
-            inv.number === receipt.invoice
-        ){
+        if(inv.number === receipt.invoice){
 
             inv.status = "PAID";
 
@@ -1237,6 +943,7 @@ function renderInvoices(){
         <th>Amount</th>
         <th>Status</th>
         <th>Preview</th>
+        <th>Accounting Entry</th>
 
     </tr>
 
@@ -1265,6 +972,17 @@ function renderInvoices(){
                 onclick="previewInvoice(${index})">
 
                     Preview
+
+                </button>
+
+            </td>
+
+            <td>
+
+                <button class="print-btn"
+                onclick="viewAccountingEntry(${index})">
+
+                    Entry
 
                 </button>
 
@@ -1310,10 +1028,6 @@ function updateCards(){
     "₱" + (sales - collection)
     .toLocaleString();
 
-    document.getElementById("customerCount")
-    .innerHTML =
-    customers.length;
-
 }
 
 /* PREVIEW */
@@ -1331,9 +1045,7 @@ function previewInvoice(index){
 
     <body style="font-family:Arial;padding:30px;">
 
-    <h1>${settings.companyName}</h1>
-
-    <p>${settings.companyAddress}</p>
+    <h1>AJ ACCOUNTING</h1>
 
     <h2>BILLING STATEMENT</h2>
 
@@ -1364,191 +1076,156 @@ function previewInvoice(index){
 
 }
 
-/* REPORT */
+/* ACCOUNTING ENTRY */
 
-function generateSalesReport(){
+function viewAccountingEntry(index){
 
-    let total = 0;
+    let inv = invoices[index];
 
-    invoices.forEach(i=>{
+    let paid =
+    inv.status === "PAID";
 
-        total += Number(i.amount);
+    let html = `
 
-    });
+    <div style="margin-bottom:20px;">
 
-    alert(
+        <h3>
+            Invoice Information
+        </h3>
 
-        "TOTAL SALES : ₱" +
-        total.toLocaleString()
+        <p>
+            <b>Customer :</b>
+            ${inv.customer}
+        </p>
 
-    );
+        <p>
+            <b>Invoice # :</b>
+            ${inv.number}
+        </p>
 
-}
+        <p>
+            <b>Date :</b>
+            ${inv.date}
+        </p>
 
-/* SETTINGS */
+        <p>
+            <b>Details :</b>
+            ${inv.details}
+        </p>
 
-function saveSettings(){
+        <p>
+            <b>Amount :</b>
+            ₱${Number(inv.amount).toLocaleString()}
+        </p>
 
-    settings.companyName =
-    document.getElementById("companyName").value;
+    </div>
 
-    settings.companyAddress =
-    document.getElementById("companyAddress").value;
+    <hr style="margin:20px 0;">
 
-    settings.companyTIN =
-    document.getElementById("companyTIN").value;
+    <h3>
+        AI Suggested Journal Entry
+    </h3>
 
-    localStorage.setItem(
-        "settings",
-        JSON.stringify(settings)
-    );
+    <table style="width:100%;margin-top:15px;">
 
-    alert("Settings Saved");
+        <tr>
 
-}
+            <th>Account</th>
+            <th>Debit</th>
+            <th>Credit</th>
 
-/* ADD USER */
+        </tr>
 
-function addUser(){
+        <tr>
 
-    let user = {
+            <td>
+                Accounts Receivable
+            </td>
 
-        username:
-        document.getElementById("newUsername").value,
+            <td>
+                ₱${Number(inv.amount).toLocaleString()}
+            </td>
 
-        password:
-        document.getElementById("newPassword").value,
+            <td>-</td>
 
-        role:
-        document.getElementById("userRole").value
+        </tr>
 
-    };
+        <tr>
 
-    users.push(user);
+            <td>
+                Sales Revenue
+            </td>
 
-    localStorage.setItem(
-        "users",
-        JSON.stringify(users)
-    );
+            <td>-</td>
 
-    alert("User Added");
+            <td>
+                ₱${Number(inv.amount).toLocaleString()}
+            </td>
 
-}
+        </tr>
 
-/* FORM MAKER */
+    </table>
 
-function saveCustomForm(){
+    `;
 
-    let form = {
+    if(paid){
 
-        title:
-        document.getElementById("formTitle").value,
+        html += `
 
-        body:
-        document.getElementById("formBody").value
+        <hr style="margin:25px 0;">
 
-    };
+        <h3>
+            Receipt Collection Entry
+        </h3>
 
-    customForms.push(form);
+        <table style="width:100%;margin-top:15px;">
 
-    localStorage.setItem(
-        "customForms",
-        JSON.stringify(customForms)
-    );
+            <tr>
 
-    alert("Custom Form Saved");
+                <th>Account</th>
+                <th>Debit</th>
+                <th>Credit</th>
 
-}
+            </tr>
 
-/* AI */
+            <tr>
 
-function runAISuggestions(){
+                <td>
+                    Cash in Bank - BDO Cavite
+                </td>
 
-    let pending =
-    invoices.filter(i=>
+                <td>
+                    ₱${Number(inv.amount).toLocaleString()}
+                </td>
 
-        i.status === "PENDING"
+                <td>-</td>
 
-    );
+            </tr>
 
-    let receivable = 0;
+            <tr>
 
-    pending.forEach(p=>{
+                <td>
+                    Accounts Receivable
+                </td>
 
-        receivable += Number(p.amount);
+                <td>-</td>
 
-    });
+                <td>
+                    ₱${Number(inv.amount).toLocaleString()}
+                </td>
 
-    let msg = "";
+            </tr>
 
-    if(receivable > 50000){
+        </table>
 
-        msg +=
-        "⚠ High receivables detected.<br><br>";
+        `;
 
     }
 
-    if(pending.length > 3){
+    document.getElementById("entryContent")
+    .innerHTML = html;
 
-        msg +=
-        "📌 Multiple unpaid invoices found.<br><br>";
-
-    }
-
-    if(customers.length === 0){
-
-        msg +=
-        "👥 Add customer records.<br><br>";
-
-    }
-
-    if(msg === ""){
-
-        msg =
-        "✅ Business operations look healthy.";
-
-    }
-
-    document.getElementById("aiInsight")
-    .innerHTML = msg;
-
-}
-
-/* EXPORT */
-
-function exportData(){
-
-    let data = {
-
-        customers,
-        invoices,
-        receipts,
-        settings,
-        users,
-        customForms
-
-    };
-
-    let blob = new Blob(
-
-        [JSON.stringify(data,null,2)],
-
-        {
-            type:"application/json"
-        }
-
-    );
-
-    let a =
-    document.createElement("a");
-
-    a.href =
-    URL.createObjectURL(blob);
-
-    a.download =
-    "quelou_erp_backup.json";
-
-    a.click();
+    openPopup("entryPopup");
 
 }
 
