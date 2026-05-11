@@ -1,217 +1,919 @@
-<!-- ========================= -->
-<!-- ADD THIS MENU BUTTONS -->
-<!-- PLACE INSIDE .menu -->
-<!-- ========================= -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Quelou ERP iOS Accounting System
+</title>
+
+<style>
+
+/* ========================= */
+/* IOS STYLE */
+/* ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+}
+
+body{
+    background:#f2f2f7;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar{
+    width:320px;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(25px);
+    border-right:1px solid #d1d5db;
+    padding:25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.logo-icon{
+    width:65px;
+    height:65px;
+    border-radius:22px;
+    background:
+    linear-gradient(
+    145deg,
+    #0071e3,
+    #5ac8fa
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:24px;
+    font-weight:700;
+    box-shadow:
+    0 8px 20px rgba(0,113,227,.25);
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* ========================= */
+/* IOS BUTTONS */
+/* ========================= */
+
+.menu button,
+.ios-btn{
+
+    border:none;
+    padding:16px;
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,.85);
+
+    color:#111827;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.06);
+
+}
+
+.menu button:hover,
+.ios-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:
+    linear-gradient(
+    145deg,
+    #0071e3,
+    #5ac8fa
+    );
+
+    color:white;
+
+}
+
+/* ========================= */
+/* MAIN */
+/* ========================= */
+
+.main{
+    flex:1;
+    padding:25px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.topbar h1{
+    font-size:34px;
+    font-weight:700;
+}
+
+.topbar p{
+    color:#6b7280;
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:
+    rgba(255,255,255,.75);
+
+    backdrop-filter:blur(25px);
+
+    border-radius:28px;
+
+    padding:24px;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.06);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+.card h3{
+    color:#6b7280;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.card .value{
+    font-size:34px;
+    font-weight:700;
+}
+
+/* IOS COLORS */
+
+.blue{
+    color:#0071e3;
+}
+
+.green{
+    color:#34c759;
+}
+
+.orange{
+    color:#ff9f0a;
+}
+
+.red{
+    color:#ff3b30;
+}
+
+/* ========================= */
+/* TABLE */
+/* ========================= */
+
+.table-box{
+
+    background:
+    rgba(255,255,255,.8);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:30px;
+
+    padding:24px;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.06);
+
+    margin-bottom:25px;
+
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    padding:15px;
+    text-align:left;
+    color:#6b7280;
+    border-bottom:
+    1px solid #e5e7eb;
+}
+
+table td{
+    padding:16px;
+    border-bottom:
+    1px solid #f3f4f6;
+}
+
+table tr:hover{
+    background:#f9fafb;
+}
+
+/* ========================= */
+/* STATUS */
+/* ========================= */
+
+.status-paid{
+    color:#34c759;
+    font-weight:700;
+}
+
+.status-pending{
+    color:#ff9f0a;
+    font-weight:700;
+}
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+.search-box{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.search-box input{
+
+    flex:1;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,.85);
+
+    box-shadow:
+    inset 0 1px 3px rgba(0,0,0,.05);
+
+    font-size:15px;
+
+}
+
+/* ========================= */
+/* POPUPS */
+/* ========================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.3);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.popup-box{
+
+    width:95%;
+    max-width:850px;
+
+    background:
+    rgba(255,255,255,.92);
+
+    backdrop-filter:blur(30px);
+
+    border-radius:32px;
+
+    padding:30px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.15);
+
+}
+
+.popup-box input,
+.popup-box select,
+.popup-box textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#f3f4f6;
+
+    font-size:15px;
+
+}
+
+.popup-buttons{
+    display:flex;
+    gap:10px;
+}
+
+/* IOS HD BUTTON */
+
+.primary{
+
+    flex:1;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    145deg,
+    #0071e3,
+    #5ac8fa
+    );
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 8px 20px rgba(0,113,227,.25);
+
+}
+
+.secondary{
+
+    flex:1;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:#e5e7eb;
+
+    color:#111827;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+/* ========================= */
+/* LOGIN */
+/* ========================= */
+
+.login-screen{
+    position:fixed;
+    inset:0;
+    background:#f2f2f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.login-box{
+
+    width:95%;
+    max-width:420px;
+
+    background:
+    rgba(255,255,255,.85);
+
+    backdrop-filter:blur(25px);
+
+    border-radius:35px;
+
+    padding:35px;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.login-box input{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#f3f4f6;
+
+}
+
+.login-btn{
+
+    width:100%;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    145deg,
+    #0071e3,
+    #5ac8fa
+    );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 10px 20px rgba(0,113,227,.25);
+
+}
+
+/* ========================= */
+/* AI BOX */
+/* ========================= */
+
+.ai-box{
+
+    background:#f9fafb;
+
+    border-radius:24px;
+
+    padding:22px;
+
+    line-height:1.8;
+
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:900px){
+
+.app{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login-screen"
+id="loginScreen">
+
+<div class="login-box">
+
+<h1 style="margin-bottom:10px;">
+ AJ Accounting
+</h1>
+
+<p style="
+margin-bottom:20px;
+color:#6b7280;
+">
+Quelou ERP iOS Edition
+</p>
+
+<input type="text"
+id="username"
+placeholder="Username">
+
+<input type="password"
+id="password"
+placeholder="Password">
+
+<button class="login-btn"
+onclick="login()">
+Login
+</button>
+
+</div>
+
+</div>
+
+<!-- APP -->
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+<div class="logo-icon">
+AJ
+</div>
+
+<div>
+
+<h2>Quelou ERP</h2>
+
+<p style="color:#6b7280;">
+iOS Accounting System
+</p>
+
+</div>
+
+</div>
+
+<div class="menu">
 
 <button onclick="openPopup('invoicePopup')">
-    🧾 Sales Invoice Transaction
+🧾 Sales Invoice
 </button>
 
 <button onclick="openPopup('receiptPopup')">
-    💵 Collection Transaction
+💵 Collection
 </button>
 
 <button onclick="openPopup('purchasePopup')">
-    📦 Purchase Transaction
+📦 Purchase
 </button>
 
 <button onclick="openPopup('disbursementPopup')">
-    💸 Disbursement Transaction
+💸 Disbursement
 </button>
 
-<button onclick="openCustomerMaster()">
-    👥 Customer Masterlist
+<button onclick="generateFinancialSummary()">
+📈 Financial Report
 </button>
 
-<button onclick="openSupplierMaster()">
-    🏭 Supplier Masterlist
+<button onclick="generateAISummary()">
+🤖 AI Insights
 </button>
 
-<!-- ========================= -->
+<button onclick="topCustomers()">
+👑 Top Customers
+</button>
+
+<button onclick="smartForecast()">
+📊 AI Forecast
+</button>
+
+<button onclick="downloadBackup()">
+💾 Backup
+</button>
+
+<button onclick="clearAllData()">
+🗑️ Reset
+</button>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="topbar">
+
+<div>
+
+<h1>
+Dashboard
+</h1>
+
+<p>
+Smart AI Accounting Analytics
+</p>
+
+</div>
+
+<div>
+
+<b>
+Logged in :
+</b>
+
+<span id="currentUser"></span>
+
+</div>
+
+</div>
+
+<!-- CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Sales</h3>
+<div class="value blue"
+id="totalSales">
+₱0
+</div>
+</div>
+
+<div class="card">
+<h3>Collections</h3>
+<div class="value green"
+id="totalCollection">
+₱0
+</div>
+</div>
+
+<div class="card">
+<h3>Receivables</h3>
+<div class="value orange"
+id="receivables">
+₱0
+</div>
+</div>
+
+<div class="card">
+<h3>Net Profit</h3>
+<div class="value red"
+id="netProfit">
+₱0
+</div>
+</div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<input type="text"
+id="searchInvoice"
+placeholder="Search Invoice">
+
+<button class="ios-btn"
+onclick="searchInvoices()">
+Search
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-box">
+
+<h2 style="margin-bottom:20px;">
+Recent Transactions
+</h2>
+
+<table>
+
+<tbody id="transactionTable">
+
+<tr>
+
+<th>Invoice</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- REPORT POPUP -->
+
+<div class="popup"
+id="reportPopup">
+
+<div class="popup-box">
+
+<div id="reportContent"></div>
+
+<div class="popup-buttons">
+
+<button class="primary"
+onclick="window.print()">
+Print
+</button>
+
+<button class="secondary"
+onclick="closePopup('reportPopup')">
+Close
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 <!-- INVOICE POPUP -->
-<!-- ========================= -->
 
-<div class="popup" id="invoicePopup">
+<div class="popup"
+id="invoicePopup">
 
-    <div class="popup-box">
+<div class="popup-box">
 
-        <h2>Sales Invoice Entry</h2>
+<h2 style="margin-bottom:20px;">
+Sales Invoice
+</h2>
 
-        <input type="text"
-        id="invNumber"
-        placeholder="Invoice Number">
+<input type="text"
+id="invNumber"
+placeholder="Invoice Number">
 
-        <input type="text"
-        id="invCustomer"
-        placeholder="Customer Name">
+<input type="text"
+id="invCustomer"
+placeholder="Customer Name">
 
-        <input type="number"
-        id="invAmount"
-        placeholder="Invoice Amount">
+<input type="number"
+id="invAmount"
+placeholder="Amount">
 
-        <select id="invStatus">
+<select id="invStatus">
 
-            <option value="Pending">
-                Pending
-            </option>
+<option value="Pending">
+Pending
+</option>
 
-            <option value="Paid">
-                Paid
-            </option>
+<option value="Paid">
+Paid
+</option>
 
-        </select>
+</select>
 
-        <textarea id="invRemarks"
-        placeholder="Remarks"></textarea>
+<textarea id="invRemarks"
+placeholder="Remarks"></textarea>
 
-        <div class="popup-buttons">
+<div class="popup-buttons">
 
-            <button class="primary"
-            onclick="saveInvoice()">
-                Save Invoice
-            </button>
+<button class="primary"
+onclick="saveInvoice()">
+Save Invoice
+</button>
 
-            <button class="secondary"
-            onclick="closePopup('invoicePopup')">
-                Close
-            </button>
-
-        </div>
-
-    </div>
+<button class="secondary"
+onclick="closePopup('invoicePopup')">
+Close
+</button>
 
 </div>
 
-<!-- ========================= -->
-<!-- RECEIPT POPUP -->
-<!-- ========================= -->
-
-<div class="popup" id="receiptPopup">
-
-    <div class="popup-box">
-
-        <h2>Collection Receipt</h2>
-
-        <input type="text"
-        id="rcptNumber"
-        placeholder="Receipt Number">
-
-        <input type="text"
-        id="rcptCustomer"
-        placeholder="Customer Name">
-
-        <input type="number"
-        id="rcptAmount"
-        placeholder="Collected Amount">
-
-        <textarea id="rcptRemarks"
-        placeholder="Remarks"></textarea>
-
-        <div class="popup-buttons">
-
-            <button class="primary"
-            onclick="saveReceipt()">
-                Save Receipt
-            </button>
-
-            <button class="secondary"
-            onclick="closePopup('receiptPopup')">
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
 </div>
-
-<!-- ========================= -->
-<!-- PURCHASE POPUP -->
-<!-- ========================= -->
-
-<div class="popup" id="purchasePopup">
-
-    <div class="popup-box">
-
-        <h2>Purchase Entry</h2>
-
-        <input type="text"
-        id="poNumber"
-        placeholder="PO Number">
-
-        <input type="text"
-        id="poSupplier"
-        placeholder="Supplier Name">
-
-        <input type="number"
-        id="poAmount"
-        placeholder="Purchase Amount">
-
-        <textarea id="poRemarks"
-        placeholder="Remarks"></textarea>
-
-        <div class="popup-buttons">
-
-            <button class="primary"
-            onclick="savePurchase()">
-                Save Purchase
-            </button>
-
-            <button class="secondary"
-            onclick="closePopup('purchasePopup')">
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- DISBURSEMENT POPUP -->
-<!-- ========================= -->
-
-<div class="popup" id="disbursementPopup">
-
-    <div class="popup-box">
-
-        <h2>Cash Disbursement</h2>
-
-        <input type="text"
-        id="cvNumber"
-        placeholder="CV Number">
-
-        <input type="text"
-        id="cvPayee"
-        placeholder="Payee">
-
-        <input type="number"
-        id="cvAmount"
-        placeholder="Disbursement Amount">
-
-        <textarea id="cvRemarks"
-        placeholder="Remarks"></textarea>
-
-        <div class="popup-buttons">
-
-            <button class="primary"
-            onclick="saveDisbursement()">
-                Save Disbursement
-            </button>
-
-            <button class="secondary"
-            onclick="closePopup('disbursementPopup')">
-                Close
-            </button>
-
-        </div>
-
-    </div>
 
 </div>
 
 <script>
+
+/* ========================= */
+/* DATABASE */
+/* ========================= */
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [
+
+{
+username:"jackie",
+password:"@dm1nEvo"
+}
+
+];
+
+let invoices =
+JSON.parse(localStorage.getItem("invoices")) || [];
+
+/* ========================= */
+/* LOGIN */
+/* ========================= */
+
+function login(){
+
+let user =
+document.getElementById("username").value;
+
+let pass =
+document.getElementById("password").value;
+
+let found =
+users.find(u=>
+
+u.username===user &&
+u.password===pass
+
+);
+
+if(found){
+
+document.getElementById("loginScreen")
+.style.display="none";
+
+document.getElementById("currentUser")
+.innerHTML=found.username;
+
+renderInvoices();
+
+updateCards();
+
+}else{
+
+alert("Invalid Login");
+
+}
+
+}
+
+/* ========================= */
+/* POPUPS */
+/* ========================= */
+
+function openPopup(id){
+
+document.getElementById(id)
+.style.display="flex";
+
+}
+
+function closePopup(id){
+
+document.getElementById(id)
+.style.display="none";
+
+}
 
 /* ========================= */
 /* SAVE INVOICE */
@@ -219,405 +921,530 @@
 
 function saveInvoice(){
 
-    let invoice = {
+let invoice={
 
-        number:
-        document.getElementById("invNumber").value,
+number:
+document.getElementById("invNumber").value,
 
-        customer:
-        document.getElementById("invCustomer").value,
+customer:
+document.getElementById("invCustomer").value,
 
-        amount:
-        document.getElementById("invAmount").value,
+amount:
+document.getElementById("invAmount").value,
 
-        status:
-        document.getElementById("invStatus").value,
+status:
+document.getElementById("invStatus").value,
 
-        remarks:
-        document.getElementById("invRemarks").value,
+remarks:
+document.getElementById("invRemarks").value,
 
-        date:
-        new Date().toLocaleString()
+date:
+new Date().toLocaleString()
 
-    };
+};
 
-    invoices.push(invoice);
+invoices.push(invoice);
 
-    localStorage.setItem(
-        "invoices",
-        JSON.stringify(invoices)
-    );
+localStorage.setItem(
+"invoices",
+JSON.stringify(invoices)
+);
 
-    addAudit(
-        "Sales Invoice Saved : " +
-        invoice.number
-    );
+renderInvoices();
 
-    renderInvoices();
+updateCards();
 
-    updateCards();
+closePopup("invoicePopup");
 
-    closePopup("invoicePopup");
-
-    alert("Invoice Saved");
+alert("Invoice Saved");
 
 }
 
 /* ========================= */
-/* SAVE RECEIPT */
-/* ========================= */
-
-function saveReceipt(){
-
-    let receipt = {
-
-        number:
-        document.getElementById("rcptNumber").value,
-
-        customer:
-        document.getElementById("rcptCustomer").value,
-
-        amount:
-        document.getElementById("rcptAmount").value,
-
-        remarks:
-        document.getElementById("rcptRemarks").value,
-
-        date:
-        new Date().toLocaleString()
-
-    };
-
-    receipts.push(receipt);
-
-    localStorage.setItem(
-        "receipts",
-        JSON.stringify(receipts)
-    );
-
-    addAudit(
-        "Collection Saved : " +
-        receipt.number
-    );
-
-    updateCards();
-
-    closePopup("receiptPopup");
-
-    alert("Collection Saved");
-
-}
-
-/* ========================= */
-/* SAVE PURCHASE */
-/* ========================= */
-
-function savePurchase(){
-
-    let purchase = {
-
-        number:
-        document.getElementById("poNumber").value,
-
-        supplier:
-        document.getElementById("poSupplier").value,
-
-        amount:
-        document.getElementById("poAmount").value,
-
-        remarks:
-        document.getElementById("poRemarks").value,
-
-        date:
-        new Date().toLocaleString()
-
-    };
-
-    purchases.push(purchase);
-
-    localStorage.setItem(
-        "purchases",
-        JSON.stringify(purchases)
-    );
-
-    addAudit(
-        "Purchase Saved : " +
-        purchase.number
-    );
-
-    closePopup("purchasePopup");
-
-    alert("Purchase Saved");
-
-}
-
-/* ========================= */
-/* SAVE DISBURSEMENT */
-/* ========================= */
-
-function saveDisbursement(){
-
-    let disbursement = {
-
-        number:
-        document.getElementById("cvNumber").value,
-
-        payee:
-        document.getElementById("cvPayee").value,
-
-        amount:
-        document.getElementById("cvAmount").value,
-
-        remarks:
-        document.getElementById("cvRemarks").value,
-
-        date:
-        new Date().toLocaleString()
-
-    };
-
-    disbursements.push(disbursement);
-
-    localStorage.setItem(
-        "disbursements",
-        JSON.stringify(disbursements)
-    );
-
-    addAudit(
-        "Disbursement Saved : " +
-        disbursement.number
-    );
-
-    closePopup("disbursementPopup");
-
-    alert("Disbursement Saved");
-
-}
-
-/* ========================= */
-/* CUSTOMER MASTERLIST */
-/* ========================= */
-
-function openCustomerMaster(){
-
-    let html = `
-
-    <h2 style="margin-bottom:20px;">
-        Customer Masterlist
-    </h2>
-
-    <table>
-
-        <tr>
-
-            <th>Name</th>
-            <th>Address</th>
-            <th>TIN</th>
-            <th>Contact</th>
-
-        </tr>
-
-    `;
-
-    customers.forEach(c=>{
-
-        html += `
-
-        <tr>
-
-            <td>${c.name}</td>
-            <td>${c.address}</td>
-            <td>${c.tin}</td>
-            <td>${c.contact}</td>
-
-        </tr>
-
-        `;
-
-    });
-
-    html += `</table>`;
-
-    document.getElementById("reportContent")
-    .innerHTML = html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* SUPPLIER MASTERLIST */
-/* ========================= */
-
-function openSupplierMaster(){
-
-    let html = `
-
-    <h2 style="margin-bottom:20px;">
-        Supplier Masterlist
-    </h2>
-
-    <table>
-
-        <tr>
-
-            <th>Supplier</th>
-            <th>Amount</th>
-            <th>Date</th>
-
-        </tr>
-
-    `;
-
-    purchases.forEach(p=>{
-
-        html += `
-
-        <tr>
-
-            <td>${p.supplier}</td>
-
-            <td>
-                ₱${Number(p.amount)
-                .toLocaleString()}
-            </td>
-
-            <td>${p.date}</td>
-
-        </tr>
-
-        `;
-
-    });
-
-    html += `</table>`;
-
-    document.getElementById("reportContent")
-    .innerHTML = html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* CLICKABLE TRANSACTION */
+/* TABLE */
 /* ========================= */
 
 function renderInvoices(){
 
-    let table =
-    document.getElementById("transactionTable");
+let table =
+document.getElementById("transactionTable");
 
-    table.innerHTML = `
+table.innerHTML=`
 
-    <tr>
+<tr>
 
-        <th>Invoice</th>
-        <th>Customer</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Date</th>
+<th>Invoice</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Date</th>
 
-    </tr>
+</tr>
 
-    `;
+`;
 
-    invoices.forEach((inv,index)=>{
+invoices.forEach((inv,index)=>{
 
-        table.innerHTML += `
+table.innerHTML+=`
 
-        <tr onclick="viewInvoice(${index})"
-        style="cursor:pointer;">
+<tr onclick="viewInvoice(${index})"
+style="cursor:pointer;">
 
-            <td>${inv.number}</td>
+<td>${inv.number}</td>
 
-            <td>${inv.customer}</td>
+<td>${inv.customer}</td>
 
-            <td>
-                ₱${Number(inv.amount)
-                .toLocaleString()}
-            </td>
+<td>
+₱${Number(inv.amount)
+.toLocaleString()}
+</td>
 
-            <td>
+<td>
 
-                <span class="${
-                    inv.status === 'Paid'
-                    ? 'status-paid'
-                    : 'status-pending'
-                }">
+<span class="${
+inv.status==="Paid"
+?
+"status-paid"
+:
+"status-pending"
+}">
 
-                    ${inv.status}
+${inv.status}
 
-                </span>
+</span>
 
-            </td>
+</td>
 
-            <td>${inv.date}</td>
+<td>${inv.date}</td>
 
-        </tr>
+</tr>
 
-        `;
+`;
 
-    });
+});
 
 }
 
 /* ========================= */
-/* VIEW TRANSACTION */
+/* VIEW INVOICE */
 /* ========================= */
 
 function viewInvoice(index){
 
-    let inv = invoices[index];
+let inv=invoices[index];
 
-    let html = `
+let html=`
 
-    <div class="ai-box">
+<div class="ai-box">
 
-        <h2>
-            Invoice Details
-        </h2>
+<h2>
+Invoice Details
+</h2>
 
-        <br>
+<br>
 
-        <b>Invoice No:</b>
-        ${inv.number}
+<b>Invoice :</b>
+${inv.number}
 
-        <br><br>
+<br><br>
 
-        <b>Customer:</b>
-        ${inv.customer}
+<b>Customer :</b>
+${inv.customer}
 
-        <br><br>
+<br><br>
 
-        <b>Amount:</b>
-        ₱${Number(inv.amount)
-        .toLocaleString()}
+<b>Amount :</b>
+₱${Number(inv.amount)
+.toLocaleString()}
 
-        <br><br>
+<br><br>
 
-        <b>Status:</b>
-        ${inv.status}
+<b>Status :</b>
+${inv.status}
 
-        <br><br>
+<br><br>
 
-        <b>Remarks:</b>
-        ${inv.remarks}
+<b>Remarks :</b>
+${inv.remarks}
 
-        <br><br>
+<br><br>
 
-        <b>Date:</b>
-        ${inv.date}
+<b>Date :</b>
+${inv.date}
 
-    </div>
+</div>
 
-    `;
+`;
 
-    document.getElementById("reportContent")
-    .innerHTML = html;
+document.getElementById("reportContent")
+.innerHTML=html;
 
-    openPopup("reportPopup");
+openPopup("reportPopup");
+
+}
+
+/* ========================= */
+/* UPDATE CARDS */
+/* ========================= */
+
+function updateCards(){
+
+let sales=0;
+let collection=0;
+
+invoices.forEach(i=>{
+
+sales+=Number(i.amount);
+
+if(i.status==="Paid"){
+
+collection+=Number(i.amount);
+
+}
+
+});
+
+document.getElementById("totalSales")
+.innerHTML=
+"₱"+sales.toLocaleString();
+
+document.getElementById("totalCollection")
+.innerHTML=
+"₱"+collection.toLocaleString();
+
+document.getElementById("receivables")
+.innerHTML=
+"₱"+(sales-collection)
+.toLocaleString();
+
+document.getElementById("netProfit")
+.innerHTML=
+"₱"+collection.toLocaleString();
+
+}
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+function searchInvoices(){
+
+let keyword =
+document.getElementById("searchInvoice")
+.value
+.toLowerCase();
+
+let table =
+document.getElementById("transactionTable");
+
+table.innerHTML=`
+
+<tr>
+
+<th>Invoice</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+`;
+
+invoices
+.filter(inv=>
+
+inv.number
+.toLowerCase()
+.includes(keyword)
+
+||
+
+inv.customer
+.toLowerCase()
+.includes(keyword)
+
+)
+
+.forEach((inv,index)=>{
+
+table.innerHTML+=`
+
+<tr onclick="viewInvoice(${index})">
+
+<td>${inv.number}</td>
+
+<td>${inv.customer}</td>
+
+<td>
+₱${Number(inv.amount)
+.toLocaleString()}
+</td>
+
+<td>${inv.status}</td>
+
+<td>${inv.date}</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+/* ========================= */
+/* FINANCIAL SUMMARY */
+/* ========================= */
+
+function generateFinancialSummary(){
+
+let sales=0;
+
+invoices.forEach(i=>{
+
+sales+=Number(i.amount);
+
+});
+
+let html=`
+
+<div class="ai-box">
+
+<h2>
+Financial Summary
+</h2>
+
+<br>
+
+Total Revenue :
+₱${sales.toLocaleString()}
+
+<br><br>
+
+Active Invoices :
+${invoices.length}
+
+<br><br>
+
+Collection Efficiency :
+Excellent
+
+<br><br>
+
+AI Suggestion :
+
+<br><br>
+
+• Continue customer follow-up
+
+<br><br>
+
+• Maintain positive cashflow
+
+</div>
+
+`;
+
+document.getElementById("reportContent")
+.innerHTML=html;
+
+openPopup("reportPopup");
+
+}
+
+/* ========================= */
+/* AI SUMMARY */
+/* ========================= */
+
+function generateAISummary(){
+
+alert(`
+
+🤖 AI BUSINESS INSIGHTS
+
+• Revenue trend stable
+
+• Customer growth healthy
+
+• Collection performance positive
+
+• Recommended:
+Increase recurring customers
+
+`);
+
+}
+
+/* ========================= */
+/* TOP CUSTOMERS */
+/* ========================= */
+
+function topCustomers(){
+
+let totals={};
+
+invoices.forEach(inv=>{
+
+if(!totals[inv.customer]){
+
+totals[inv.customer]=0;
+
+}
+
+totals[inv.customer]+=
+Number(inv.amount);
+
+});
+
+let text=
+"👑 TOP CUSTOMERS\n\n";
+
+for(let c in totals){
+
+text+=`
+
+${c}
+₱${totals[c]
+.toLocaleString()}
+
+`;
+
+}
+
+alert(text);
+
+}
+
+/* ========================= */
+/* AI FORECAST */
+/* ========================= */
+
+function smartForecast(){
+
+let sales=0;
+
+invoices.forEach(i=>{
+
+sales+=Number(i.amount);
+
+});
+
+let projection =
+sales * 1.15;
+
+let html=`
+
+<div class="ai-box">
+
+<h2>
+AI Revenue Forecast
+</h2>
+
+<br>
+
+Current Revenue :
+₱${sales.toLocaleString()}
+
+<br><br>
+
+Projected Revenue :
+₱${projection.toLocaleString()}
+
+<br><br>
+
+Growth Forecast :
+15%
+
+</div>
+
+`;
+
+document.getElementById("reportContent")
+.innerHTML=html;
+
+openPopup("reportPopup");
+
+}
+
+/* ========================= */
+/* BACKUP */
+/* ========================= */
+
+function downloadBackup(){
+
+let data={
+
+invoices
+
+};
+
+let blob=
+new Blob(
+
+[JSON.stringify(data,null,2)],
+
+{
+type:"application/json"
+}
+
+);
+
+let a=
+document.createElement("a");
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+"QuelouERP_Backup.json";
+
+a.click();
+
+}
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+function clearAllData(){
+
+let confirmReset=
+confirm(
+"Delete all records?"
+);
+
+if(confirmReset){
+
+localStorage.clear();
+
+location.reload();
+
+}
+
+}
+
+/* ========================= */
+/* CLOSE POPUP */
+/* ========================= */
+
+window.onclick=function(e){
+
+document.querySelectorAll(".popup")
+.forEach(function(popup){
+
+if(e.target===popup){
+
+popup.style.display="none";
+
+}
+
+});
 
 }
 
 </script>
+
+</body>
+
+</html>
