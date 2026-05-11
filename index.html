@@ -1,167 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- ========================= -->
+<!-- ADD THIS MENU BUTTONS -->
+<!-- PLACE INSIDE .menu -->
+<!-- ========================= -->
 
-<head>
+<button onclick="openPopup('invoicePopup')">
+    🧾 Sales Invoice Transaction
+</button>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<button onclick="openPopup('receiptPopup')">
+    💵 Collection Transaction
+</button>
 
-<title>Quelou ERP - AJ Accounting System</title>
+<button onclick="openPopup('purchasePopup')">
+    📦 Purchase Transaction
+</button>
+
+<button onclick="openPopup('disbursementPopup')">
+    💸 Disbursement Transaction
+</button>
+
+<button onclick="openCustomerMaster()">
+    👥 Customer Masterlist
+</button>
+
+<button onclick="openSupplierMaster()">
+    🏭 Supplier Masterlist
+</button>
+
+<!-- ========================= -->
+<!-- INVOICE POPUP -->
+<!-- ========================= -->
+
+<div class="popup" id="invoicePopup">
+
+    <div class="popup-box">
+
+        <h2>Sales Invoice Entry</h2>
+
+        <input type="text"
+        id="invNumber"
+        placeholder="Invoice Number">
+
+        <input type="text"
+        id="invCustomer"
+        placeholder="Customer Name">
+
+        <input type="number"
+        id="invAmount"
+        placeholder="Invoice Amount">
+
+        <select id="invStatus">
+
+            <option value="Pending">
+                Pending
+            </option>
+
+            <option value="Paid">
+                Paid
+            </option>
+
+        </select>
+
+        <textarea id="invRemarks"
+        placeholder="Remarks"></textarea>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="saveInvoice()">
+                Save Invoice
+            </button>
+
+            <button class="secondary"
+            onclick="closePopup('invoicePopup')">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- RECEIPT POPUP -->
+<!-- ========================= -->
+
+<div class="popup" id="receiptPopup">
+
+    <div class="popup-box">
+
+        <h2>Collection Receipt</h2>
+
+        <input type="text"
+        id="rcptNumber"
+        placeholder="Receipt Number">
+
+        <input type="text"
+        id="rcptCustomer"
+        placeholder="Customer Name">
+
+        <input type="number"
+        id="rcptAmount"
+        placeholder="Collected Amount">
+
+        <textarea id="rcptRemarks"
+        placeholder="Remarks"></textarea>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="saveReceipt()">
+                Save Receipt
+            </button>
+
+            <button class="secondary"
+            onclick="closePopup('receiptPopup')">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- PURCHASE POPUP -->
+<!-- ========================= -->
+
+<div class="popup" id="purchasePopup">
+
+    <div class="popup-box">
+
+        <h2>Purchase Entry</h2>
+
+        <input type="text"
+        id="poNumber"
+        placeholder="PO Number">
+
+        <input type="text"
+        id="poSupplier"
+        placeholder="Supplier Name">
+
+        <input type="number"
+        id="poAmount"
+        placeholder="Purchase Amount">
+
+        <textarea id="poRemarks"
+        placeholder="Remarks"></textarea>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="savePurchase()">
+                Save Purchase
+            </button>
+
+            <button class="secondary"
+            onclick="closePopup('purchasePopup')">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- DISBURSEMENT POPUP -->
+<!-- ========================= -->
+
+<div class="popup" id="disbursementPopup">
+
+    <div class="popup-box">
+
+        <h2>Cash Disbursement</h2>
+
+        <input type="text"
+        id="cvNumber"
+        placeholder="CV Number">
+
+        <input type="text"
+        id="cvPayee"
+        placeholder="Payee">
+
+        <input type="number"
+        id="cvAmount"
+        placeholder="Disbursement Amount">
+
+        <textarea id="cvRemarks"
+        placeholder="Remarks"></textarea>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="saveDisbursement()">
+                Save Disbursement
+            </button>
+
+            <button class="secondary"
+            onclick="closePopup('disbursementPopup')">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <script>
-
-/* ========================= */
-/* DATABASE */
-/* ========================= */
-
-let users = JSON.parse(localStorage.getItem("users")) || [
-    {
-        username:"jackie",
-        password:"@dm1nEvo"
-    }
-];
-
-let customers = JSON.parse(localStorage.getItem("customers")) || [];
-let suppliers = JSON.parse(localStorage.getItem("suppliers")) || [];
-let invoices = JSON.parse(localStorage.getItem("invoices")) || [];
-let receipts = JSON.parse(localStorage.getItem("receipts")) || [];
-let purchases = JSON.parse(localStorage.getItem("purchases")) || [];
-let disbursements = JSON.parse(localStorage.getItem("disbursements")) || [];
-let auditLogs = JSON.parse(localStorage.getItem("auditLogs")) || [];
-
-/* ========================= */
-/* LOGIN */
-/* ========================= */
-
-function login(){
-
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
-
-    let found = users.find(u =>
-        u.username === user &&
-        u.password === pass
-    );
-
-    if(found){
-
-        document.getElementById("loginScreen").style.display = "none";
-
-        document.querySelector(".app").style.display = "flex";
-
-        document.getElementById("currentUser").innerHTML =
-        found.username;
-
-        renderInvoices();
-
-        updateCards();
-
-    }else{
-
-        alert("Invalid Login");
-
-    }
-
-}
-
-/* ========================= */
-/* LOGOUT */
-/* ========================= */
-
-function logout(){
-
-    if(confirm("Logout Session?")){
-
-        document.querySelector(".app").style.display = "none";
-
-        document.getElementById("loginScreen").style.display = "flex";
-
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-
-    }
-
-}
-
-/* ========================= */
-/* POPUP */
-/* ========================= */
-
-function openPopup(id){
-
-    let popup = document.getElementById(id);
-
-    if(popup){
-
-        popup.style.display = "flex";
-
-    }
-
-}
-
-function closePopup(id){
-
-    let popup = document.getElementById(id);
-
-    if(popup){
-
-        popup.style.display = "none";
-
-    }
-
-}
-
-/* ========================= */
-/* AUDIT */
-/* ========================= */
-
-function addAudit(action){
-
-    auditLogs.push({
-        action:action,
-        date:new Date().toLocaleString()
-    });
-
-    localStorage.setItem(
-        "auditLogs",
-        JSON.stringify(auditLogs)
-    );
-
-}
-
-/* ========================= */
-/* SAVE CUSTOMER */
-/* ========================= */
-
-function saveCustomer(){
-
-    let customer = {
-
-        name:document.getElementById("custName").value,
-        address:document.getElementById("custAddress").value,
-        tin:document.getElementById("custTIN").value,
-        contact:document.getElementById("custContact").value
-
-    };
-
-    customers.push(customer);
-
-    localStorage.setItem(
-        "customers",
-        JSON.stringify(customers)
-    );
-
-    addAudit(
-        "Customer Created : " + customer.name
-    );
-
-    updateCards();
-
-    closePopup("customerPopup");
-
-    alert("Customer Saved");
-
-}
 
 /* ========================= */
 /* SAVE INVOICE */
@@ -171,12 +221,23 @@ function saveInvoice(){
 
     let invoice = {
 
-        number:document.getElementById("invNumber").value,
-        customer:document.getElementById("invCustomer").value,
-        amount:document.getElementById("invAmount").value,
-        status:document.getElementById("invStatus").value,
-        remarks:document.getElementById("invRemarks").value,
-        date:new Date().toLocaleString()
+        number:
+        document.getElementById("invNumber").value,
+
+        customer:
+        document.getElementById("invCustomer").value,
+
+        amount:
+        document.getElementById("invAmount").value,
+
+        status:
+        document.getElementById("invStatus").value,
+
+        remarks:
+        document.getElementById("invRemarks").value,
+
+        date:
+        new Date().toLocaleString()
 
     };
 
@@ -188,7 +249,8 @@ function saveInvoice(){
     );
 
     addAudit(
-        "Sales Invoice Saved : " + invoice.number
+        "Sales Invoice Saved : " +
+        invoice.number
     );
 
     renderInvoices();
@@ -209,11 +271,20 @@ function saveReceipt(){
 
     let receipt = {
 
-        number:document.getElementById("rcptNumber").value,
-        customer:document.getElementById("rcptCustomer").value,
-        amount:document.getElementById("rcptAmount").value,
-        remarks:document.getElementById("rcptRemarks").value,
-        date:new Date().toLocaleString()
+        number:
+        document.getElementById("rcptNumber").value,
+
+        customer:
+        document.getElementById("rcptCustomer").value,
+
+        amount:
+        document.getElementById("rcptAmount").value,
+
+        remarks:
+        document.getElementById("rcptRemarks").value,
+
+        date:
+        new Date().toLocaleString()
 
     };
 
@@ -225,7 +296,8 @@ function saveReceipt(){
     );
 
     addAudit(
-        "Collection Saved : " + receipt.number
+        "Collection Saved : " +
+        receipt.number
     );
 
     updateCards();
@@ -244,11 +316,20 @@ function savePurchase(){
 
     let purchase = {
 
-        number:document.getElementById("poNumber").value,
-        supplier:document.getElementById("poSupplier").value,
-        amount:document.getElementById("poAmount").value,
-        remarks:document.getElementById("poRemarks").value,
-        date:new Date().toLocaleString()
+        number:
+        document.getElementById("poNumber").value,
+
+        supplier:
+        document.getElementById("poSupplier").value,
+
+        amount:
+        document.getElementById("poAmount").value,
+
+        remarks:
+        document.getElementById("poRemarks").value,
+
+        date:
+        new Date().toLocaleString()
 
     };
 
@@ -260,7 +341,8 @@ function savePurchase(){
     );
 
     addAudit(
-        "Purchase Saved : " + purchase.number
+        "Purchase Saved : " +
+        purchase.number
     );
 
     closePopup("purchasePopup");
@@ -277,11 +359,20 @@ function saveDisbursement(){
 
     let disbursement = {
 
-        number:document.getElementById("cvNumber").value,
-        payee:document.getElementById("cvPayee").value,
-        amount:document.getElementById("cvAmount").value,
-        remarks:document.getElementById("cvRemarks").value,
-        date:new Date().toLocaleString()
+        number:
+        document.getElementById("cvNumber").value,
+
+        payee:
+        document.getElementById("cvPayee").value,
+
+        amount:
+        document.getElementById("cvAmount").value,
+
+        remarks:
+        document.getElementById("cvRemarks").value,
+
+        date:
+        new Date().toLocaleString()
 
     };
 
@@ -293,7 +384,8 @@ function saveDisbursement(){
     );
 
     addAudit(
-        "Disbursement Saved : " + disbursement.number
+        "Disbursement Saved : " +
+        disbursement.number
     );
 
     closePopup("disbursementPopup");
@@ -303,38 +395,112 @@ function saveDisbursement(){
 }
 
 /* ========================= */
-/* DASHBOARD */
+/* CUSTOMER MASTERLIST */
 /* ========================= */
 
-function updateCards(){
+function openCustomerMaster(){
 
-    let sales = 0;
-    let collection = 0;
+    let html = `
 
-    invoices.forEach(i => {
-        sales += Number(i.amount || 0);
+    <h2 style="margin-bottom:20px;">
+        Customer Masterlist
+    </h2>
+
+    <table>
+
+        <tr>
+
+            <th>Name</th>
+            <th>Address</th>
+            <th>TIN</th>
+            <th>Contact</th>
+
+        </tr>
+
+    `;
+
+    customers.forEach(c=>{
+
+        html += `
+
+        <tr>
+
+            <td>${c.name}</td>
+            <td>${c.address}</td>
+            <td>${c.tin}</td>
+            <td>${c.contact}</td>
+
+        </tr>
+
+        `;
+
     });
 
-    receipts.forEach(r => {
-        collection += Number(r.amount || 0);
-    });
+    html += `</table>`;
 
-    document.getElementById("totalSales").innerHTML =
-    "₱" + sales.toLocaleString();
+    document.getElementById("reportContent")
+    .innerHTML = html;
 
-    document.getElementById("totalCollected").innerHTML =
-    "₱" + collection.toLocaleString();
-
-    document.getElementById("receivables").innerHTML =
-    "₱" + (sales - collection).toLocaleString();
-
-    document.getElementById("totalCustomers").innerHTML =
-    customers.length;
+    openPopup("reportPopup");
 
 }
 
 /* ========================= */
-/* CLICKABLE TABLE */
+/* SUPPLIER MASTERLIST */
+/* ========================= */
+
+function openSupplierMaster(){
+
+    let html = `
+
+    <h2 style="margin-bottom:20px;">
+        Supplier Masterlist
+    </h2>
+
+    <table>
+
+        <tr>
+
+            <th>Supplier</th>
+            <th>Amount</th>
+            <th>Date</th>
+
+        </tr>
+
+    `;
+
+    purchases.forEach(p=>{
+
+        html += `
+
+        <tr>
+
+            <td>${p.supplier}</td>
+
+            <td>
+                ₱${Number(p.amount)
+                .toLocaleString()}
+            </td>
+
+            <td>${p.date}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    html += `</table>`;
+
+    document.getElementById("reportContent")
+    .innerHTML = html;
+
+    openPopup("reportPopup");
+
+}
+
+/* ========================= */
+/* CLICKABLE TRANSACTION */
 /* ========================= */
 
 function renderInvoices(){
@@ -345,11 +511,13 @@ function renderInvoices(){
     table.innerHTML = `
 
     <tr>
+
         <th>Invoice</th>
         <th>Customer</th>
         <th>Amount</th>
         <th>Status</th>
         <th>Date</th>
+
     </tr>
 
     `;
@@ -361,12 +529,12 @@ function renderInvoices(){
         <tr onclick="viewInvoice(${index})"
         style="cursor:pointer;">
 
-            <td>${inv.number || ''}</td>
+            <td>${inv.number}</td>
 
-            <td>${inv.customer || ''}</td>
+            <td>${inv.customer}</td>
 
             <td>
-                ₱${Number(inv.amount || 0)
+                ₱${Number(inv.amount)
                 .toLocaleString()}
             </td>
 
@@ -378,13 +546,13 @@ function renderInvoices(){
                     : 'status-pending'
                 }">
 
-                    ${inv.status || 'Pending'}
+                    ${inv.status}
 
                 </span>
 
             </td>
 
-            <td>${inv.date || ''}</td>
+            <td>${inv.date}</td>
 
         </tr>
 
@@ -395,7 +563,7 @@ function renderInvoices(){
 }
 
 /* ========================= */
-/* VIEW INVOICE */
+/* VIEW TRANSACTION */
 /* ========================= */
 
 function viewInvoice(index){
@@ -406,7 +574,9 @@ function viewInvoice(index){
 
     <div class="ai-box">
 
-        <h2>Invoice Details</h2>
+        <h2>
+            Invoice Details
+        </h2>
 
         <br>
 
@@ -443,429 +613,11 @@ function viewInvoice(index){
 
     `;
 
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* SIMPLE REPORTS */
-/* ========================= */
-
-function openReceivableModule(){
-
-    generateSalesReport();
-
-}
-
-function openPayablesLedger(){
-
-    openSupplierMaster();
-
-}
-
-function openPaidModule(){
-
-    let paidInvoices =
-    invoices.filter(i => i.status === "Paid");
-
-    let html = `
-
-    <h2>Paid Invoices</h2>
-
-    <table>
-
-    <tr>
-        <th>Invoice</th>
-        <th>Customer</th>
-        <th>Amount</th>
-    </tr>
-
-    `;
-
-    paidInvoices.forEach(inv=>{
-
-        html += `
-
-        <tr>
-
-            <td>${inv.number}</td>
-            <td>${inv.customer}</td>
-
-            <td>
-                ₱${Number(inv.amount)
-                .toLocaleString()}
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-    html += `</table>`;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-function openCustomerLedger(){
-
-    openCustomerMaster();
-
-}
-
-function openAgingReport(){
-
-    let html = `
-
-    <div class="ai-box">
-
-        <h2>Aging Report</h2>
-
-        <br>
-
-        Pending Receivables:
-        ₱${(
-            invoices.reduce((a,b)=>
-            a + Number(b.amount || 0),0)
-
-            -
-
-            receipts.reduce((a,b)=>
-            a + Number(b.amount || 0),0)
-
-        ).toLocaleString()}
-
-    </div>
-
-    `;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-function openPurchaseReport(){
-
-    openSupplierMaster();
-
-}
-
-function openDisbursementReport(){
-
-    let html = `
-
-    <h2>Disbursement Report</h2>
-
-    <table>
-
-    <tr>
-        <th>CV No</th>
-        <th>Payee</th>
-        <th>Amount</th>
-    </tr>
-
-    `;
-
-    disbursements.forEach(d=>{
-
-        html += `
-
-        <tr>
-
-            <td>${d.number}</td>
-            <td>${d.payee}</td>
-
-            <td>
-                ₱${Number(d.amount)
-                .toLocaleString()}
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-    html += `</table>`;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* PDF */
-/* ========================= */
-
-function downloadPDF(){
-
-    const { jsPDF } = window.jspdf;
-
-    let doc = new jsPDF();
-
-    let text =
     document.getElementById("reportContent")
-    .innerText;
-
-    doc.text(text || "No Report Opened",10,10);
-
-    doc.save("ERP_REPORT.pdf");
-
-}
-
-/* ========================= */
-/* EXCEL */
-/* ========================= */
-
-function downloadExcel(){
-
-    let rows = [
-        ["Invoice","Customer","Amount"]
-    ];
-
-    invoices.forEach(inv=>{
-
-        rows.push([
-            inv.number,
-            inv.customer,
-            inv.amount
-        ]);
-
-    });
-
-    let csvContent =
-    "data:text/csv;charset=utf-8," +
-    rows.map(r=>r.join(",")).join("\n");
-
-    let link =
-    document.createElement("a");
-
-    link.href = encodeURI(csvContent);
-
-    link.download = "sales_report.csv";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-}
-
-/* ========================= */
-/* AUDIT TRAIL */
-/* ========================= */
-
-function openAuditTrail(){
-
-    let html = `
-
-    <h2>Audit Trail</h2>
-
-    <table>
-
-    <tr>
-        <th>Date</th>
-        <th>Action</th>
-    </tr>
-
-    `;
-
-    auditLogs.forEach(log=>{
-
-        html += `
-
-        <tr>
-
-            <td>${log.date}</td>
-            <td>${log.action}</td>
-
-        </tr>
-
-        `;
-
-    });
-
-    html += `</table>`;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
+    .innerHTML = html;
 
     openPopup("reportPopup");
 
 }
-
-/* ========================= */
-/* PROCESS FLOW */
-/* ========================= */
-
-function openProcessFlow(){
-
-    let html = `
-
-    <div class="ai-box">
-
-        <h2>ERP Process Flow</h2>
-
-        <br>
-
-        Customer Maintenance
-        ➜ Sales Invoice
-        ➜ Collection Receipt
-        ➜ Receivable Ledger
-
-        <hr style="margin:25px 0;">
-
-        Supplier Maintenance
-        ➜ Purchase Entry
-        ➜ Cash Disbursement
-        ➜ Payables Ledger
-
-    </div>
-
-    `;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* AI CENTER */
-/* ========================= */
-
-function openAICenter(){
-
-    generateAISummary();
-
-}
-
-function generateAISummary(){
-
-    let sales = 0;
-
-    invoices.forEach(inv=>{
-
-        sales += Number(inv.amount || 0);
-
-    });
-
-    let html = `
-
-    <div class="ai-box">
-
-        <h2>AI Business Insights</h2>
-
-        <br>
-
-        <h1 style="color:#4ade80;">
-            ₱${sales.toLocaleString()}
-        </h1>
-
-        <br>
-
-        <ul>
-
-            <li>Follow up pending invoices</li>
-
-            <li>Increase customer collection</li>
-
-            <li>Monitor purchasing expenses</li>
-
-            <li>Review unpaid receivables</li>
-
-        </ul>
-
-    </div>
-
-    `;
-
-    document.getElementById("reportContent").innerHTML =
-    html;
-
-    openPopup("reportPopup");
-
-}
-
-/* ========================= */
-/* BACKUP */
-/* ========================= */
-
-function exportData(){
-
-    let data = {
-
-        customers,
-        suppliers,
-        invoices,
-        receipts,
-        purchases,
-        disbursements,
-        auditLogs
-
-    };
-
-    let blob = new Blob(
-        [JSON.stringify(data,null,2)],
-        {type:"application/json"}
-    );
-
-    let a = document.createElement("a");
-
-    a.href = URL.createObjectURL(blob);
-
-    a.download = "ERP_BACKUP.json";
-
-    a.click();
-
-}
-
-/* ========================= */
-/* RESET */
-/* ========================= */
-
-function clearAllData(){
-
-    if(confirm("Delete ALL records?")){
-
-        localStorage.clear();
-
-        location.reload();
-
-    }
-
-}
-
-/* ========================= */
-/* CLOSE POPUP */
-/* ========================= */
-
-window.onclick = function(e){
-
-    document.querySelectorAll(".popup")
-    .forEach(function(popup){
-
-        if(e.target === popup){
-
-            popup.style.display = "none";
-
-        }
-
-    });
-
-};
 
 </script>
-</body>
-</html>
