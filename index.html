@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quelou ERP - AJ Accounting</title>
+<title>Quelou ERP - AJ Accounting Ultimate</title>
 
 <style>
 
@@ -34,36 +34,34 @@ body::before{
 }
 
 .app{
-    max-width:1400px;
-    margin:auto;
     display:flex;
     min-height:100vh;
 }
 
 .sidebar{
-    width:270px;
+    width:280px;
     background:rgba(255,255,255,.05);
-    backdrop-filter:blur(18px);
-    border-right:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
     padding:25px;
+    border-right:1px solid rgba(255,255,255,.08);
 }
 
 .logo{
     display:flex;
+    gap:15px;
     align-items:center;
-    gap:14px;
     margin-bottom:35px;
 }
 
 .logo-icon{
-    width:58px;
-    height:58px;
+    width:60px;
+    height:60px;
     border-radius:18px;
     background:linear-gradient(135deg,#1d4ed8,#14b8a6);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:26px;
+    font-size:25px;
     font-weight:700;
 }
 
@@ -75,12 +73,12 @@ body::before{
 
 .menu button{
     border:none;
-    background:rgba(255,255,255,.05);
-    color:white;
     padding:15px;
-    border-radius:16px;
-    cursor:pointer;
+    border-radius:15px;
+    background:rgba(255,255,255,.06);
+    color:white;
     text-align:left;
+    cursor:pointer;
     transition:.3s;
     font-size:15px;
 }
@@ -102,12 +100,6 @@ body::before{
     margin-bottom:30px;
 }
 
-.profile{
-    background:rgba(255,255,255,.06);
-    padding:12px 18px;
-    border-radius:16px;
-}
-
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -117,15 +109,13 @@ body::before{
 
 .card{
     background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:26px;
     padding:24px;
+    border-radius:24px;
 }
 
 .card h3{
-    color:#cfd7e8;
-    font-size:15px;
-    margin-bottom:14px;
+    margin-bottom:10px;
+    color:#cdd6ea;
 }
 
 .card .value{
@@ -133,42 +123,39 @@ body::before{
     font-weight:800;
 }
 
-.green{ color:#4ade80; }
-.orange{ color:#fbbf24; }
-.red{ color:#f87171; }
-.blue{ color:#60a5fa; }
+.green{color:#4ade80;}
+.orange{color:#fbbf24;}
+.blue{color:#60a5fa;}
+.red{color:#f87171;}
 
 .actions{
     display:flex;
     gap:15px;
     flex-wrap:wrap;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .actions button{
     border:none;
-    padding:16px 22px;
-    border-radius:18px;
-    font-size:15px;
-    font-weight:700;
+    padding:15px 20px;
+    border-radius:16px;
     cursor:pointer;
+    color:white;
+    font-weight:700;
 }
 
 .primary{
     background:linear-gradient(135deg,#1d4ed8,#14b8a6);
-    color:white;
 }
 
 .secondary{
     background:rgba(255,255,255,.08);
-    color:white;
 }
 
 .table-box{
     background:rgba(255,255,255,.06);
-    border-radius:26px;
+    border-radius:25px;
     padding:24px;
-    overflow:auto;
 }
 
 table{
@@ -178,25 +165,13 @@ table{
 
 table th{
     background:rgba(255,255,255,.08);
-    padding:16px;
+    padding:14px;
     text-align:left;
 }
 
 table td{
-    padding:16px;
+    padding:14px;
     border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.status{
-    padding:8px 14px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.pending{
-    background:#78350f;
-    color:#fde68a;
 }
 
 .popup{
@@ -211,10 +186,16 @@ table td{
 
 .popup-box{
     width:95%;
-    max-width:500px;
+    max-width:600px;
     background:#111827;
-    border-radius:28px;
     padding:30px;
+    border-radius:24px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.popup-box h2{
+    margin-bottom:20px;
 }
 
 .popup-box input,
@@ -223,7 +204,7 @@ table td{
     width:100%;
     padding:15px;
     border:none;
-    border-radius:16px;
+    border-radius:14px;
     background:rgba(255,255,255,.08);
     color:white;
     margin-bottom:15px;
@@ -231,16 +212,16 @@ table td{
 
 .popup-buttons{
     display:flex;
-    gap:12px;
+    gap:10px;
 }
 
 .popup-buttons button{
     flex:1;
     border:none;
     padding:15px;
-    border-radius:16px;
-    font-weight:700;
+    border-radius:14px;
     cursor:pointer;
+    font-weight:700;
 }
 
 .login-screen{
@@ -250,32 +231,32 @@ table td{
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:5000;
+    z-index:9999;
 }
 
 .login-box{
     width:95%;
     max-width:420px;
     background:rgba(255,255,255,.06);
-    border-radius:30px;
     padding:35px;
+    border-radius:28px;
 }
 
 .login-box input{
     width:100%;
-    padding:16px;
-    margin-bottom:15px;
+    padding:15px;
     border:none;
-    border-radius:18px;
+    border-radius:15px;
+    margin-bottom:15px;
     background:rgba(255,255,255,.08);
     color:white;
 }
 
 .login-btn{
     width:100%;
-    padding:16px;
+    padding:15px;
     border:none;
-    border-radius:18px;
+    border-radius:15px;
     background:linear-gradient(135deg,#1d4ed8,#14b8a6);
     color:white;
     font-size:16px;
@@ -305,6 +286,7 @@ table td{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -315,22 +297,30 @@ table td{
 
     <div class="login-box">
 
-        <h1>AJ Accounting</h1>
+        <h1 style="margin-bottom:10px;">AJ Accounting</h1>
 
-        <p>Quelou ERP Financial & Collection System</p>
+        <p style="margin-bottom:20px;color:#bfc7d9;">
+            Quelou ERP Ultimate
+        </p>
 
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
+        <input type="text" id="username"
+        placeholder="Username">
 
-        <button class="login-btn" onclick="login()">
-            Login System
+        <input type="password" id="password"
+        placeholder="Password">
+
+        <button class="login-btn"
+        onclick="login()">
+
+            Login
+
         </button>
 
     </div>
 
 </div>
 
-<!-- MAIN -->
+<!-- APP -->
 
 <div class="app">
 
@@ -340,11 +330,18 @@ table td{
 
         <div class="logo">
 
-            <div class="logo-icon">AJ</div>
+            <div class="logo-icon">
+                AJ
+            </div>
 
             <div>
-                <h1>Quelou ERP</h1>
-                <p>AJ Accounting</p>
+
+                <h2>Quelou ERP</h2>
+
+                <p style="color:#b8c0d4;">
+                    AJ Accounting
+                </p>
+
             </div>
 
         </div>
@@ -366,30 +363,40 @@ table td{
             </button>
 
             <button onclick="generateSalesReport()">
-                📈 Sales Report
+                📈 Reports
             </button>
 
-            <button onclick="printStatement()">
-                📄 Print Statement
+            <button onclick="openPopup('formPopup')">
+                🧩 Form Maker
+            </button>
+
+            <button onclick="openPopup('settingsPopup')">
+                ⚙ Settings
             </button>
 
         </div>
 
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
 
     <div class="main">
 
         <div class="topbar">
 
             <div>
-                <h2>Accounting Dashboard</h2>
-                <p>Monitor invoices and collections</p>
+
+                <h1>Accounting Dashboard</h1>
+
+                <p style="color:#b7bfd2;">
+                    Manage invoices and collections
+                </p>
+
             </div>
 
-            <div class="profile">
-                Admin User
+            <div>
+                Logged in:
+                <span id="currentUser"></span>
             </div>
 
         </div>
@@ -399,23 +406,39 @@ table td{
         <div class="cards">
 
             <div class="card">
+
                 <h3>Total Sales</h3>
-                <div class="value green" id="totalSales">₱0</div>
+
+                <div class="value green"
+                id="totalSales">₱0</div>
+
             </div>
 
             <div class="card">
-                <h3>Collected</h3>
-                <div class="value blue" id="collected">₱0</div>
+
+                <h3>Collections</h3>
+
+                <div class="value blue"
+                id="totalCollected">₱0</div>
+
             </div>
 
             <div class="card">
+
                 <h3>Receivables</h3>
-                <div class="value orange" id="receivables">₱0</div>
+
+                <div class="value orange"
+                id="receivables">₱0</div>
+
             </div>
 
             <div class="card">
-                <h3>Total Customers</h3>
-                <div class="value red" id="totalCustomers">0</div>
+
+                <h3>Customers</h3>
+
+                <div class="value red"
+                id="customerCount">0</div>
+
             </div>
 
         </div>
@@ -427,14 +450,14 @@ table td{
             <button class="primary"
             onclick="openPopup('invoicePopup')">
 
-                + New Invoice
+                + Invoice
 
             </button>
 
             <button class="secondary"
             onclick="openPopup('receiptPopup')">
 
-                + New Collection
+                + Receipt
 
             </button>
 
@@ -452,7 +475,7 @@ table td{
         <div class="table-box">
 
             <h2 style="margin-bottom:20px;">
-                Recent Transactions
+                Recent Invoices
             </h2>
 
             <table>
@@ -461,11 +484,11 @@ table td{
 
                     <tr>
 
-                        <th>Invoice No.</th>
+                        <th>Invoice #</th>
                         <th>Customer</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Preview</th>
 
                     </tr>
 
@@ -479,7 +502,7 @@ table td{
 
 </div>
 
-<!-- CUSTOMER POPUP -->
+<!-- CUSTOMER -->
 
 <div class="popup" id="customerPopup">
 
@@ -497,7 +520,7 @@ table td{
         placeholder="TIN">
 
         <input type="text" id="custContact"
-        placeholder="Contact Number">
+        placeholder="Contact">
 
         <div class="popup-buttons">
 
@@ -521,7 +544,7 @@ table td{
 
 </div>
 
-<!-- INVOICE POPUP -->
+<!-- INVOICE -->
 
 <div class="popup" id="invoicePopup">
 
@@ -564,7 +587,7 @@ table td{
 
 </div>
 
-<!-- RECEIPT POPUP -->
+<!-- RECEIPT -->
 
 <div class="popup" id="receiptPopup">
 
@@ -579,14 +602,13 @@ table td{
         placeholder="Receipt Number">
 
         <input type="number" id="recAmount"
-        placeholder="Collected Amount">
+        placeholder="Amount">
 
         <select id="recMethod">
 
+            <option>Cash</option>
             <option>GCash</option>
             <option>Bank Transfer</option>
-            <option>Cash</option>
-            <option>Cheque</option>
 
         </select>
 
@@ -615,11 +637,138 @@ table td{
 
 </div>
 
+<!-- SETTINGS -->
+
+<div class="popup" id="settingsPopup">
+
+    <div class="popup-box">
+
+        <h2>System Settings</h2>
+
+        <input type="text" id="companyName"
+        placeholder="Company Name">
+
+        <input type="text" id="companyAddress"
+        placeholder="Company Address">
+
+        <input type="text" id="companyTIN"
+        placeholder="Company TIN">
+
+        <input type="file" id="companyLogo">
+
+        <hr style="margin:20px 0;">
+
+        <h3 style="margin-bottom:15px;">
+            Add System User
+        </h3>
+
+        <input type="text" id="newUsername"
+        placeholder="Username">
+
+        <input type="password" id="newPassword"
+        placeholder="Password">
+
+        <select id="userRole">
+
+            <option>Admin</option>
+            <option>Cashier</option>
+            <option>Accounting</option>
+
+        </select>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="saveSettings()">
+
+                Save Settings
+
+            </button>
+
+            <button class="secondary"
+            onclick="addUser()">
+
+                Add User
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FORM MAKER -->
+
+<div class="popup" id="formPopup">
+
+    <div class="popup-box">
+
+        <h2>Custom Form Maker</h2>
+
+        <input type="text" id="formTitle"
+        placeholder="Form Title">
+
+        <textarea id="formBody"
+        placeholder="Custom Form Content"></textarea>
+
+        <div class="popup-buttons">
+
+            <button class="primary"
+            onclick="saveCustomForm()">
+
+                Save Form
+
+            </button>
+
+            <button class="secondary"
+            onclick="closePopup('formPopup')">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 
-let customers = [];
-let invoices = [];
-let receipts = [];
+/* DATABASE */
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [
+
+    {
+        username:"jackie-gelic",
+        password:"1028",
+        role:"Admin"
+    }
+
+];
+
+let customers =
+JSON.parse(localStorage.getItem("customers")) || [];
+
+let invoices =
+JSON.parse(localStorage.getItem("invoices")) || [];
+
+let receipts =
+JSON.parse(localStorage.getItem("receipts")) || [];
+
+let settings =
+JSON.parse(localStorage.getItem("settings")) || {
+
+    companyName:"SAMPLE COMPANY",
+    companyAddress:"621 J. Dimabiling, Cavite",
+    companyTIN:"123-123-123"
+
+};
+
+let customForms =
+JSON.parse(localStorage.getItem("customForms")) || [];
 
 /* LOGIN */
 
@@ -631,20 +780,35 @@ function login(){
     let pass =
     document.getElementById("password").value;
 
-    if(user === "jackie-gelic" && pass === "1028"){
+    let found =
+    users.find(u=>
 
-        document.getElementById(
-        "loginScreen").style.display = "none";
+        u.username === user &&
+        u.password === pass
+
+    );
+
+    if(found){
+
+        document.getElementById("loginScreen")
+        .style.display = "none";
+
+        document.getElementById("currentUser")
+        .innerHTML = found.username;
+
+        loadCustomers();
+        renderInvoices();
+        updateCards();
 
     }else{
 
-        alert("Invalid Username or Password");
+        alert("Invalid Login");
 
     }
 
 }
 
-/* POPUP */
+/* POPUPS */
 
 function openPopup(id){
 
@@ -660,37 +824,32 @@ function closePopup(id){
 
 }
 
-/* CUSTOMER */
+/* SAVE CUSTOMER */
 
 function saveCustomer(){
 
-    let name =
-    document.getElementById("custName").value;
+    let customer = {
 
-    let address =
-    document.getElementById("custAddress").value;
+        name:
+        document.getElementById("custName").value,
 
-    let tin =
-    document.getElementById("custTIN").value;
+        address:
+        document.getElementById("custAddress").value,
 
-    let contact =
-    document.getElementById("custContact").value;
+        tin:
+        document.getElementById("custTIN").value,
 
-    if(name === ""){
+        contact:
+        document.getElementById("custContact").value
 
-        alert("Customer name required");
-        return;
+    };
 
-    }
+    customers.push(customer);
 
-    customers.push({
-
-        name,
-        address,
-        tin,
-        contact
-
-    });
+    localStorage.setItem(
+        "customers",
+        JSON.stringify(customers)
+    );
 
     loadCustomers();
 
@@ -701,6 +860,8 @@ function saveCustomer(){
     alert("Customer Saved");
 
 }
+
+/* LOAD CUSTOMERS */
 
 function loadCustomers(){
 
@@ -727,38 +888,33 @@ function loadCustomers(){
 
 function saveInvoice(){
 
-    let customer =
-    document.getElementById("invCustomer").value;
+    let invoice = {
 
-    let number =
-    document.getElementById("invNumber").value;
+        customer:
+        document.getElementById("invCustomer").value,
 
-    let date =
-    document.getElementById("invDate").value;
+        number:
+        document.getElementById("invNumber").value,
 
-    let details =
-    document.getElementById("invDetails").value;
+        date:
+        document.getElementById("invDate").value,
 
-    let amount =
-    document.getElementById("invAmount").value;
+        details:
+        document.getElementById("invDetails").value,
 
-    if(customer === "" || amount === ""){
+        amount:
+        document.getElementById("invAmount").value,
 
-        alert("Complete invoice details");
-        return;
-
-    }
-
-    invoices.push({
-
-        customer,
-        number,
-        date,
-        details,
-        amount,
         status:"PENDING"
 
-    });
+    };
+
+    invoices.push(invoice);
+
+    localStorage.setItem(
+        "invoices",
+        JSON.stringify(invoices)
+    );
 
     renderInvoices();
 
@@ -766,44 +922,41 @@ function saveInvoice(){
 
     closePopup("invoicePopup");
 
-    alert("Invoice Saved");
-
 }
 
 /* SAVE RECEIPT */
 
 function saveReceipt(){
 
-    let customer =
-    document.getElementById("recCustomer").value;
+    let receipt = {
 
-    let number =
-    document.getElementById("recNumber").value;
+        customer:
+        document.getElementById("recCustomer").value,
 
-    let amount =
-    document.getElementById("recAmount").value;
+        number:
+        document.getElementById("recNumber").value,
 
-    let method =
-    document.getElementById("recMethod").value;
+        amount:
+        document.getElementById("recAmount").value,
 
-    let remarks =
-    document.getElementById("recRemarks").value;
+        method:
+        document.getElementById("recMethod").value,
 
-    receipts.push({
+        remarks:
+        document.getElementById("recRemarks").value
 
-        customer,
-        number,
-        amount,
-        method,
-        remarks
+    };
 
-    });
+    receipts.push(receipt);
+
+    localStorage.setItem(
+        "receipts",
+        JSON.stringify(receipts)
+    );
 
     updateCards();
 
     closePopup("receiptPopup");
-
-    alert("Receipt Saved");
 
 }
 
@@ -818,11 +971,11 @@ function renderInvoices(){
 
     <tr>
 
-        <th>Invoice No.</th>
+        <th>Invoice #</th>
         <th>Customer</th>
         <th>Amount</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>Preview</th>
 
     </tr>
 
@@ -843,18 +996,12 @@ function renderInvoices(){
                 .toLocaleString()}
             </td>
 
-            <td>
-
-                <span class="status pending">
-                    ${inv.status}
-                </span>
-
-            </td>
+            <td>${inv.status}</td>
 
             <td>
 
                 <button class="print-btn"
-                onclick="printInvoice(${index})">
+                onclick="previewInvoice(${index})">
 
                     Preview
 
@@ -870,53 +1017,56 @@ function renderInvoices(){
 
 }
 
-/* DASHBOARD */
+/* UPDATE DASHBOARD */
 
 function updateCards(){
 
-    let totalSales = 0;
-    let totalCollected = 0;
+    let sales = 0;
+    let collection = 0;
 
-    invoices.forEach(inv=>{
+    invoices.forEach(i=>{
 
-        totalSales += Number(inv.amount);
-
-    });
-
-    receipts.forEach(rec=>{
-
-        totalCollected += Number(rec.amount);
+        sales += Number(i.amount);
 
     });
 
-    let receivable =
-    totalSales - totalCollected;
+    receipts.forEach(r=>{
+
+        collection += Number(r.amount);
+
+    });
 
     document.getElementById("totalSales")
     .innerHTML =
-    "₱" + totalSales.toLocaleString();
+    "₱" + sales.toLocaleString();
 
-    document.getElementById("collected")
+    document.getElementById("totalCollected")
     .innerHTML =
-    "₱" + totalCollected.toLocaleString();
+    "₱" + collection.toLocaleString();
 
     document.getElementById("receivables")
     .innerHTML =
-    "₱" + receivable.toLocaleString();
+    "₱" + (sales - collection)
+    .toLocaleString();
 
-    document.getElementById("totalCustomers")
-    .innerHTML = customers.length;
+    document.getElementById("customerCount")
+    .innerHTML =
+    customers.length;
 
 }
 
-/* PRINT INVOICE */
+/* PREVIEW */
 
-function printInvoice(index){
+function previewInvoice(index){
 
     let inv = invoices[index];
 
     let customer =
-    customers.find(c=>c.name === inv.customer);
+    customers.find(c=>
+
+        c.name === inv.customer
+
+    );
 
     let win =
     window.open("","","width=1000,height=800");
@@ -952,7 +1102,7 @@ function printInvoice(index){
     }
 
     th,td{
-        padding:12px;
+        padding:10px;
     }
 
     .right{
@@ -965,7 +1115,6 @@ function printInvoice(index){
         background:#1d4ed8;
         color:white;
         margin-top:20px;
-        cursor:pointer;
     }
 
     </style>
@@ -978,9 +1127,11 @@ function printInvoice(index){
 
         <center>
 
-            <h2>SAMPLE COMPANY</h2>
+            <h2>${settings.companyName}</h2>
 
-            <p>621 J. Dimabiling, Cavite</p>
+            <p>${settings.companyAddress}</p>
+
+            <p>TIN: ${settings.companyTIN}</p>
 
             <h1>BILLING STATEMENT</h1>
 
@@ -1004,7 +1155,7 @@ function printInvoice(index){
         </p>
 
         <p>
-        <b>Invoice No:</b>
+        <b>Invoice #:</b>
         ${inv.number}
         </p>
 
@@ -1050,9 +1201,7 @@ function printInvoice(index){
     </div>
 
     <button onclick="window.print()">
-
-        Print Billing Statement
-
+        Print
     </button>
 
     </body>
@@ -1069,129 +1218,97 @@ function generateSalesReport(){
 
     let total = 0;
 
-    invoices.forEach(inv=>{
+    invoices.forEach(i=>{
 
-        total += Number(inv.amount);
-
-    });
-
-    let win =
-    window.open("","","width=1000,height=700");
-
-    let html = `
-
-    <html>
-
-    <head>
-
-    <title>Sales Report</title>
-
-    <style>
-
-    body{
-        font-family:Arial;
-        padding:40px;
-    }
-
-    table{
-        width:100%;
-        border-collapse:collapse;
-    }
-
-    table,th,td{
-        border:1px solid #ccc;
-    }
-
-    th,td{
-        padding:12px;
-    }
-
-    button{
-        padding:12px 18px;
-        border:none;
-        background:#1d4ed8;
-        color:white;
-        margin-top:20px;
-        cursor:pointer;
-    }
-
-    </style>
-
-    </head>
-
-    <body>
-
-    <h1>Sales Report</h1>
-
-    <h3>
-    Total Sales :
-    ₱${total.toLocaleString()}
-    </h3>
-
-    <table>
-
-        <tr>
-
-            <th>Invoice No</th>
-            <th>Customer</th>
-            <th>Amount</th>
-
-        </tr>
-
-    `;
-
-    invoices.forEach(inv=>{
-
-        html += `
-
-        <tr>
-
-            <td>${inv.number}</td>
-
-            <td>${inv.customer}</td>
-
-            <td>
-
-                ₱${Number(inv.amount)
-                .toLocaleString()}
-
-            </td>
-
-        </tr>
-
-        `;
+        total += Number(i.amount);
 
     });
 
-    html += `
+    alert(
 
-    </table>
+        "TOTAL SALES : ₱" +
+        total.toLocaleString()
 
-    <button onclick="window.print()">
-
-        Print Report
-
-    </button>
-
-    </body>
-
-    </html>
-
-    `;
-
-    win.document.write(html);
+    );
 
 }
 
-/* STATEMENT */
+/* SETTINGS */
 
-function printStatement(){
+function saveSettings(){
 
-    generateSalesReport();
+    settings.companyName =
+    document.getElementById("companyName").value;
+
+    settings.companyAddress =
+    document.getElementById("companyAddress").value;
+
+    settings.companyTIN =
+    document.getElementById("companyTIN").value;
+
+    localStorage.setItem(
+        "settings",
+        JSON.stringify(settings)
+    );
+
+    alert("Settings Saved");
 
 }
 
-/* CLOSE POPUP OUTSIDE */
+/* ADD USER */
+
+function addUser(){
+
+    let user = {
+
+        username:
+        document.getElementById("newUsername").value,
+
+        password:
+        document.getElementById("newPassword").value,
+
+        role:
+        document.getElementById("userRole").value
+
+    };
+
+    users.push(user);
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+    alert("User Added");
+
+}
+
+/* FORM MAKER */
+
+function saveCustomForm(){
+
+    let form = {
+
+        title:
+        document.getElementById("formTitle").value,
+
+        body:
+        document.getElementById("formBody").value
+
+    };
+
+    customForms.push(form);
+
+    localStorage.setItem(
+        "customForms",
+        JSON.stringify(customForms)
+    );
+
+    alert("Custom Form Saved");
+
+}
+
+/* CLOSE POPUP */
 
 window.onclick = function(e){
 
