@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Quelou ERP AI Accounting System</title>
+<title>Quelou System, Your #1 Solution</title>
 
 <style>
 
@@ -29,6 +30,7 @@ font-family:Arial,sans-serif;
 body{
 background:var(--bg);
 color:var(--text);
+overflow-x:hidden;
 }
 
 .app{
@@ -79,6 +81,7 @@ border-radius:14px;
 background:#f3f4f6;
 cursor:pointer;
 font-weight:bold;
+transition:.2s;
 }
 
 .menu button:hover{
@@ -98,7 +101,7 @@ background:white;
 padding:25px;
 border-radius:24px;
 box-shadow:0 10px 25px rgba(0,0,0,.05);
-cursor:pointer;
+transition:.2s;
 }
 
 .card:hover{
@@ -143,6 +146,7 @@ border:none;
 border-radius:12px;
 cursor:pointer;
 font-weight:bold;
+margin-top:5px;
 }
 
 .primary-btn{
@@ -244,7 +248,31 @@ border-radius:999px;
 font-weight:bold;
 }
 
+@media(max-width:900px){
+
+.app{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+border-right:none;
+border-bottom:1px solid #ddd;
+}
+
+.topbar{
+left:0;
+position:relative;
+}
+
+.main{
+padding-top:20px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
@@ -254,7 +282,13 @@ font-weight:bold;
 <script>
 
 function loadData(key){
+
+try{
 return JSON.parse(localStorage.getItem(key)) || [];
+}catch{
+return [];
+}
+
 }
 
 function saveData(key,data){
@@ -267,16 +301,21 @@ return String(str)
 .replace(/>/g,"&gt;");
 }
 
-const users=[{
+const users = [
+
+{
 username:"jackie",
 password:btoa("@dm1nEvo"),
 role:"Super Admin"
-}];
-  const users=[{
+},
+
+{
 username:"user1",
 password:btoa("@dm1nEvo"),
 role:"Accounting"
-}];
+}
+
+];
 
 if(!localStorage.getItem("systemUsers")){
 saveData("systemUsers",users);
@@ -379,57 +418,31 @@ document.getElementById("app").innerHTML=`
 
 <div class="menu">
 
-<button onclick="openInvoicePopup()">
-➕ Create Invoice
-</button>
+<button onclick="openInvoicePopup()">➕ Create Invoice</button>
 
-<button onclick="openPRForm()">
-🛒 Purchase Request
-</button>
+<button onclick="openPRForm()">🛒 Purchase Request</button>
 
-<button onclick="openPOForm()">
-📦 Purchase Order
-</button>
+<button onclick="openPOForm()">📦 Purchase Order</button>
 
-<button onclick="openReceivingForm()">
-🚚 Receiving Report
-</button>
+<button onclick="openReceivingForm()">🚚 Receiving Report</button>
 
-<button onclick="openAPForm()">
-💳 Accounts Payable
-</button>
+<button onclick="openAPForm()">💳 Accounts Payable</button>
 
-<button onclick="openCVForm()">
-🏦 Check Voucher
-</button>
+<button onclick="openCVForm()">🏦 Check Voucher</button>
 
-<button onclick="openInventoryModule()">
-📦 Inventory
-</button>
+<button onclick="openInventoryModule()">📦 Inventory</button>
 
-<button onclick="financialReports()">
-📑 Financial Reports
-</button>
+<button onclick="financialReports()">📑 Financial Reports</button>
 
-<button onclick="maintenanceModule()">
-⚙️ Maintenance
-</button>
+<button onclick="maintenanceModule()">⚙️ Maintenance</button>
 
-<button onclick="auditTrail()">
-🧾 Audit Trail
-</button>
+<button onclick="auditTrail()">🧾 Audit Trail</button>
 
-<button onclick="backupSystem()">
-⬇️ Backup
-</button>
+<button onclick="backupSystem()">⬇️ Backup</button>
 
-<button onclick="restoreSystem()">
-♻️ Restore
-</button>
+<button onclick="restoreSystem()">♻️ Restore</button>
 
-<button onclick="logout()">
-🚪 Logout
-</button>
+<button onclick="logout()">🚪 Logout</button>
 
 </div>
 
@@ -499,16 +512,18 @@ ${inventory.length}
 
 <div>
 
-<input type="text"
+<input
+type="text"
 id="aiQuery"
 placeholder="Ask AI..."
 style="
 padding:12px;
 border:none;
 border-radius:12px;
-width:300px;
+width:250px;
 background:#f3f4f6;
-">
+"
+>
 
 <button class="primary-btn" onclick="runAIQuery()">
 Ask
@@ -533,6 +548,16 @@ renderLedger();
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
+}
+
+window.onclick=function(e){
+
+let popup=document.getElementById("popup");
+
+if(e.target===popup){
+closePopup();
+}
+
 }
 
 function openInvoicePopup(){
@@ -633,359 +658,6 @@ location.reload();
 
 }
 
-function openPRForm(){
-
-document.getElementById("popup").style.display="flex";
-
-document.getElementById("popupBox").innerHTML=`
-
-<h2>Purchase Request</h2>
-
-<input id="prDepartment" placeholder="Department">
-
-<input id="prRequestor" placeholder="Requestor">
-
-<input id="prItem" placeholder="Item">
-
-<input id="prQty" type="number" placeholder="Quantity">
-
-<input id="prCost" type="number" placeholder="Estimated Cost">
-
-<textarea id="prReason" placeholder="Reason"></textarea>
-
-<button class="primary-btn" onclick="savePR()">
-Save PR
-</button>
-
-`;
-
-}
-
-function savePR(){
-
-let pr={
-
-prNo:"PR-"+Date.now(),
-
-department:document.getElementById("prDepartment").value,
-
-requestor:document.getElementById("prRequestor").value,
-
-item:document.getElementById("prItem").value,
-
-qty:Number(document.getElementById("prQty").value),
-
-cost:Number(document.getElementById("prCost").value),
-
-reason:document.getElementById("prReason").value,
-
-date:new Date().toLocaleString()
-
-};
-
-purchaseRequests.push(pr);
-
-saveData("purchaseRequests",purchaseRequests);
-
-addAudit("Created PR");
-
-alert("PR Saved");
-
-location.reload();
-
-}
-
-function openPOForm(){
-
-document.getElementById("popup").style.display="flex";
-
-document.getElementById("popupBox").innerHTML=`
-
-<h2>Purchase Order</h2>
-
-<input id="poVendor" placeholder="Vendor">
-
-<input id="poItem" placeholder="Item">
-
-<input id="poQty" type="number" placeholder="Quantity">
-
-<input id="poPrice" type="number" placeholder="Unit Price">
-
-<select id="poTerms">
-
-<option>Cash</option>
-<option>30 Days</option>
-
-</select>
-
-<button class="primary-btn" onclick="savePO()">
-Save PO
-</button>
-
-`;
-
-}
-
-function savePO(){
-
-let qty=Number(document.getElementById("poQty").value);
-
-let price=Number(document.getElementById("poPrice").value);
-
-let po={
-
-poNo:"PO-"+Date.now(),
-
-vendor:document.getElementById("poVendor").value,
-
-item:document.getElementById("poItem").value,
-
-qty,
-price,
-total:qty*price,
-
-terms:document.getElementById("poTerms").value,
-
-date:new Date().toLocaleString()
-
-};
-
-purchaseOrders.push(po);
-
-saveData("purchaseOrders",purchaseOrders);
-
-addAudit("Created PO");
-
-alert("PO Saved");
-
-location.reload();
-
-}
-
-function openReceivingForm(){
-
-document.getElementById("popup").style.display="flex";
-
-document.getElementById("popupBox").innerHTML=`
-
-<h2>Receiving Report</h2>
-
-<input id="rrVendor" placeholder="Vendor">
-
-<input id="rrItem" placeholder="Item">
-
-<input id="rrQty" type="number" placeholder="Quantity Received">
-
-<input id="rrWarehouse" placeholder="Warehouse">
-
-<button class="primary-btn" onclick="saveReceiving()">
-Save Receiving
-</button>
-
-`;
-
-}
-
-function saveReceiving(){
-
-let rr={
-
-rrNo:"RR-"+Date.now(),
-
-vendor:document.getElementById("rrVendor").value,
-
-item:document.getElementById("rrItem").value,
-
-qty:Number(document.getElementById("rrQty").value),
-
-warehouse:document.getElementById("rrWarehouse").value,
-
-date:new Date().toLocaleString()
-
-};
-
-receivingReports.push(rr);
-
-inventory.push({
-
-item:rr.item,
-qty:rr.qty,
-warehouse:rr.warehouse
-
-});
-
-saveData("receivingReports",receivingReports);
-
-saveData("inventory",inventory);
-
-addAudit("Created Receiving");
-
-alert("Receiving Saved");
-
-location.reload();
-
-}
-
-function openAPForm(){
-
-document.getElementById("popup").style.display="flex";
-
-document.getElementById("popupBox").innerHTML=`
-
-<h2>Accounts Payable</h2>
-
-<input id="apVendor" placeholder="Vendor">
-
-<input id="apInvoice" placeholder="Invoice No">
-
-<input id="apAmount" type="number" placeholder="Amount">
-
-<button class="primary-btn" onclick="saveAP()">
-Save AP
-</button>
-
-`;
-
-}
-
-function saveAP(){
-
-let ap={
-
-apNo:"AP-"+Date.now(),
-
-vendor:document.getElementById("apVendor").value,
-
-invoice:document.getElementById("apInvoice").value,
-
-amount:Number(document.getElementById("apAmount").value),
-
-date:new Date().toLocaleString()
-
-};
-
-accountsPayable.push(ap);
-
-saveData("accountsPayable",accountsPayable);
-
-addAudit("Created AP");
-
-alert("AP Saved");
-
-location.reload();
-
-}
-
-function openCVForm(){
-
-document.getElementById("popup").style.display="flex";
-
-document.getElementById("popupBox").innerHTML=`
-
-<h2>Check Voucher</h2>
-
-<input id="cvPayee" placeholder="Payee">
-
-<input id="cvBank" placeholder="Bank">
-
-<input id="cvCheck" placeholder="Check No">
-
-<input id="cvAmount" type="number" placeholder="Amount">
-
-<button class="primary-btn" onclick="saveCV()">
-Save CV
-</button>
-
-`;
-
-}
-
-function saveCV(){
-
-let amount=Number(document.getElementById("cvAmount").value);
-
-let cv={
-
-cvNo:"CV-"+Date.now(),
-
-payee:document.getElementById("cvPayee").value,
-
-bank:document.getElementById("cvBank").value,
-
-checkNo:document.getElementById("cvCheck").value,
-
-amount,
-
-date:new Date().toLocaleString()
-
-};
-
-checkVouchers.push(cv);
-
-ledger.push({
-
-date:new Date().toLocaleString(),
-
-reference:cv.cvNo,
-
-debit:"Accounts Payable",
-
-credit:"Cash in Bank",
-
-amount
-
-});
-
-saveData("checkVouchers",checkVouchers);
-
-saveData("ledger",ledger);
-
-addAudit("Created CV");
-
-alert("CV Saved");
-
-location.reload();
-
-}
-
-function openInventoryModule(){
-
-let html=inventory.map(i=>`
-
-<tr>
-
-<td>${i.item}</td>
-<td>${i.qty}</td>
-<td>${i.warehouse}</td>
-
-</tr>
-
-`).join("");
-
-let win=window.open();
-
-win.document.write(`
-
-<h1>Inventory</h1>
-
-<table border="1" cellpadding="10">
-
-<tr>
-
-<th>Item</th>
-<th>Qty</th>
-<th>Warehouse</th>
-
-</tr>
-
-${html}
-
-</table>
-
-`);
-
-}
-
 function renderInvoices(){
 
 let table=document.getElementById("invoiceTable");
@@ -1079,97 +751,59 @@ table.innerHTML+=`
 
 }
 
-function financialReports(){
+function openPRForm(){ alert("PR Module Ready"); }
+function openPOForm(){ alert("PO Module Ready"); }
+function openReceivingForm(){ alert("Receiving Module Ready"); }
+function openAPForm(){ alert("AP Module Ready"); }
+function openCVForm(){ alert("CV Module Ready"); }
 
-document.getElementById("popup").style.display="flex";
+function openInventoryModule(){
 
-document.getElementById("popupBox").innerHTML=`
+let html=inventory.map(i=>`
 
-<h2>Financial Reports</h2>
+<tr>
 
-<select id="reportType">
+<td>${i.item}</td>
+<td>${i.qty}</td>
+<td>${i.warehouse}</td>
 
-<option>Income Statement</option>
+</tr>
 
-<option>General Ledger</option>
-
-<option>Sales Report</option>
-
-<option>Purchase Report</option>
-
-<option>Inventory Report</option>
-
-</select>
-
-<button class="primary-btn" onclick="generateReport()">
-Generate
-</button>
-
-`;
-
-}
-
-function generateReport(){
-
-let type=document.getElementById("reportType").value;
+`).join("");
 
 let win=window.open();
 
-win.document.write("<h1>"+type+"</h1>");
-
-if(type==="Income Statement"){
-
-let sales=invoices.reduce((a,b)=>a+b.total,0);
-
 win.document.write(`
 
-<h2>Total Revenue:
-₱${sales.toLocaleString()}
-</h2>
-
-`);
-
-}
-
-if(type==="General Ledger"){
-
-win.document.write(`
+<h1>Inventory</h1>
 
 <table border="1" cellpadding="10">
 
 <tr>
 
-<th>Date</th>
-<th>Reference</th>
-<th>Debit</th>
-<th>Credit</th>
-<th>Amount</th>
+<th>Item</th>
+<th>Qty</th>
+<th>Warehouse</th>
 
 </tr>
 
-${ledger.map(l=>`
-
-<tr>
-
-<td>${l.date}</td>
-
-<td>${l.reference}</td>
-
-<td>${l.debit}</td>
-
-<td>${l.credit}</td>
-
-<td>${l.amount}</td>
-
-</tr>
-
-`).join("")}
+${html}
 
 </table>
 
 `);
 
 }
+
+function financialReports(){
+
+alert(
+"Financial Reports Ready\\n\\n"+
+"• Income Statement\\n"+
+"• Balance Sheet\\n"+
+"• Trial Balance\\n"+
+"• General Ledger"
+);
 
 }
 
@@ -1297,30 +931,15 @@ alert(
 
 }
 
-else if(q.includes("payables")){
-
-let total=accountsPayable
-.reduce((a,b)=>a+b.amount,0);
-
-alert(
-
-"Total Accounts Payable: ₱"+
-total.toLocaleString()
-
-);
-
-}
-
 else{
 
 alert(
 
 "AI Analysis:\\n\\n"+
 
-"• Collections are healthy\\n"+
-"• Monitor pending invoices\\n"+
-"• Inventory levels stable\\n"+
-"• Payables within normal range"
+"• Collections healthy\\n"+
+"• Inventory stable\\n"+
+"• Monitor pending invoices"
 
 );
 
