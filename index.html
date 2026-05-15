@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quelou ERP AI Accounting</title>
+<title>Quelou Accounting System</title>
 
 <style>
 
@@ -36,30 +36,28 @@ min-height:100vh;
 }
 
 .sidebar{
-width:270px;
+width:280px;
 background:#fff;
 padding:25px;
 border-right:1px solid var(--line);
 }
 
-.logo{
-margin-bottom:25px;
-}
-
 .logo h2{
 color:var(--blue);
+margin-bottom:5px;
 }
 
 .menu{
 display:flex;
 flex-direction:column;
 gap:12px;
+margin-top:25px;
 }
 
 .menu button{
 padding:15px;
 border:none;
-border-radius:16px;
+border-radius:14px;
 background:#f3f4f6;
 cursor:pointer;
 font-weight:bold;
@@ -68,7 +66,7 @@ transition:.2s;
 
 .menu button:hover{
 background:var(--blue);
-color:#fff;
+color:white;
 }
 
 .main{
@@ -80,10 +78,10 @@ padding-top:90px;
 .topbar{
 position:fixed;
 top:0;
-left:270px;
+left:280px;
 right:0;
 height:70px;
-background:#fff;
+background:white;
 border-bottom:1px solid var(--line);
 display:flex;
 justify-content:space-between;
@@ -98,8 +96,8 @@ border:none;
 border-radius:12px;
 background:var(--red);
 color:white;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
 .cards{
@@ -110,7 +108,7 @@ margin-bottom:25px;
 }
 
 .card{
-background:#fff;
+background:white;
 padding:25px;
 border-radius:24px;
 box-shadow:0 10px 25px rgba(0,0,0,.05);
@@ -132,9 +130,11 @@ font-weight:bold;
 .red{color:var(--red);}
 
 .table-box{
-background:#fff;
+background:white;
 padding:25px;
 border-radius:24px;
+margin-bottom:25px;
+overflow:auto;
 }
 
 table{
@@ -146,12 +146,13 @@ th,td{
 padding:14px;
 border-bottom:1px solid #eee;
 text-align:left;
+font-size:14px;
 }
 
 .popup{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.4);
+background:rgba(0,0,0,.5);
 display:none;
 justify-content:center;
 align-items:center;
@@ -161,8 +162,8 @@ padding:20px;
 
 .popup-box{
 width:100%;
-max-width:800px;
-background:#fff;
+max-width:1000px;
+background:white;
 padding:30px;
 border-radius:28px;
 max-height:90vh;
@@ -180,33 +181,36 @@ border-radius:14px;
 background:#f3f4f6;
 }
 
-.primary-btn{
-padding:14px 18px;
+.primary-btn,
+.secondary-btn,
+.success-btn,
+.danger-btn{
+padding:12px 16px;
 border:none;
-border-radius:14px;
-background:var(--blue);
-color:#fff;
-cursor:pointer;
+border-radius:12px;
 font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+margin-right:10px;
+}
+
+.primary-btn{
+background:var(--blue);
+color:white;
 }
 
 .secondary-btn{
-padding:14px 18px;
-border:none;
-border-radius:14px;
 background:#ddd;
-cursor:pointer;
-font-weight:bold;
 }
 
 .success-btn{
-padding:14px 18px;
-border:none;
-border-radius:14px;
 background:var(--green);
 color:white;
-cursor:pointer;
-font-weight:bold;
+}
+
+.danger-btn{
+background:var(--red);
+color:white;
 }
 
 .status-paid{
@@ -225,6 +229,14 @@ border-radius:999px;
 font-weight:bold;
 }
 
+.receipt-preview{
+background:#fafafa;
+padding:25px;
+border-radius:18px;
+border:1px solid #ddd;
+margin-top:20px;
+}
+
 .login-wrapper{
 height:100vh;
 display:flex;
@@ -236,7 +248,7 @@ padding:20px;
 .login-card{
 width:100%;
 max-width:420px;
-background:#fff;
+background:white;
 padding:40px;
 border-radius:35px;
 box-shadow:0 20px 40px rgba(0,0,0,.08);
@@ -257,7 +269,7 @@ padding:18px;
 border:none;
 border-radius:16px;
 background:var(--blue);
-color:#fff;
+color:white;
 font-weight:bold;
 cursor:pointer;
 }
@@ -305,10 +317,10 @@ return String(str)
 .replace(/>/g,"&gt;");
 }
 
-const users = [
+const users=[
 {
-username:"admin",
-password:btoa("admin123"),
+username:"jackie@quelou.com.ph",
+password:btoa("@dm1nEvo"),
 role:"Super Admin"
 }
 ];
@@ -317,9 +329,12 @@ if(!localStorage.getItem("systemUsers")){
 saveData("systemUsers",users);
 }
 
+let invoices=loadData("invoices");
+let ledger=loadData("ledger");
+
 function renderLogin(){
 
-document.getElementById("app").innerHTML = `
+document.getElementById("app").innerHTML=`
 
 <div class="login-wrapper">
 
@@ -381,8 +396,6 @@ renderLogin();
 renderApp();
 }
 
-let invoices=loadData("invoices");
-
 function renderApp(){
 
 document.getElementById("app").innerHTML=`
@@ -393,29 +406,25 @@ document.getElementById("app").innerHTML=`
 
 <div class="logo">
 <h2>Quelou ERP</h2>
-<p>Accounting Dashboard</p>
+<p>Billing • Collection • Accounting</p>
 </div>
 
 <div class="menu">
 
 <button onclick="openPopup()">
-➕ New Invoice
+➕ Create Invoice
 </button>
 
 <button onclick="exportJSON()">
 💾 Export JSON
 </button>
 
-<button onclick="window.print()">
-🖨️ Print Report
-</button>
-
 <button onclick="downloadBackup()">
 ⬇️ Download Backup
 </button>
 
-<button onclick="saveAccountingSystem()">
-📚 Save to Accounting System
+<button onclick="window.print()">
+🖨️ Print Reports
 </button>
 
 </div>
@@ -424,7 +433,7 @@ document.getElementById("app").innerHTML=`
 
 <div class="main">
 
-<h1>Dashboard</h1>
+<h1>Accounting Dashboard</h1>
 
 <br>
 
@@ -436,17 +445,17 @@ document.getElementById("app").innerHTML=`
 </div>
 
 <div class="card">
-<h3>Invoices</h3>
+<h3>Total Invoices</h3>
 <div class="value green" id="invoiceCount">0</div>
 </div>
 
 <div class="card">
-<h3>Pending</h3>
+<h3>Pending Collection</h3>
 <div class="value orange" id="pendingCount">0</div>
 </div>
 
 <div class="card">
-<h3>Paid</h3>
+<h3>Collected Payments</h3>
 <div class="value red" id="paidCount">0</div>
 </div>
 
@@ -454,11 +463,21 @@ document.getElementById("app").innerHTML=`
 
 <div class="table-box">
 
-<h2>Transactions</h2>
+<h2>Billing to Collection Monitoring</h2>
 
 <br>
 
 <table id="table"></table>
+
+</div>
+
+<div class="table-box">
+
+<h2>General Ledger</h2>
+
+<br>
+
+<table id="ledgerTable"></table>
 
 </div>
 
@@ -468,7 +487,7 @@ document.getElementById("app").innerHTML=`
 
 <div class="topbar">
 
-<h3>Quelou ERP AI Accounting</h3>
+<h3>Quelou ERP AI Accounting PRO</h3>
 
 <button class="logout-btn" onclick="logout()">
 Logout
@@ -480,30 +499,47 @@ Logout
 
 <div class="popup-box">
 
-<h2>Create Invoice</h2>
+<h2>Create Billing / Invoice</h2>
 
 <br>
 
 <input type="text" id="customer" placeholder="Customer Name">
 
-<input type="number" id="amount" placeholder="Amount">
+<input type="text" id="tin" placeholder="TIN Number">
+
+<input type="text" id="address" placeholder="Customer Address">
+
+<input type="number" id="amount" placeholder="Sales Amount">
+
+<input type="number" id="vat" value="12" placeholder="VAT %">
 
 <select id="status">
-
-<option value="Pending">Pending</option>
+<option value="Pending">Pending Collection</option>
 <option value="Paid">Paid</option>
+</select>
 
+<select id="documentType">
+<option value="EIS">EIS</option>
+<option value="EOPT">EOPT</option>
+<option value="EOR">EOR</option>
+<option value="BIR CAS">BIR CAS</option>
 </select>
 
 <textarea id="remarks" placeholder="Remarks"></textarea>
 
 <button class="primary-btn" onclick="saveInvoice()">
-Save Invoice
+Save Transaction
+</button>
+
+<button class="success-btn" onclick="previewReceipt()">
+Preview Receipt
 </button>
 
 <button class="secondary-btn" onclick="closePopup()">
 Close
 </button>
+
+<div id="previewArea"></div>
 
 </div>
 
@@ -512,6 +548,7 @@ Close
 `;
 
 renderInvoices();
+renderLedger();
 updateDashboard();
 
 }
@@ -527,30 +564,58 @@ document.getElementById("popup").style.display="none";
 function saveInvoice(){
 
 let customer=document.getElementById("customer").value;
+let tin=document.getElementById("tin").value;
+let address=document.getElementById("address").value;
 let amount=Number(document.getElementById("amount").value);
+let vat=Number(document.getElementById("vat").value);
 let status=document.getElementById("status").value;
 let remarks=document.getElementById("remarks").value;
+let documentType=document.getElementById("documentType").value;
 
 if(!customer || amount<=0){
-alert("Complete fields");
+alert("Please complete required fields.");
 return;
 }
 
-invoices.push({
+let vatAmount=(amount*vat)/100;
+let total=amount+vatAmount;
+
+let invoice={
 invoice:"INV-"+Date.now(),
 customer,
+tin,
+address,
 amount,
+vat,
+vatAmount,
+total,
 status,
 remarks,
+documentType,
 date:new Date().toLocaleString()
+};
+
+invoices.push(invoice);
+
+ledger.push({
+date:new Date().toLocaleString(),
+reference:invoice.invoice,
+debit: status==="Paid" ? "Cash" : "Accounts Receivable",
+credit:"Sales Revenue",
+amount:total,
+remarks:customer
 });
 
 saveData("invoices",invoices);
+saveData("ledger",ledger);
+
+renderInvoices();
+renderLedger();
+updateDashboard();
 
 closePopup();
 
-renderInvoices();
-updateDashboard();
+alert("Transaction Saved Successfully");
 
 }
 
@@ -563,9 +628,13 @@ table.innerHTML=`
 <tr>
 <th>Invoice</th>
 <th>Customer</th>
+<th>Document</th>
 <th>Amount</th>
+<th>VAT</th>
+<th>Total</th>
 <th>Status</th>
-<th>Date</th>
+<th>Action</th>
+<th>Preview</th>
 </tr>
 
 `;
@@ -580,19 +649,116 @@ table.innerHTML+=`
 
 <td>${sanitize(inv.customer)}</td>
 
+<td>${sanitize(inv.documentType)}</td>
+
 <td>₱${Number(inv.amount).toLocaleString()}</td>
 
+<td>₱${Number(inv.vatAmount).toLocaleString()}</td>
+
+<td><b>₱${Number(inv.total).toLocaleString()}</b></td>
+
 <td>
+
 <span class="${
 inv.status==="Paid"
 ? "status-paid"
 : "status-pending"
 }">
+
 ${sanitize(inv.status)}
+
 </span>
+
 </td>
 
-<td>${sanitize(inv.date)}</td>
+<td>
+
+${
+inv.status==="Paid"
+? "Collected"
+: `<button class="success-btn" onclick="collectPayment('${inv.invoice}')">Collect</button>`
+}
+
+</td>
+
+<td>
+
+<button class="primary-btn" onclick="showInvoice('${inv.invoice}')">
+View
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function collectPayment(invoiceNo){
+
+let inv=invoices.find(i=>i.invoice===invoiceNo);
+
+if(!inv) return;
+
+inv.status="Paid";
+
+ledger.push({
+date:new Date().toLocaleString(),
+reference:invoiceNo,
+debit:"Cash",
+credit:"Accounts Receivable",
+amount:inv.total,
+remarks:"Collection from "+inv.customer
+});
+
+saveData("invoices",invoices);
+saveData("ledger",ledger);
+
+renderInvoices();
+renderLedger();
+updateDashboard();
+
+alert("Payment Collected");
+
+}
+
+function renderLedger(){
+
+let table=document.getElementById("ledgerTable");
+
+table.innerHTML=`
+
+<tr>
+<th>Date</th>
+<th>Reference</th>
+<th>Debit Account</th>
+<th>Credit Account</th>
+<th>Amount</th>
+<th>Remarks</th>
+</tr>
+
+`;
+
+ledger.forEach(item=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${sanitize(item.date)}</td>
+
+<td>${sanitize(item.reference)}</td>
+
+<td>${sanitize(item.debit)}</td>
+
+<td>${sanitize(item.credit)}</td>
+
+<td>₱${Number(item.amount).toLocaleString()}</td>
+
+<td>${sanitize(item.remarks)}</td>
 
 </tr>
 
@@ -604,11 +770,11 @@ ${sanitize(inv.status)}
 
 function updateDashboard(){
 
-let sales=invoices.reduce((a,b)=>a+b.amount,0);
+let sales=invoices.reduce((a,b)=>a+b.total,0);
 
 let paid=invoices.filter(i=>i.status==="Paid").length;
 
-let pending=invoices.filter(i=>i.status==="Pending").length;
+let pending=invoices.filter(i=>i.status!=="Paid").length;
 
 document.getElementById("sales").innerHTML=
 "₱"+sales.toLocaleString();
@@ -621,6 +787,161 @@ pending;
 
 document.getElementById("paidCount").innerHTML=
 paid;
+
+}
+
+function previewReceipt(){
+
+let customer=document.getElementById("customer").value || "Sample Customer";
+
+let amount=Number(document.getElementById("amount").value || 0);
+
+let vat=Number(document.getElementById("vat").value || 12);
+
+let documentType=document.getElementById("documentType").value;
+
+let vatAmount=(amount*vat)/100;
+
+let total=amount+vatAmount;
+
+document.getElementById("previewArea").innerHTML=`
+
+<div class="receipt-preview">
+
+<h2>${documentType} RECEIPT PREVIEW</h2>
+
+<hr><br>
+
+<p><b>Business:</b> Quelou ERP AI Accounting</p>
+
+<p><b>Customer:</b> ${sanitize(customer)}</p>
+
+<p><b>Date:</b> ${new Date().toLocaleString()}</p>
+
+<br>
+
+<table style="width:100%;">
+
+<tr>
+<td>Sales Amount</td>
+<td>₱${amount.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>VAT</td>
+<td>₱${vatAmount.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td><b>Total</b></td>
+<td><b>₱${total.toLocaleString()}</b></td>
+</tr>
+
+</table>
+
+<br>
+
+<p><b>Document Type:</b> ${documentType}</p>
+
+<p><b>BIR CAS READY FORMAT</b></p>
+
+</div>
+
+`;
+
+}
+
+function showInvoice(invoiceNo){
+
+let inv=invoices.find(i=>i.invoice===invoiceNo);
+
+if(!inv) return;
+
+let win=window.open();
+
+win.document.write(`
+
+<html>
+
+<head>
+
+<title>${inv.invoice}</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+td{
+padding:10px;
+border:1px solid #ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>${inv.documentType} DOCUMENT</h1>
+
+<hr>
+
+<p><b>Invoice No:</b> ${inv.invoice}</p>
+<p><b>Date:</b> ${inv.date}</p>
+<p><b>Customer:</b> ${inv.customer}</p>
+<p><b>TIN:</b> ${inv.tin}</p>
+<p><b>Address:</b> ${inv.address}</p>
+
+<table>
+
+<tr>
+<td>Sales Amount</td>
+<td>₱${inv.amount.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>VAT ${inv.vat}%</td>
+<td>₱${inv.vatAmount.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td><b>Total</b></td>
+<td><b>₱${inv.total.toLocaleString()}</b></td>
+</tr>
+
+</table>
+
+<br>
+
+<h3>Accounting Entry</h3>
+
+<p>
+Debit:
+${inv.status==="Paid" ? "Cash" : "Accounts Receivable"}
+</p>
+
+<p>
+Credit: Sales Revenue
+</p>
+
+<p>
+Amount: ₱${inv.total.toLocaleString()}
+</p>
+
+</body>
+
+</html>
+
+`);
 
 }
 
@@ -644,7 +965,8 @@ a.click();
 function downloadBackup(){
 
 let backup={
-invoices
+invoices,
+ledger
 };
 
 let blob=new Blob(
@@ -659,14 +981,6 @@ a.href=URL.createObjectURL(blob);
 a.download="QuelouERPBackup.json";
 
 a.click();
-
-}
-
-function saveAccountingSystem(){
-
-alert(
-"Accounting records successfully saved."
-);
 
 }
 
