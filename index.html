@@ -1,11 +1,8 @@
-# Quelou ERP – AI Accounting System (Consolidated Overall Code Structure)
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Quelou ERP AI Accounting System</title>
 
 <style>
@@ -25,7 +22,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -43,6 +40,7 @@ body{
     background:white;
     padding:25px;
     border-right:1px solid var(--line);
+    overflow:auto;
 }
 
 .logo{
@@ -66,6 +64,7 @@ body{
     background:#f3f4f6;
     cursor:pointer;
     font-weight:bold;
+    transition:.2s;
 }
 
 .menu button:hover{
@@ -76,6 +75,7 @@ body{
 .main{
     flex:1;
     padding:25px;
+    padding-top:95px;
 }
 
 .cards{
@@ -113,15 +113,15 @@ body{
     padding:25px;
 }
 
-.table-box table{
+table{
     width:100%;
     border-collapse:collapse;
 }
 
-.table-box th,
-.table-box td{
+th,td{
     padding:14px;
     border-bottom:1px solid #eee;
+    text-align:left;
 }
 
 .popup{
@@ -132,10 +132,11 @@ body{
     justify-content:center;
     align-items:center;
     z-index:9999;
+    padding:20px;
 }
 
 .popup-box{
-    width:95%;
+    width:100%;
     max-width:850px;
     background:white;
     border-radius:30px;
@@ -173,6 +174,15 @@ body{
     cursor:pointer;
 }
 
+.danger-btn{
+    border:none;
+    padding:10px 15px;
+    border-radius:12px;
+    background:var(--red);
+    color:white;
+    cursor:pointer;
+}
+
 .status-paid{
     background:rgba(48,209,88,.15);
     color:var(--green);
@@ -189,9 +199,284 @@ body{
     font-weight:bold;
 }
 
+.topbar{
+    position:fixed;
+    top:0;
+    left:300px;
+    right:0;
+    height:75px;
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    z-index:999;
+}
+
+.user-badge{
+    padding:10px 15px;
+    border-radius:999px;
+    background:#f3f4f6;
+    font-weight:bold;
+}
+
+.logout-btn{
+    border:none;
+    padding:12px 18px;
+    border-radius:14px;
+    background:var(--red);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.login-wrapper{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:40px;
+    border-radius:35px;
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+.login-card h1{
+    color:var(--blue);
+    margin-bottom:10px;
+}
+
+.login-input{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    background:#f3f4f6;
+    margin-bottom:15px;
+}
+
+.login-btn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    background:var(--blue);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+.app{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+}
+
+.topbar{
+    left:0;
+}
+
+.main{
+    padding-top:110px;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+}
+
 </style>
 </head>
 <body>
+
+<div id="app"></div>
+
+<script>
+
+/* ========================= */
+/* STORAGE */
+/* ========================= */
+
+function loadData(key){
+    return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function saveData(key,data){
+    localStorage.setItem(key,JSON.stringify(data));
+}
+
+function sanitize(str){
+    return String(str)
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+/* ========================= */
+/* DEFAULT USERS */
+/* ========================= */
+
+const defaultUsers = [
+
+{
+id:1,
+username:"jackie",
+password:btoa("@dm1nEvo"),
+name:"System Administrator",
+role:"Super Admin",
+status:"Active"
+},
+
+{
+id:2,
+username:"sample@jackieerp.com",
+password:btoa("sample123"),
+name:"Accounting Manager",
+role:"Manager",
+status:"Active"
+},
+
+{
+id:3,
+username:"user1",
+password:btoa("user123"),
+name:"Accounting Staff",
+role:"Staff",
+status:"Active"
+}
+
+];
+
+if(!localStorage.getItem("systemUsers")){
+    saveData("systemUsers",defaultUsers);
+}
+
+/* ========================= */
+/* AUTH */
+/* ========================= */
+
+function renderLogin(){
+
+document.getElementById("app").innerHTML = `
+
+<div class="login-wrapper">
+
+<div class="login-card">
+
+<h1>Quelou ERP</h1>
+<p style="margin-bottom:25px;">AI Accounting System</p>
+
+<input type="text" id="loginUsername" class="login-input" placeholder="Username">
+
+<input type="password" id="loginPassword" class="login-input" placeholder="Password">
+
+<button class="login-btn" onclick="loginSystem()">
+LOGIN SYSTEM
+</button>
+
+<br><br>
+
+<div style="line-height:1.8;font-size:14px;">
+
+<b>SUPER ADMIN</b><br>
+admin / admin123
+
+<br><br>
+
+<b>MANAGER</b><br>
+manager / manager123
+
+<br><br>
+
+<b>STAFF</b><br>
+user1 / user123
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+function loginSystem(){
+
+let username = document.getElementById("loginUsername").value.trim();
+let password = document.getElementById("loginPassword").value.trim();
+
+let users = loadData("systemUsers");
+
+let user = users.find(u =>
+u.username === username &&
+u.password === btoa(password) &&
+u.status === "Active"
+);
+
+if(!user){
+    alert("Invalid Login");
+    return;
+}
+
+sessionStorage.setItem("loggedInUser",JSON.stringify(user));
+
+saveAudit("User Login",username);
+
+location.reload();
+
+}
+
+function logoutSystem(){
+
+if(confirm("Logout Account?")){
+
+let user = getCurrentUser();
+
+saveAudit("User Logout",user.username);
+
+sessionStorage.removeItem("loggedInUser");
+
+location.reload();
+
+}
+
+}
+
+function getCurrentUser(){
+    return JSON.parse(sessionStorage.getItem("loggedInUser"));
+}
+
+if(!sessionStorage.getItem("loggedInUser")){
+    renderLogin();
+}else{
+    renderApp();
+}
+
+/* ========================= */
+/* ERP APP */
+/* ========================= */
+
+function renderApp(){
+
+document.getElementById("app").innerHTML = `
 
 <div class="app">
 
@@ -204,15 +489,45 @@ body{
 
 <div class="menu">
 
-<button onclick="openPopup('invoicePopup')">🧾 Sales Invoice</button>
-<button onclick="openPopup('receiptPopup')">🧾 Official Receipt</button>
-<button onclick="openPopup('expensePopup')">💸 Expense</button>
-<button onclick="generateGL()">📚 General Ledger</button>
-<button onclick="generateTrialBalance()">📊 Trial Balance</button>
-<button onclick="generateFinancialSummary()">📈 Financial Report</button>
-<button onclick="generateAISummary()">🤖 AI Insights</button>
-<button onclick="generateAuditTrail()">🛡️ Audit Trail</button>
-<button onclick="downloadBackup()">💾 Backup</button>
+<button onclick="openPopup('invoicePopup')">
+🧾 Sales Invoice
+</button>
+
+<button onclick="openPopup('receiptPopup');loadInvoiceOptions();">
+🧾 Official Receipt
+</button>
+
+<button onclick="openPopup('expensePopup')">
+💸 Expense
+</button>
+
+<button onclick="generateGL()">
+📚 General Ledger
+</button>
+
+<button onclick="generateTrialBalance()">
+📊 Trial Balance
+</button>
+
+<button onclick="generateFinancialSummary()">
+📈 Financial Report
+</button>
+
+<button onclick="generateAISummary()">
+🤖 AI Insights
+</button>
+
+<button onclick="generateAuditTrail()">
+🛡️ Audit Trail
+</button>
+
+<button onclick="viewUsers()">
+👤 User Management
+</button>
+
+<button onclick="downloadBackup()">
+💾 Backup
+</button>
 
 </div>
 
@@ -221,6 +536,7 @@ body{
 <div class="main">
 
 <h1>Dashboard</h1>
+
 <br>
 
 <div class="cards">
@@ -250,20 +566,10 @@ body{
 <div class="table-box">
 
 <h2>Recent Transactions</h2>
+
 <br>
 
-<table>
-<tbody id="transactionTable">
-<tr>
-<th>Invoice</th>
-<th>Customer</th>
-<th>Amount</th>
-<th>Status</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-</tbody>
-</table>
+<table id="transactionTable"></table>
 
 </div>
 
@@ -271,331 +577,17 @@ body{
 
 </div>
 
-<script>
-
-const users = [
-
-{
-id:1,
-username:"admin",
-password:"admin123",
-name:"System Administrator",
-role:"Super Admin",
-status:"Active"
-},
-
-{
-id:2,
-username:"user1",
-password:"user123",
-name:"Sample User 1",
-role:"Accounting Staff",
-status:"Active"
-},
-
-{
-id:3,
-username:"manager",
-password:"manager123",
-name:"Accounting Manager",
-role:"Manager",
-status:"Active"
-}
-
-];
-
-localStorage.setItem("systemUsers",JSON.stringify(users));
-
-/* =============================== */
-/* LOGIN SCREEN */
-/* =============================== */
-
-function renderLoginScreen(){
-
-document.body.innerHTML = `
-
-<style>
-
-.login-wrapper{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#f5f5f7;
-padding:20px;
-}
-
-.login-card{
-width:100%;
-max-width:420px;
-background:white;
-padding:40px;
-border-radius:35px;
-box-shadow:0 20px 40px rgba(0,0,0,.08);
-}
-
-.login-logo{
-text-align:center;
-margin-bottom:30px;
-}
-
-.login-logo h1{
-color:#0a84ff;
-font-size:38px;
-margin-bottom:10px;
-}
-
-.login-logo p{
-color:#6b7280;
-}
-
-.login-input{
-width:100%;
-padding:18px;
-border:none;
-border-radius:18px;
-background:#f3f4f6;
-margin-bottom:15px;
-font-size:15px;
-}
-
-.login-btn{
-width:100%;
-padding:18px;
-border:none;
-border-radius:18px;
-background:#0a84ff;
-color:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.login-btn:hover{
-opacity:.9;
-}
-
-.demo-box{
-margin-top:25px;
-background:#f9fafb;
-padding:18px;
-border-radius:18px;
-line-height:1.9;
-font-size:14px;
-}
-
-.user-badge{
-padding:8px 14px;
-background:#f3f4f6;
-border-radius:999px;
-font-size:13px;
-font-weight:bold;
-}
-
-.topbar{
-position:fixed;
-top:0;
-left:300px;
-right:0;
-height:75px;
-background:white;
-border-bottom:1px solid #e5e7eb;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 25px;
-z-index:999;
-}
-
-.topbar-right{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.logout-btn{
-border:none;
-padding:12px 18px;
-border-radius:14px;
-background:#ff453a;
-color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-</style>
-
-<div class="login-wrapper">
-
-<div class="login-card">
-
-<div class="login-logo">
-<h1>Quelou ERP</h1>
-<p>AI Accounting System</p>
-</div>
-
-<input 
-type="text" 
-id="loginUsername" 
-class="login-input"
-placeholder="Enter Username"
->
-
-<input 
-type="password" 
-id="loginPassword" 
-class="login-input"
-placeholder="Enter Password"
->
-
-<button class="login-btn" onclick="loginSystem()">
-LOGIN SYSTEM
-</button>
-
-<div class="demo-box">
-
-<b>Sample Accounts</b>
-
-<br><br>
-
-<b>SUPER ADMIN</b><br>
-Username: admin<br>
-Password: admin123
-
-<br><br>
-
-<b>ACCOUNTING STAFF</b><br>
-Username: user1<br>
-Password: user123
-
-<br><br>
-
-<b>MANAGER</b><br>
-Username: manager<br>
-Password: manager123
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-/* =============================== */
-/* LOGIN FUNCTION */
-/* =============================== */
-
-function loginSystem(){
-
-let username = document.getElementById("loginUsername").value;
-let password = document.getElementById("loginPassword").value;
-
-let systemUsers = JSON.parse(localStorage.getItem("systemUsers")) || [];
-
-let foundUser = systemUsers.find(u => 
-u.username === username &&
-u.password === password &&
-u.status === "Active"
-);
-
-if(foundUser){
-
-sessionStorage.setItem(
-"loggedInUser",
-JSON.stringify(foundUser)
-);
-
-saveAudit(
-"User Login",
-foundUser.username
-);
-
-location.reload();
-
-}else{
-
-alert("Invalid Username or Password");
-
-}
-
-}
-
-/* =============================== */
-/* LOGOUT FUNCTION */
-/* =============================== */
-
-function logoutSystem(){
-
-if(confirm("Logout this account?")){
-
-let currentUser = JSON.parse(
-sessionStorage.getItem("loggedInUser")
-);
-
-saveAudit(
-"User Logout",
-currentUser.username
-);
-
-sessionStorage.removeItem("loggedInUser");
-
-location.reload();
-
-}
-
-}
-
-/* =============================== */
-/* AUTH CHECK */
-/* =============================== */
-
-if(!sessionStorage.getItem("loggedInUser")){
-
-renderLoginScreen();
-
-throw new Error("LOGIN REQUIRED");
-
-}
-
-/* =============================== */
-/* CURRENT USER */
-/* =============================== */
-
-const currentUser = JSON.parse(
-sessionStorage.getItem("loggedInUser")
-);
-
-/* =============================== */
-/* TOPBAR */
-/* =============================== */
-
-window.addEventListener("load",()=>{
-
-let topbar = document.createElement("div");
-
-topbar.className = "topbar";
-
-topbar.innerHTML = `
+<div class="topbar">
 
 <div>
-
-<h3>
-Welcome, ${currentUser.name}
-</h3>
-
-<small>
-${currentUser.role}
-</small>
-
+<h3>Welcome, ${sanitize(getCurrentUser().name)}</h3>
+<small>${sanitize(getCurrentUser().role)}</small>
 </div>
 
 <div class="topbar-right">
 
 <div class="user-badge">
-${currentUser.username}
+${sanitize(getCurrentUser().username)}
 </div>
 
 <button class="logout-btn" onclick="logoutSystem()">
@@ -604,521 +596,681 @@ Logout
 
 </div>
 
+</div>
+
+${renderPopups()}
+
 `;
 
-document.body.appendChild(topbar);
-
-document.querySelector(".main").style.paddingTop = "95px";
-
-});
-
-/* =============================== */
-/* CREATE USER */
-/* =============================== */
-
-function createUser(){
-
-let username = prompt("Enter Username");
-if(!username) return;
-
-let password = prompt("Enter Password");
-if(!password) return;
-
-let name = prompt("Enter Full Name");
-if(!name) return;
-
-let role = prompt("Enter Role");
-
-let systemUsers = JSON.parse(localStorage.getItem("systemUsers")) || [];
-
-systemUsers.push({
-
-id:Date.now(),
-username,
-password,
-name,
-role,
-status:"Active"
-
-});
-
-localStorage.setItem(
-"systemUsers",
-JSON.stringify(systemUsers)
-);
-
-saveAudit(
-"Created User",
-username
-);
-
-alert("User Created Successfully");
+renderInvoices();
+updateCards();
 
 }
 
-/* =============================== */
-/* VIEW USERS */
-/* =============================== */
+/* ========================= */
+/* POPUPS */
+/* ========================= */
 
-function viewUsers(){
+function renderPopups(){
 
-let systemUsers = JSON.parse(
-localStorage.getItem("systemUsers")
-) || [];
+return `
 
-let html = `
-<h2>User Management</h2>
-<br>
-<table width="100%" border="0">
-<tr>
-<th align="left">Username</th>
-<th align="left">Name</th>
-<th align="left">Role</th>
-<th align="left">Status</th>
-</tr>
-`;
-
-systemUsers.forEach(u=>{
-
-html += `
-<tr>
-<td>${u.username}</td>
-<td>${u.name}</td>
-<td>${u.role}</td>
-<td>${u.status}</td>
-</tr>
-`;
-
-});
-
-html += `</table><br><br>
-
-<button class="primary-btn" onclick="createUser()">
-Add User
-</button>
-
-`;
-
-document.getElementById("reportContent").innerHTML = html;
-
-openPopup('reportPopup');
-
-}
-
-</script>
-
-<!-- =============================== -->
-<!-- ADD THIS BUTTON IN SIDEBAR -->
-<!-- =============================== -->
-
-<button onclick="viewUsers()">👤 User Management</button>
 <div class="popup" id="invoicePopup">
+
 <div class="popup-box">
 
 <h2>Sales Invoice</h2>
+
 <br>
 
 <input type="text" id="invNumber" placeholder="Invoice Number">
+
 <input type="text" id="invCustomer" placeholder="Customer Name">
+
 <input type="text" id="invTIN" placeholder="Customer TIN">
+
 <input type="number" id="invAmount" placeholder="Amount">
 
 <select id="ewtPercent">
+
 <option value="0">No EWT</option>
 <option value="0.01">1% EWT</option>
 <option value="0.02">2% EWT</option>
 <option value="0.05">5% EWT</option>
+
 </select>
 
 <select id="invStatus">
+
 <option value="Pending">Pending</option>
 <option value="Paid">Paid</option>
+
 </select>
 
 <textarea id="invRemarks" placeholder="Remarks"></textarea>
 
-<button class="primary-btn" onclick="saveInvoice()">Save Invoice</button>
-<button class="secondary-btn" onclick="closePopup('invoicePopup')">Close</button>
+<button class="primary-btn" onclick="saveInvoice()">
+Save Invoice
+</button>
+
+<button class="secondary-btn" onclick="closePopup('invoicePopup')">
+Close
+</button>
 
 </div>
+
 </div>
 
 <div class="popup" id="receiptPopup">
+
 <div class="popup-box">
 
 <h2>Official Receipt</h2>
+
 <br>
 
-<input type="text" id="receiptCustomer" placeholder="Customer">
+<select id="receiptInvoice"></select>
+
 <input type="number" id="receiptAmount" placeholder="Amount">
+
 <textarea id="receiptRemarks" placeholder="Remarks"></textarea>
 
-<button class="primary-btn" onclick="saveReceipt()">Save Receipt</button>
-<button class="secondary-btn" onclick="closePopup('receiptPopup')">Close</button>
+<button class="primary-btn" onclick="saveReceipt()">
+Save Receipt
+</button>
+
+<button class="secondary-btn" onclick="closePopup('receiptPopup')">
+Close
+</button>
 
 </div>
+
 </div>
 
 <div class="popup" id="expensePopup">
+
 <div class="popup-box">
 
 <h2>Expense Entry</h2>
+
 <br>
 
 <input type="text" id="expenseTitle" placeholder="Expense Name">
+
 <input type="number" id="expenseAmount" placeholder="Amount">
+
 <textarea id="expenseRemarks" placeholder="Remarks"></textarea>
 
-<button class="primary-btn" onclick="saveExpense()">Save Expense</button>
-<button class="secondary-btn" onclick="closePopup('expensePopup')">Close</button>
+<button class="primary-btn" onclick="saveExpense()">
+Save Expense
+</button>
+
+<button class="secondary-btn" onclick="closePopup('expensePopup')">
+Close
+</button>
 
 </div>
+
 </div>
 
 <div class="popup" id="reportPopup">
+
 <div class="popup-box">
+
 <div id="reportContent"></div>
+
 <br>
-<button class="primary-btn" onclick="window.print()">Print</button>
-<button class="secondary-btn" onclick="closePopup('reportPopup')">Close</button>
+
+<button class="primary-btn" onclick="window.print()">
+Print
+</button>
+
+<button class="secondary-btn" onclick="closePopup('reportPopup')">
+Close
+</button>
+
 </div>
+
 </div>
 
-<script>
+`;
 
-const companyInfo = {
-company:"Quelou ERP Solutions",
-address:"Metro Manila, Philippines",
-tin:"123-456-789-000",
-permit:"PTU-2026-001",
-serial:"EIS-0001",
-vatType:"VAT Registered"
-};
+}
 
-let invoices = JSON.parse(localStorage.getItem("invoices")) || [];
-let receipts = JSON.parse(localStorage.getItem("receipts")) || [];
-let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-let journalEntries = JSON.parse(localStorage.getItem("journalEntries")) || [];
-let auditTrail = JSON.parse(localStorage.getItem("auditTrail")) || [];
+/* ========================= */
+/* DATA */
+/* ========================= */
+
+let invoices = loadData("invoices");
+let receipts = loadData("receipts");
+let expenses = loadData("expenses");
+let journalEntries = loadData("journalEntries");
+let auditTrail = loadData("auditTrail");
+
+/* ========================= */
+/* UTILITIES */
+/* ========================= */
 
 function openPopup(id){
-document.getElementById(id).style.display="flex";
+    document.getElementById(id).style.display="flex";
 }
 
 function closePopup(id){
-document.getElementById(id).style.display="none";
+    document.getElementById(id).style.display="none";
 }
+
+window.onclick = function(e){
+
+document.querySelectorAll(".popup").forEach(p=>{
+    if(e.target === p){
+        p.style.display = "none";
+    }
+});
+
+}
+
+/* ========================= */
+/* AUDIT */
+/* ========================= */
+
+function saveAudit(action,reference){
+
+let user = getCurrentUser();
+
+auditTrail.push({
+user:user.username,
+action,
+reference,
+date:new Date().toISOString()
+});
+
+saveData("auditTrail",auditTrail);
+
+}
+
+/* ========================= */
+/* INVOICE */
+/* ========================= */
 
 function saveInvoice(){
 
 let number = document.getElementById("invNumber").value || "INV-"+Date.now();
 
+let customer = document.getElementById("invCustomer").value.trim();
+
 let amount = Number(document.getElementById("invAmount").value);
 
-let vat = amount * 0.12;
-let vatable = amount - vat;
+if(!customer){
+    alert("Customer Required");
+    return;
+}
+
+if(amount <= 0){
+    alert("Invalid Amount");
+    return;
+}
+
+let vatable = amount / 1.12;
+let vat = amount - vatable;
 
 let ewtRate = Number(document.getElementById("ewtPercent").value);
 let ewtAmount = vatable * ewtRate;
 
 let invoice = {
-number:number,
-customer:document.getElementById("invCustomer").value,
+
+number,
+customer,
 tin:document.getElementById("invTIN").value,
-amount:amount,
-vat:vat,
-vatable:vatable,
+amount,
+vat,
+vatable,
 ewt:ewtAmount,
 status:document.getElementById("invStatus").value,
 remarks:document.getElementById("invRemarks").value,
-date:new Date().toLocaleString()
+date:new Date().toISOString()
+
 };
 
 invoices.push(invoice);
-localStorage.setItem("invoices",JSON.stringify(invoices));
+
+saveData("invoices",invoices);
 
 journalEntries.push({
+
 ref:number,
 type:"Sales Invoice",
-date:new Date().toLocaleString(),
+date:new Date().toISOString(),
+
 entries:[
-{account:"Accounts Receivable",debit:amount-ewtAmount,credit:0},
-{account:"Creditable Withholding Tax",debit:ewtAmount,credit:0},
-{account:"Sales Revenue",debit:0,credit:vatable},
-{account:"Output VAT",debit:0,credit:vat}
+
+{
+account:"Accounts Receivable",
+debit:amount-ewtAmount,
+credit:0
+},
+
+{
+account:"Creditable Withholding Tax",
+debit:ewtAmount,
+credit:0
+},
+
+{
+account:"Sales Revenue",
+debit:0,
+credit:vatable
+},
+
+{
+account:"Output VAT",
+debit:0,
+credit:vat
+}
+
 ]
+
 });
 
-localStorage.setItem("journalEntries",JSON.stringify(journalEntries));
+saveData("journalEntries",journalEntries);
 
-saveAudit("Created Sales Invoice",number);
+saveAudit("Created Invoice",number);
+
+closePopup("invoicePopup");
 
 renderInvoices();
+
 updateCards();
-closePopup('invoicePopup');
+
+}
+
+/* ========================= */
+/* RECEIPTS */
+/* ========================= */
+
+function loadInvoiceOptions(){
+
+let select = document.getElementById("receiptInvoice");
+
+select.innerHTML = "";
+
+invoices
+.filter(i=>i.status==="Pending")
+.forEach(i=>{
+
+select.innerHTML += `
+<option value="${i.number}">
+${i.number} - ${sanitize(i.customer)}
+</option>
+`;
+
+});
 
 }
 
 function saveReceipt(){
 
+let invoiceNo = document.getElementById("receiptInvoice").value;
+
 let amount = Number(document.getElementById("receiptAmount").value);
 
+if(amount <= 0){
+    alert("Invalid Amount");
+    return;
+}
+
+let invoice = invoices.find(i=>i.number===invoiceNo);
+
+if(!invoice){
+    alert("Invoice Not Found");
+    return;
+}
+
+invoice.status = "Paid";
+
 let receipt = {
-customer:document.getElementById("receiptCustomer").value,
-amount:amount,
+
+invoice:invoiceNo,
+customer:invoice.customer,
+amount,
 remarks:document.getElementById("receiptRemarks").value,
-date:new Date().toLocaleString()
+date:new Date().toISOString()
+
 };
 
 receipts.push(receipt);
-localStorage.setItem("receipts",JSON.stringify(receipts));
+
+saveData("receipts",receipts);
+
+saveData("invoices",invoices);
 
 journalEntries.push({
+
 ref:"OR-"+Date.now(),
 type:"Official Receipt",
-date:new Date().toLocaleString(),
+date:new Date().toISOString(),
+
 entries:[
-{account:"Cash",debit:amount,credit:0},
-{account:"Accounts Receivable",debit:0,credit:amount}
+
+{
+account:"Cash",
+debit:amount,
+credit:0
+},
+
+{
+account:"Accounts Receivable",
+debit:0,
+credit:amount
+}
+
 ]
+
 });
 
-localStorage.setItem("journalEntries",JSON.stringify(journalEntries));
+saveData("journalEntries",journalEntries);
 
-saveAudit("Created Official Receipt",receipt.customer);
+saveAudit("Created Receipt",invoiceNo);
+
+closePopup("receiptPopup");
+
+renderInvoices();
 
 updateCards();
-closePopup('receiptPopup');
 
 }
+
+/* ========================= */
+/* EXPENSE */
+/* ========================= */
 
 function saveExpense(){
 
+let title = document.getElementById("expenseTitle").value.trim();
+
 let amount = Number(document.getElementById("expenseAmount").value);
 
-let vat = amount * 0.12;
+if(!title){
+    alert("Expense Title Required");
+    return;
+}
+
+if(amount <= 0){
+    alert("Invalid Amount");
+    return;
+}
+
+let vat = amount / 1.12 * 0.12;
 let net = amount - vat;
 
 let expense = {
-title:document.getElementById("expenseTitle").value,
-amount:amount,
+
+title,
+amount,
 remarks:document.getElementById("expenseRemarks").value,
-date:new Date().toLocaleString()
+date:new Date().toISOString()
+
 };
 
 expenses.push(expense);
-localStorage.setItem("expenses",JSON.stringify(expenses));
+
+saveData("expenses",expenses);
 
 journalEntries.push({
+
 ref:"EXP-"+Date.now(),
-type:"Expense Entry",
-date:new Date().toLocaleString(),
+type:"Expense",
+date:new Date().toISOString(),
+
 entries:[
-{account:"Expense",debit:net,credit:0},
-{account:"Input VAT",debit:vat,credit:0},
-{account:"Cash",debit:0,credit:amount}
+
+{
+account:"Expense",
+debit:net,
+credit:0
+},
+
+{
+account:"Input VAT",
+debit:vat,
+credit:0
+},
+
+{
+account:"Cash",
+debit:0,
+credit:amount
+}
+
 ]
+
 });
 
-localStorage.setItem("journalEntries",JSON.stringify(journalEntries));
+saveData("journalEntries",journalEntries);
 
-saveAudit("Created Expense Entry",expense.title);
+saveAudit("Created Expense",title);
+
+closePopup("expensePopup");
 
 updateCards();
-closePopup('expensePopup');
 
 }
 
-function saveAudit(action,reference){
-
-auditTrail.push({
-action:action,
-reference:reference,
-date:new Date().toLocaleString()
-});
-
-localStorage.setItem("auditTrail",JSON.stringify(auditTrail));
-
-}
+/* ========================= */
+/* RENDER INVOICES */
+/* ========================= */
 
 function renderInvoices(){
 
 let table = document.getElementById("transactionTable");
 
 table.innerHTML = `
+
 <tr>
+
 <th>Invoice</th>
 <th>Customer</th>
 <th>Amount</th>
 <th>Status</th>
 <th>Date</th>
 <th>Action</th>
+
 </tr>
+
 `;
 
 invoices.forEach((inv,index)=>{
 
-let statusClass = inv.status === "Paid" ? "status-paid" : "status-pending";
+let statusClass =
+inv.status === "Paid"
+? "status-paid"
+: "status-pending";
 
 table.innerHTML += `
+
 <tr>
-<td>${inv.number}</td>
-<td>${inv.customer}</td>
-<td>₱${Number(inv.amount).toLocaleString()}</td>
-<td><span class="${statusClass}">${inv.status}</span></td>
-<td>${inv.date}</td>
+
+<td>${sanitize(inv.number)}</td>
+
+<td>${sanitize(inv.customer)}</td>
+
 <td>
-<button onclick="viewInvoice(${index})">👁️</button>
-<button onclick="deleteInvoice(${index})">🗑️</button>
+₱${Number(inv.amount).toLocaleString()}
 </td>
+
+<td>
+<span class="${statusClass}">
+${sanitize(inv.status)}
+</span>
+</td>
+
+<td>
+${new Date(inv.date).toLocaleString()}
+</td>
+
+<td>
+
+<button onclick="viewInvoice(${index})">
+👁️
+</button>
+
+<button class="danger-btn" onclick="deleteInvoice(${index})">
+Delete
+</button>
+
+</td>
+
 </tr>
+
 `;
 
 });
 
 }
+
+/* ========================= */
+/* VIEW INVOICE */
+/* ========================= */
 
 function viewInvoice(index){
 
 let inv = invoices[index];
 
 let html = `
-<div style="padding:40px;font-family:Arial;">
 
-<div style="text-align:center;">
-<h1>SALES INVOICE</h1>
-<h2>${companyInfo.company}</h2>
-${companyInfo.address}<br>
-TIN: ${companyInfo.tin}<br>
-${companyInfo.vatType}<br>
-Permit: ${companyInfo.permit}<br>
-Serial: ${companyInfo.serial}
-</div>
-
-<hr><br>
-
-<table width="100%">
-<tr>
-<td>
-<b>Invoice No:</b> ${inv.number}
-</td>
-<td align="right">
-<b>Date:</b> ${inv.date}
-</td>
-</tr>
-</table>
+<h1>Sales Invoice</h1>
 
 <br>
 
-<b>Customer:</b> ${inv.customer}<br>
-<b>TIN:</b> ${inv.tin}
+<b>Invoice:</b> ${sanitize(inv.number)}<br>
+<b>Customer:</b> ${sanitize(inv.customer)}<br>
+<b>TIN:</b> ${sanitize(inv.tin)}<br>
+<b>Date:</b> ${new Date(inv.date).toLocaleString()}<br>
 
-<br><br>
+<br>
 
-<table width="100%" border="1" cellpadding="10" style="border-collapse:collapse;">
+<table>
+
 <tr>
 <th>Description</th>
 <th>Amount</th>
 </tr>
+
 <tr>
-<td>ERP Software / Services</td>
-<td align="right">₱${Number(inv.amount).toLocaleString()}</td>
+<td>ERP Services</td>
+<td>₱${Number(inv.amount).toLocaleString()}</td>
 </tr>
+
 </table>
 
 <br>
 
-<table width="350" align="right">
-<tr>
-<td>Vatable Sales</td>
-<td align="right">₱${Number(inv.vatable).toLocaleString()}</td>
-</tr>
-<tr>
-<td>VAT 12%</td>
-<td align="right">₱${Number(inv.vat).toLocaleString()}</td>
-</tr>
-<tr>
-<td>EWT</td>
-<td align="right">₱${Number(inv.ewt).toLocaleString()}</td>
-</tr>
-<tr>
-<td><b>Total</b></td>
-<td align="right"><b>₱${Number(inv.amount).toLocaleString()}</b></td>
-</tr>
-</table>
-
-<div style="clear:both"></div>
+<b>Vatable:</b>
+₱${Number(inv.vatable).toLocaleString()}
 
 <br><br>
 
-<b>Remarks:</b> ${inv.remarks}
+<b>VAT:</b>
+₱${Number(inv.vat).toLocaleString()}
 
-<br><br><br>
+<br><br>
 
-<table width="100%">
-<tr>
-<td>
-_____________________<br>
-Prepared By
-</td>
-<td align="right">
-_____________________<br>
-Authorized Signature
-</td>
-</tr>
-</table>
+<b>EWT:</b>
+₱${Number(inv.ewt).toLocaleString()}
 
-</div>
+<br><br>
+
+<b>Total:</b>
+₱${Number(inv.amount).toLocaleString()}
+
 `;
 
 document.getElementById("reportContent").innerHTML = html;
-openPopup('reportPopup');
+
+openPopup("reportPopup");
 
 }
 
+/* ========================= */
+/* DELETE */
+/* ========================= */
+
 function deleteInvoice(index){
+
+let user = getCurrentUser();
+
+if(
+user.role !== "Super Admin" &&
+user.role !== "Manager"
+){
+    alert("Access Denied");
+    return;
+}
 
 if(confirm("Delete Invoice?")){
 
-saveAudit("Deleted Invoice",invoices[index].number);
+let ref = invoices[index].number;
+
+saveAudit("Deleted Invoice",ref);
 
 invoices.splice(index,1);
 
-localStorage.setItem("invoices",JSON.stringify(invoices));
+journalEntries = journalEntries.filter(
+j=>j.ref !== ref
+);
+
+saveData("invoices",invoices);
+
+saveData("journalEntries",journalEntries);
 
 renderInvoices();
+
 updateCards();
 
 }
 
 }
 
+/* ========================= */
+/* DASHBOARD */
+/* ========================= */
+
 function updateCards(){
 
-let sales = 0;
-let collections = 0;
-let expenseTotal = 0;
+let sales = invoices.reduce(
+(a,b)=>a+Number(b.amount),0
+);
 
-invoices.forEach(i=>{
-sales += Number(i.amount);
-if(i.status === "Paid"){
-collections += Number(i.amount);
-}
-});
+let collections = receipts.reduce(
+(a,b)=>a+Number(b.amount),0
+);
 
-expenses.forEach(e=>{
-expenseTotal += Number(e.amount);
-});
+let expenseTotal = expenses.reduce(
+(a,b)=>a+Number(b.amount),0
+);
 
-let receivables = sales - collections;
+let receivables = invoices
+.filter(i=>i.status==="Pending")
+.reduce((a,b)=>a+Number(b.amount),0);
+
 let profit = collections - expenseTotal;
 
-document.getElementById("totalSales").innerHTML = "₱"+sales.toLocaleString();
-document.getElementById("totalCollection").innerHTML = "₱"+collections.toLocaleString();
-document.getElementById("receivables").innerHTML = "₱"+receivables.toLocaleString();
-document.getElementById("netProfit").innerHTML = "₱"+profit.toLocaleString();
+document.getElementById("totalSales").innerHTML =
+"₱"+sales.toLocaleString();
+
+document.getElementById("totalCollection").innerHTML =
+"₱"+collections.toLocaleString();
+
+document.getElementById("receivables").innerHTML =
+"₱"+receivables.toLocaleString();
+
+document.getElementById("netProfit").innerHTML =
+"₱"+profit.toLocaleString();
 
 }
+
+/* ========================= */
+/* GENERAL LEDGER */
+/* ========================= */
 
 function generateGL(){
 
@@ -1127,14 +1279,26 @@ let html = `<h2>General Ledger</h2><br>`;
 journalEntries.forEach(j=>{
 
 html += `
+
 <div style="padding:20px;background:#f8fafc;border-radius:20px;margin-bottom:15px;">
-<b>Reference:</b> ${j.ref}<br>
-<b>Type:</b> ${j.type}<br>
-<b>Date:</b> ${j.date}<br><br>
+
+<b>Reference:</b> ${sanitize(j.ref)}<br>
+<b>Type:</b> ${sanitize(j.type)}<br>
+<b>Date:</b> ${new Date(j.date).toLocaleString()}<br>
+
+<br>
+
 `;
 
 j.entries.forEach(e=>{
-html += `${e.account} | Debit ₱${Number(e.debit).toLocaleString()} | Credit ₱${Number(e.credit).toLocaleString()}<br>`;
+
+html += `
+${sanitize(e.account)}
+| Debit ₱${Number(e.debit).toLocaleString()}
+| Credit ₱${Number(e.credit).toLocaleString()}
+<br>
+`;
+
 });
 
 html += `</div>`;
@@ -1142,9 +1306,14 @@ html += `</div>`;
 });
 
 document.getElementById("reportContent").innerHTML = html;
-openPopup('reportPopup');
+
+openPopup("reportPopup");
 
 }
+
+/* ========================= */
+/* TRIAL BALANCE */
+/* ========================= */
 
 function generateTrialBalance(){
 
@@ -1155,7 +1324,12 @@ journalEntries.forEach(j=>{
 j.entries.forEach(e=>{
 
 if(!accounts[e.account]){
-accounts[e.account] = {debit:0,credit:0};
+
+accounts[e.account] = {
+debit:0,
+credit:0
+};
+
 }
 
 accounts[e.account].debit += Number(e.debit);
@@ -1166,24 +1340,39 @@ accounts[e.account].credit += Number(e.credit);
 });
 
 let html = `
+
 <h2>Trial Balance</h2>
+
 <br>
-<table width="100%">
+
+<table>
+
 <tr>
 <th>Account</th>
 <th>Debit</th>
 <th>Credit</th>
 </tr>
+
 `;
 
 Object.keys(accounts).forEach(acc=>{
 
 html += `
+
 <tr>
-<td>${acc}</td>
-<td>₱${accounts[acc].debit.toLocaleString()}</td>
-<td>₱${accounts[acc].credit.toLocaleString()}</td>
+
+<td>${sanitize(acc)}</td>
+
+<td>
+₱${accounts[acc].debit.toLocaleString()}
+</td>
+
+<td>
+₱${accounts[acc].credit.toLocaleString()}
+</td>
+
 </tr>
+
 `;
 
 });
@@ -1191,58 +1380,126 @@ html += `
 html += `</table>`;
 
 document.getElementById("reportContent").innerHTML = html;
-openPopup('reportPopup');
+
+openPopup("reportPopup");
 
 }
+
+/* ========================= */
+/* FINANCIAL REPORT */
+/* ========================= */
 
 function generateFinancialSummary(){
 
-let sales = invoices.reduce((a,b)=>a+Number(b.amount),0);
+let sales = invoices.reduce(
+(a,b)=>a+Number(b.amount),0
+);
+
+let expenseTotal = expenses.reduce(
+(a,b)=>a+Number(b.amount),0
+);
+
+let profit = sales - expenseTotal;
+
+let margin = sales > 0
+? ((profit/sales)*100).toFixed(2)
+: 0;
 
 let html = `
-<div>
+
 <h2>Financial Summary</h2>
+
 <br>
-Total Revenue: ₱${sales.toLocaleString()}<br><br>
-Total Invoices: ${invoices.length}<br><br>
-Total Expenses: ${expenses.length}<br><br>
-Business Status: Healthy Growth
-</div>
+
+<b>Total Revenue:</b>
+₱${sales.toLocaleString()}
+
+<br><br>
+
+<b>Total Expenses:</b>
+₱${expenseTotal.toLocaleString()}
+
+<br><br>
+
+<b>Net Profit:</b>
+₱${profit.toLocaleString()}
+
+<br><br>
+
+<b>Profit Margin:</b>
+${margin}%
+
 `;
 
 document.getElementById("reportContent").innerHTML = html;
-openPopup('reportPopup');
+
+openPopup("reportPopup");
 
 }
+
+/* ========================= */
+/* AI REPORT */
+/* ========================= */
 
 function generateAISummary(){
 
-let totalSales = invoices.reduce((a,b)=>a+Number(b.amount),0);
+let totalSales = invoices.reduce(
+(a,b)=>a+Number(b.amount),0
+);
 
-let paid = invoices.filter(i=>i.status==="Paid").length;
-let pending = invoices.filter(i=>i.status==="Pending").length;
+let paid = invoices.filter(
+i=>i.status==="Paid"
+).length;
+
+let pending = invoices.filter(
+i=>i.status==="Pending"
+).length;
 
 let forecast = totalSales * 1.15;
 
-alert(`
-🤖 QUELOU AI CENTER
+let html = `
 
-Revenue Trend: Positive Growth
+<h2>Quelou AI Insights</h2>
 
-Forecast Revenue:
+<br>
+
+<b>Revenue Trend:</b>
+Positive Growth
+
+<br><br>
+
+<b>Forecast Revenue:</b>
 ₱${forecast.toLocaleString()}
 
-Paid Invoices:
+<br><br>
+
+<b>Paid Invoices:</b>
 ${paid}
 
-Pending Invoices:
+<br><br>
+
+<b>Pending Invoices:</b>
 ${pending}
 
-AI Recommendation:
-Focus on recurring clients and collection follow-up.
-`);
+<br><br>
+
+<b>AI Recommendation:</b>
+
+<br><br>
+
+Focus on recurring clients and faster collection follow-up.
+
+`;
+
+document.getElementById("reportContent").innerHTML = html;
+
+openPopup("reportPopup");
 
 }
+
+/* ========================= */
+/* AUDIT */
+/* ========================= */
 
 function generateAuditTrail(){
 
@@ -1251,53 +1508,129 @@ let html = `<h2>Audit Trail</h2><br>`;
 auditTrail.forEach(a=>{
 
 html += `
+
 <div style="padding:18px;background:#f8fafc;border-radius:18px;margin-bottom:10px;">
-<b>Action:</b> ${a.action}<br>
-<b>Reference:</b> ${a.reference}<br>
-<b>Date:</b> ${a.date}
+
+<b>User:</b>
+${sanitize(a.user)}
+
+<br>
+
+<b>Action:</b>
+${sanitize(a.action)}
+
+<br>
+
+<b>Reference:</b>
+${sanitize(a.reference)}
+
+<br>
+
+<b>Date:</b>
+${new Date(a.date).toLocaleString()}
+
 </div>
+
 `;
 
 });
 
 document.getElementById("reportContent").innerHTML = html;
-openPopup('reportPopup');
+
+openPopup("reportPopup");
 
 }
 
+/* ========================= */
+/* USERS */
+/* ========================= */
+
+function viewUsers(){
+
+let users = loadData("systemUsers");
+
+let html = `
+
+<h2>User Management</h2>
+
+<br>
+
+<table>
+
+<tr>
+
+<th>Username</th>
+<th>Name</th>
+<th>Role</th>
+<th>Status</th>
+
+</tr>
+
+`;
+
+users.forEach(u=>{
+
+html += `
+
+<tr>
+
+<td>${sanitize(u.username)}</td>
+
+<td>${sanitize(u.name)}</td>
+
+<td>${sanitize(u.role)}</td>
+
+<td>${sanitize(u.status)}</td>
+
+</tr>
+
+`;
+
+});
+
+html += `</table>`;
+
+document.getElementById("reportContent").innerHTML = html;
+
+openPopup("reportPopup");
+
+}
+
+/* ========================= */
+/* BACKUP */
+/* ========================= */
+
 function downloadBackup(){
 
-let data = {
+let backup = {
+
 invoices,
 receipts,
 expenses,
 journalEntries,
-auditTrail
+auditTrail,
+users:loadData("systemUsers")
+
 };
 
-let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let blob = new Blob(
+[JSON.stringify(backup,null,2)],
+{type:"application/json"}
+);
 
 let a = document.createElement("a");
+
 a.href = URL.createObjectURL(blob);
+
 a.download = "QuelouERPBackup.json";
+
 a.click();
 
-}
-
-window.onclick = function(e){
-
-document.querySelectorAll('.popup').forEach(p=>{
-if(e.target === p){
-p.style.display='none';
-}
-});
+saveAudit("Downloaded Backup","System Backup");
 
 }
-
-renderInvoices();
-updateCards();
 
 </script>
+
 </body>
 </html>
-```
