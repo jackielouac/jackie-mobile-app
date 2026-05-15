@@ -1,15 +1,20 @@
+<!--
+QUelou ERP AI PRO
+FULL ACCOUNTING + PRINTABLE INVOICE + OFFICIAL RECEIPT
+COPY PASTE READY
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Quelou System your #1 solution worldwide</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- PDF + EXCEL -->
+<title>Quelou System, your #1 Solution world-wide</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 
 <style>
 
@@ -19,10 +24,6 @@
     --orange:#f59e0b;
     --red:#ef4444;
     --bg:#f4f7fb;
-    --card:#fff;
-    --line:#e5e7eb;
-    --text:#111827;
-    --shadow:0 10px 25px rgba(0,0,0,.07);
 }
 
 *{
@@ -34,44 +35,34 @@
 
 body{
     background:var(--bg);
-    color:var(--text);
 }
 
 button{
     cursor:pointer;
 }
 
-/* LOGIN */
-
 .login{
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
 }
 
 .login-card{
     width:100%;
-    max-width:420px;
+    max-width:400px;
     background:white;
     padding:35px;
-    border-radius:25px;
-    box-shadow:var(--shadow);
-}
-
-.login-card h1{
-    color:var(--blue);
-    margin-bottom:10px;
+    border-radius:20px;
 }
 
 .input{
     width:100%;
-    padding:15px;
+    padding:14px;
     border:none;
-    border-radius:14px;
-    background:#f3f4f6;
-    margin-top:15px;
+    background:#f1f5f9;
+    border-radius:12px;
+    margin-top:12px;
 }
 
 .btn{
@@ -87,26 +78,15 @@ button{
 .orange{background:var(--orange);}
 .red{background:var(--red);}
 
-.w100{
-    width:100%;
-}
-
-/* APP */
-
 .app{
     display:flex;
 }
 
 .sidebar{
-    width:280px;
+    width:260px;
     background:white;
-    border-right:1px solid #ddd;
     padding:20px;
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    overflow:auto;
+    min-height:100vh;
 }
 
 .sidebar h2{
@@ -114,18 +94,18 @@ button{
 }
 
 .menu{
-    margin-top:20px;
     display:flex;
     flex-direction:column;
     gap:10px;
+    margin-top:20px;
 }
 
 .menu button{
     border:none;
-    background:#f3f4f6;
-    padding:15px;
-    border-radius:14px;
+    padding:14px;
+    border-radius:12px;
     text-align:left;
+    background:#f1f5f9;
     font-weight:bold;
 }
 
@@ -135,22 +115,15 @@ button{
 }
 
 .main{
-    margin-left:280px;
-    width:100%;
+    flex:1;
     padding:20px;
 }
 
 .topbar{
     background:white;
-    padding:18px;
+    padding:20px;
     border-radius:20px;
     margin-bottom:20px;
-    box-shadow:var(--shadow);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
 }
 
 .cards{
@@ -162,47 +135,36 @@ button{
 
 .card{
     background:white;
-    border-radius:20px;
     padding:20px;
-    box-shadow:var(--shadow);
+    border-radius:20px;
 }
 
 .card h3{
     color:gray;
-    margin-bottom:10px;
 }
 
 .value{
-    font-size:30px;
+    font-size:28px;
+    margin-top:10px;
     font-weight:bold;
 }
 
 .table-box{
     background:white;
-    border-radius:20px;
     padding:20px;
+    border-radius:20px;
     margin-bottom:20px;
     overflow:auto;
-    box-shadow:var(--shadow);
-}
-
-.table-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-    flex-wrap:wrap;
-    gap:10px;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:700px;
+    min-width:900px;
 }
 
 th,td{
-    padding:14px;
+    padding:12px;
     border-bottom:1px solid #eee;
     text-align:left;
     font-size:14px;
@@ -211,19 +173,17 @@ th,td{
 .status-paid{
     background:#dcfce7;
     color:#166534;
-    padding:6px 12px;
+    padding:6px 10px;
     border-radius:999px;
     font-size:12px;
-    font-weight:bold;
 }
 
 .status-pending{
     background:#fef3c7;
     color:#92400e;
-    padding:6px 12px;
+    padding:6px 10px;
     border-radius:999px;
     font-size:12px;
-    font-weight:bold;
 }
 
 .popup{
@@ -233,18 +193,18 @@ th,td{
     display:none;
     justify-content:center;
     align-items:center;
-    z-index:9999;
     padding:20px;
+    z-index:999;
 }
 
 .popup-box{
     width:100%;
-    max-width:900px;
-    background:white;
-    border-radius:24px;
-    padding:25px;
+    max-width:1000px;
     max-height:90vh;
     overflow:auto;
+    background:white;
+    border-radius:20px;
+    padding:25px;
 }
 
 .grid{
@@ -255,51 +215,95 @@ th,td{
 
 textarea{
     width:100%;
-    min-height:100px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#f3f4f6;
+    min-height:90px;
     margin-top:12px;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    background:#f1f5f9;
 }
 
-.action{
+.actions{
     display:flex;
     gap:10px;
-    margin-top:15px;
     flex-wrap:wrap;
+    margin-top:15px;
 }
 
-.report-card{
+/* PRINT */
+
+.print-area{
+    background:white;
+    padding:40px;
+    width:800px;
+    margin:auto;
+}
+
+.print-title{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.print-title h1{
+    color:var(--blue);
+}
+
+.invoice-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.invoice-box{
     border:1px solid #ddd;
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:15px;
+    padding:12px;
+    border-radius:12px;
 }
 
-.report-card h3{
-    margin-bottom:10px;
+.total-box{
+    margin-top:20px;
+    width:300px;
+    margin-left:auto;
+}
+
+.total-box table{
+    min-width:auto;
+}
+
+@media print{
+
+body *{
+    visibility:hidden;
+}
+
+#printSection,
+#printSection *{
+    visibility:visible;
+}
+
+#printSection{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+}
+
 }
 
 @media(max-width:900px){
 
-    .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
-    }
+.app{
+    flex-direction:column;
+}
 
-    .main{
-        margin-left:0;
-    }
+.sidebar{
+    width:100%;
+    min-height:auto;
+}
 
-    .app{
-        flex-direction:column;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
+.grid{
+    grid-template-columns:1fr;
+}
 
 }
 
@@ -308,6 +312,10 @@ textarea{
 <body>
 
 <div id="app"></div>
+
+<div class="popup" id="popup">
+    <div class="popup-box" id="popupBox"></div>
+</div>
 
 <script>
 
@@ -324,30 +332,24 @@ function save(key,data){
 }
 
 function money(v){
-    return "₱"+Number(v).toLocaleString();
-}
-
-function sanitize(v){
-    return String(v)
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
+    return "₱"+Number(v).toLocaleString(undefined,{
+        minimumFractionDigits:2
+    });
 }
 
 /* =========================
-DEFAULT USERS
+DEFAULT LOGIN
 ========================= */
 
 if(!localStorage.getItem("users")){
 
-save("users",[
+save("users",[{
 
-{
     username:"admin",
     password:btoa("admin123"),
     role:"Super Admin"
-}
 
-]);
+}]);
 
 }
 
@@ -356,27 +358,8 @@ DATABASE
 ========================= */
 
 let invoices=load("invoices");
-let inventory=load("inventory");
-let customers=load("customers");
 let ledger=load("ledger");
-let logs=load("logs");
-
-/* =========================
-AUDIT
-========================= */
-
-function addLog(action){
-
-logs.push({
-
-    date:new Date().toLocaleString(),
-    action
-
-});
-
-save("logs",logs);
-
-}
+let receipts=load("receipts");
 
 /* =========================
 LOGIN
@@ -396,14 +379,17 @@ document.getElementById("app").innerHTML=`
 
 <div class="login-card">
 
-<h1>Quelou ERP</h1>
+<h1 style="color:#0a84ff;">Quelou ERP</h1>
 
 <p>AI Accounting System</p>
 
-<input class="input" id="user" placeholder="Username">
-<input class="input" id="pass" type="password" placeholder="Password">
+<input id="user" class="input" placeholder="Username">
 
-<button class="btn primary w100" onclick="login()" style="margin-top:15px;">
+<input id="pass" type="password" class="input" placeholder="Password">
+
+<button class="btn primary"
+style="width:100%;margin-top:15px;"
+onclick="login()">
 LOGIN
 </button>
 
@@ -453,8 +439,6 @@ APP
 
 function renderApp(){
 
-let user=JSON.parse(sessionStorage.getItem("user"));
-
 document.getElementById("app").innerHTML=`
 
 <div class="app">
@@ -462,23 +446,14 @@ document.getElementById("app").innerHTML=`
 <div class="sidebar">
 
 <h2>Quelou ERP</h2>
-<p>${user.role}</p>
 
 <div class="menu">
 
-<button onclick="invoicePopup()">➕ Create Invoice</button>
+<button onclick="invoiceForm()">➕ Create Invoice</button>
 
-<button onclick="inventoryPopup()">📦 Add Inventory</button>
+<button onclick="receiptForm()">🧾 Official Receipt</button>
 
-<button onclick="customerPopup()">👤 Customer Master</button>
-
-<button onclick="financialReports()">📑 Financial Reports</button>
-
-<button onclick="showAudit()">🧾 Audit Trail</button>
-
-<button onclick="backup()">⬇️ Backup</button>
-
-<button onclick="restore()">♻️ Restore</button>
+<button onclick="financialReport()">📑 Financial Reports</button>
 
 <button onclick="logout()">🚪 Logout</button>
 
@@ -492,11 +467,6 @@ document.getElementById("app").innerHTML=`
 
 <h2>Quelou ERP AI PRO</h2>
 
-<div>
-<input class="input" id="ai" placeholder="Ask AI..." style="width:220px;">
-<button class="btn primary" onclick="askAI()">Ask</button>
-</div>
-
 </div>
 
 <div class="cards">
@@ -504,23 +474,26 @@ document.getElementById("app").innerHTML=`
 <div class="card">
 <h3>Total Sales</h3>
 <div class="value">
-${money(invoices.reduce((a,b)=>a+b.total,0))}
+${money(
+invoices.reduce((a,b)=>a+b.total,0)
+)}
+</div>
+</div>
+
+<div class="card">
+<h3>Total Receipts</h3>
+<div class="value">
+${money(
+receipts.reduce((a,b)=>a+b.amount,0)
+)}
 </div>
 </div>
 
 <div class="card">
 <h3>Total Invoices</h3>
-<div class="value">${invoices.length}</div>
+<div class="value">
+${invoices.length}
 </div>
-
-<div class="card">
-<h3>Inventory Items</h3>
-<div class="value">${inventory.length}</div>
-</div>
-
-<div class="card">
-<h3>Customers</h3>
-<div class="value">${customers.length}</div>
 </div>
 
 </div>
@@ -529,51 +502,102 @@ ${money(invoices.reduce((a,b)=>a+b.total,0))}
 
 <div class="table-box">
 
-<div class="table-head">
-
 <h2>Invoices</h2>
 
-<div>
+<br>
 
-<button class="btn green" onclick="exportExcel('invoiceTable','Invoices')">
-Excel
+<table id="invoiceTable">
+
+<tr>
+<th>Invoice No</th>
+<th>Customer</th>
+<th>Subtotal</th>
+<th>VAT</th>
+<th>Total</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+${invoices.map(i=>`
+
+<tr>
+
+<td>${i.invoiceNo}</td>
+<td>${i.customer}</td>
+<td>${money(i.subtotal)}</td>
+<td>${money(i.vat)}</td>
+<td>${money(i.total)}</td>
+
+<td>
+
+<span class="${
+i.status==="PAID"
+? "status-paid"
+: "status-pending"
+}">
+${i.status}
+</span>
+
+</td>
+
+<td>
+
+<button class="btn primary"
+onclick='printInvoice(${JSON.stringify(i)})'>
+Print
 </button>
 
-<button class="btn red" onclick="exportPDF('invoiceTable','Invoices Report')">
-PDF
-</button>
+</td>
+
+</tr>
+
+`).join("")}
+
+</table>
 
 </div>
 
-</div>
-
-<table id="invoiceTable"></table>
-
-</div>
-
-<!-- INVENTORY -->
+<!-- RECEIPTS -->
 
 <div class="table-box">
 
-<div class="table-head">
+<h2>Official Receipts</h2>
 
-<h2>Inventory</h2>
+<br>
 
-<div>
+<table>
 
-<button class="btn green" onclick="exportExcel('inventoryTable','Inventory')">
-Excel
+<tr>
+<th>OR No</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+
+${receipts.map(r=>`
+
+<tr>
+
+<td>${r.orNo}</td>
+<td>${r.customer}</td>
+<td>${money(r.amount)}</td>
+<td>${r.date}</td>
+
+<td>
+
+<button class="btn green"
+onclick='printReceipt(${JSON.stringify(r)})'>
+Print
 </button>
 
-<button class="btn red" onclick="exportPDF('inventoryTable','Inventory Report')">
-PDF
-</button>
+</td>
 
-</div>
+</tr>
 
-</div>
+`).join("")}
 
-<table id="inventoryTable"></table>
+</table>
 
 </div>
 
@@ -581,43 +605,43 @@ PDF
 
 <div class="table-box">
 
-<div class="table-head">
+<h2>Detailed Accounting Entries</h2>
 
-<h2>General Ledger</h2>
+<br>
 
-<div>
+<table>
 
-<button class="btn green" onclick="exportExcel('ledgerTable','Ledger')">
-Excel
-</button>
+<tr>
+<th>Date</th>
+<th>Reference</th>
+<th>Account Title</th>
+<th>Debit</th>
+<th>Credit</th>
+</tr>
 
-<button class="btn red" onclick="exportPDF('ledgerTable','General Ledger')">
-PDF
-</button>
+${ledger.map(l=>`
+
+<tr>
+
+<td>${l.date}</td>
+<td>${l.reference}</td>
+<td>${l.account}</td>
+<td>${l.debit ? money(l.debit) : "-"}</td>
+<td>${l.credit ? money(l.credit) : "-"}</td>
+
+</tr>
+
+`).join("")}
+
+</table>
 
 </div>
 
 </div>
-
-<table id="ledgerTable"></table>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="popup" id="popup">
-
-<div class="popup-box" id="popupBox"></div>
 
 </div>
 
 `;
-
-renderInvoices();
-renderInventory();
-renderLedger();
 
 }
 
@@ -625,448 +649,62 @@ renderLedger();
 POPUP
 ========================= */
 
-function closePopup(){
-    document.getElementById("popup").style.display="none";
-}
-
-function showPopup(html){
+function openPopup(html){
 
 document.getElementById("popup").style.display="flex";
 document.getElementById("popupBox").innerHTML=html;
 
 }
 
+function closePopup(){
+
+document.getElementById("popup").style.display="none";
+
+}
+
 /* =========================
-INVOICE
+INVOICE FORM
 ========================= */
 
-function invoicePopup(){
+function invoiceForm(){
 
-showPopup(`
+openPopup(`
 
-<h2>Create Invoice</h2>
+<h2>Create Sales Invoice</h2>
 
 <div class="grid">
 
-<input class="input" id="customer" placeholder="Customer Name">
+<input id="customer" class="input" placeholder="Customer Name">
 
-<input class="input" id="amount" type="number" placeholder="Amount">
+<input id="tin" class="input" placeholder="TIN">
 
-<select class="input" id="status">
+<input id="address" class="input" placeholder="Address">
 
-<option>Pending</option>
-<option>Paid</option>
+<input id="item" class="input" placeholder="Item/Service">
+
+<input id="qty" type="number" class="input" placeholder="Quantity">
+
+<input id="price" type="number" class="input" placeholder="Unit Price">
+
+<select id="status" class="input">
+
+<option>PENDING</option>
+<option>PAID</option>
 
 </select>
 
-<input class="input" id="due" type="date">
+<input id="terms" class="input" placeholder="Terms">
 
 </div>
 
-<textarea id="remarks" placeholder="Remarks"></textarea>
+<textarea id="remarks"
+placeholder="Remarks"></textarea>
 
-<div class="action">
-
-<button class="btn primary" onclick="saveInvoice()">
-Save Invoice
-</button>
-
-<button class="btn red" onclick="closePopup()">
-Close
-</button>
-
-</div>
-
-`);
-
-}
-
-function saveInvoice(){
-
-let customer=document.getElementById("customer").value;
-let amount=Number(document.getElementById("amount").value);
-
-if(customer==="" || amount<=0){
-    alert("Complete required fields");
-    return;
-}
-
-let vat=amount*0.12;
-
-let total=amount+vat;
-
-let inv={
-
-invoice:"INV-"+Date.now(),
-customer,
-amount,
-vat,
-total,
-status:document.getElementById("status").value,
-due:document.getElementById("due").value,
-remarks:document.getElementById("remarks").value,
-date:new Date().toLocaleString()
-
-};
-
-invoices.push(inv);
-
-ledger.push({
-
-date:new Date().toLocaleString(),
-reference:inv.invoice,
-debit:inv.status==="Paid" ? "Cash" : "Accounts Receivable",
-credit:"Sales Revenue",
-amount:inv.total
-
-});
-
-save("invoices",invoices);
-save("ledger",ledger);
-
-addLog("Created Invoice "+inv.invoice);
-
-renderInvoices();
-renderLedger();
-
-closePopup();
-
-alert("Invoice Saved");
-
-}
-
-/* =========================
-RENDER INVOICES
-========================= */
-
-function renderInvoices(){
-
-let html=`
-
-<tr>
-<th>Invoice</th>
-<th>Customer</th>
-<th>Amount</th>
-<th>VAT</th>
-<th>Total</th>
-<th>Status</th>
-<th>Date</th>
-</tr>
-
-`;
-
-invoices.forEach(i=>{
-
-html+=`
-
-<tr>
-
-<td>${sanitize(i.invoice)}</td>
-
-<td>${sanitize(i.customer)}</td>
-
-<td>${money(i.amount)}</td>
-
-<td>${money(i.vat)}</td>
-
-<td>${money(i.total)}</td>
-
-<td>
-
-<span class="${
-i.status==="Paid"
-? "status-paid"
-: "status-pending"
-}">
-
-${i.status}
-
-</span>
-
-</td>
-
-<td>${i.date}</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById("invoiceTable").innerHTML=html;
-
-}
-
-/* =========================
-INVENTORY
-========================= */
-
-function inventoryPopup(){
-
-showPopup(`
-
-<h2>Add Inventory</h2>
-
-<div class="grid">
-
-<input class="input" id="item" placeholder="Item">
-
-<input class="input" id="qty" type="number" placeholder="Qty">
-
-<input class="input" id="warehouse" placeholder="Warehouse">
-
-<input class="input" id="cost" type="number" placeholder="Cost">
-
-</div>
-
-<div class="action">
-
-<button class="btn green" onclick="saveInventory()">
-Save
-</button>
-
-<button class="btn red" onclick="closePopup()">
-Close
-</button>
-
-</div>
-
-`);
-
-}
-
-function saveInventory(){
-
-let data={
-
-item:document.getElementById("item").value,
-qty:Number(document.getElementById("qty").value),
-warehouse:document.getElementById("warehouse").value,
-cost:Number(document.getElementById("cost").value)
-
-};
-
-inventory.push(data);
-
-save("inventory",inventory);
-
-addLog("Added Inventory "+data.item);
-
-renderInventory();
-
-closePopup();
-
-alert("Inventory Saved");
-
-}
-
-function renderInventory(){
-
-let html=`
-
-<tr>
-<th>Item</th>
-<th>Qty</th>
-<th>Warehouse</th>
-<th>Cost</th>
-</tr>
-
-`;
-
-inventory.forEach(i=>{
-
-html+=`
-
-<tr>
-
-<td>${i.item}</td>
-<td>${i.qty}</td>
-<td>${i.warehouse}</td>
-<td>${money(i.cost)}</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById("inventoryTable").innerHTML=html;
-
-}
-
-/* =========================
-CUSTOMERS
-========================= */
-
-function customerPopup(){
-
-showPopup(`
-
-<h2>Customer Master</h2>
-
-<div class="grid">
-
-<input class="input" id="cname" placeholder="Customer Name">
-<input class="input" id="ccontact" placeholder="Contact">
-<input class="input" id="caddress" placeholder="Address">
-<input class="input" id="ctin" placeholder="TIN">
-
-</div>
-
-<div class="action">
-
-<button class="btn primary" onclick="saveCustomer()">
-Save Customer
-</button>
-
-<button class="btn red" onclick="closePopup()">
-Close
-</button>
-
-</div>
-
-`);
-
-}
-
-function saveCustomer(){
-
-let c={
-
-name:document.getElementById("cname").value,
-contact:document.getElementById("ccontact").value,
-address:document.getElementById("caddress").value,
-tin:document.getElementById("ctin").value
-
-};
-
-customers.push(c);
-
-save("customers",customers);
-
-addLog("Added Customer "+c.name);
-
-closePopup();
-
-alert("Customer Saved");
-
-}
-
-/* =========================
-LEDGER
-========================= */
-
-function renderLedger(){
-
-let html=`
-
-<tr>
-<th>Date</th>
-<th>Reference</th>
-<th>Debit</th>
-<th>Credit</th>
-<th>Amount</th>
-</tr>
-
-`;
-
-ledger.forEach(l=>{
-
-html+=`
-
-<tr>
-
-<td>${l.date}</td>
-<td>${l.reference}</td>
-<td>${l.debit}</td>
-<td>${l.credit}</td>
-<td>${money(l.amount)}</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById("ledgerTable").innerHTML=html;
-
-}
-
-/* =========================
-REAL REPORTS
-========================= */
-
-function financialReports(){
-
-let totalSales=invoices.reduce((a,b)=>a+b.total,0);
-
-let paid=invoices
-.filter(i=>i.status==="Paid")
-.reduce((a,b)=>a+b.total,0);
-
-let pending=invoices
-.filter(i=>i.status==="Pending")
-.reduce((a,b)=>a+b.total,0);
-
-showPopup(`
-
-<h2>Financial Reports</h2>
-
-<div class="report-card">
-
-<h3>Income Statement</h3>
-
-<p>Total Revenue: <b>${money(totalSales)}</b></p>
-
-<p>Paid Revenue: <b>${money(paid)}</b></p>
-
-<p>Pending Revenue: <b>${money(pending)}</b></p>
-
-</div>
-
-<div class="report-card">
-
-<h3>Balance Sheet</h3>
-
-<p>Accounts Receivable:
-<b>${money(pending)}</b></p>
-
-<p>Cash:
-<b>${money(paid)}</b></p>
-
-<p>Inventory Assets:
-<b>${money(
-inventory.reduce((a,b)=>a+(b.qty*b.cost),0)
-)}</b></p>
-
-</div>
-
-<div class="report-card">
-
-<h3>VAT Summary</h3>
-
-<p>Total VAT Collected:
-<b>${money(
-invoices.reduce((a,b)=>a+b.vat,0)
-)}</b></p>
-
-</div>
-
-<div class="action">
-
-<button class="btn green"
-onclick="printReports()">
-Print
-</button>
+<div class="actions">
 
 <button class="btn primary"
-onclick="downloadReportsPDF()">
-Save PDF
-</button>
-
-<button class="btn orange"
-onclick="downloadReportsExcel()">
-Save Excel
+onclick="saveInvoice()">
+Save Invoice
 </button>
 
 <button class="btn red"
@@ -1080,280 +718,399 @@ Close
 
 }
 
-/* =========================
-REPORT EXPORT
-========================= */
+function saveInvoice(){
 
-function printReports(){
+let qty=Number(document.getElementById("qty").value);
+let price=Number(document.getElementById("price").value);
 
-window.print();
+let subtotal=qty*price;
+let vat=subtotal*0.12;
+let total=subtotal+vat;
 
-}
+let invoice={
 
-function exportPDF(tableId,title){
+invoiceNo:"INV-"+Date.now(),
 
-const { jsPDF } = window.jspdf;
+customer:document.getElementById("customer").value,
 
-let doc=new jsPDF();
+tin:document.getElementById("tin").value,
 
-doc.text(title,14,15);
+address:document.getElementById("address").value,
 
-doc.autoTable({
+item:document.getElementById("item").value,
 
-html:"#"+tableId,
-startY:25,
-theme:"grid"
+qty,
+price,
+subtotal,
+vat,
+total,
 
-});
+status:document.getElementById("status").value,
 
-doc.save(title+".pdf");
+terms:document.getElementById("terms").value,
 
-}
+remarks:document.getElementById("remarks").value,
 
-function exportExcel(tableId,file){
+date:new Date().toLocaleString()
 
-let table=document.getElementById(tableId);
+};
 
-let wb=XLSX.utils.table_to_book(table);
+invoices.push(invoice);
 
-XLSX.writeFile(wb,file+".xlsx");
+/* ACCOUNTING ENTRY */
 
-}
+if(invoice.status==="PAID"){
 
-function downloadReportsPDF(){
+ledger.push({
 
-const { jsPDF } = window.jspdf;
-
-let doc=new jsPDF();
-
-doc.text("Quelou ERP Financial Reports",14,20);
-
-doc.text(
-"Total Sales: "+
-money(invoices.reduce((a,b)=>a+b.total,0)),
-14,
-40
-);
-
-doc.text(
-"Total VAT: "+
-money(invoices.reduce((a,b)=>a+b.vat,0)),
-14,
-50
-);
-
-doc.save("FinancialReports.pdf");
-
-}
-
-function downloadReportsExcel(){
-
-let data=[
-
-["Total Sales",
-invoices.reduce((a,b)=>a+b.total,0)],
-
-["Total VAT",
-invoices.reduce((a,b)=>a+b.vat,0)]
-
-];
-
-let ws=XLSX.utils.aoa_to_sheet(data);
-
-let wb=XLSX.utils.book_new();
-
-XLSX.utils.book_append_sheet(wb,ws,"Reports");
-
-XLSX.writeFile(wb,"FinancialReports.xlsx");
-
-}
-
-/* =========================
-AUDIT
-========================= */
-
-function showAudit(){
-
-let html=`
-
-<h2>Audit Trail</h2>
-
-<table>
-
-<tr>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-`;
-
-logs.forEach(l=>{
-
-html+=`
-
-<tr>
-
-<td>${l.date}</td>
-<td>${l.action}</td>
-
-</tr>
-
-`;
+date:invoice.date,
+reference:invoice.invoiceNo,
+account:"Cash",
+debit:total,
+credit:0
 
 });
 
-html+=`</table>
+}else{
 
-<div class="action">
+ledger.push({
 
-<button class="btn red" onclick="closePopup()">
+date:invoice.date,
+reference:invoice.invoiceNo,
+account:"Accounts Receivable",
+debit:total,
+credit:0
+
+});
+
+}
+
+ledger.push({
+
+date:invoice.date,
+reference:invoice.invoiceNo,
+account:"Sales Revenue",
+debit:0,
+credit:subtotal
+
+});
+
+ledger.push({
+
+date:invoice.date,
+reference:invoice.invoiceNo,
+account:"Output VAT",
+debit:0,
+credit:vat
+
+});
+
+save("invoices",invoices);
+save("ledger",ledger);
+
+alert("Invoice Saved");
+
+closePopup();
+
+renderApp();
+
+}
+
+/* =========================
+OFFICIAL RECEIPT
+========================= */
+
+function receiptForm(){
+
+openPopup(`
+
+<h2>Create Official Receipt</h2>
+
+<div class="grid">
+
+<input id="rcustomer" class="input" placeholder="Customer Name">
+
+<input id="ramount" type="number" class="input" placeholder="Amount">
+
+<input id="rpayment" class="input" placeholder="Payment Method">
+
+<input id="rremarks" class="input" placeholder="Remarks">
+
+</div>
+
+<div class="actions">
+
+<button class="btn green"
+onclick="saveReceipt()">
+Save Receipt
+</button>
+
+<button class="btn red"
+onclick="closePopup()">
 Close
 </button>
 
 </div>
-`;
 
-showPopup(html);
+`);
 
 }
 
-/* =========================
-BACKUP
-========================= */
+function saveReceipt(){
 
-function backup(){
+let amount=Number(
+document.getElementById("ramount").value
+);
 
-let backupData={
+let receipt={
 
-invoices,
-inventory,
-customers,
-ledger,
-logs
+orNo:"OR-"+Date.now(),
+
+customer:
+document.getElementById("rcustomer").value,
+
+amount,
+
+payment:
+document.getElementById("rpayment").value,
+
+remarks:
+document.getElementById("rremarks").value,
+
+date:new Date().toLocaleString()
 
 };
 
-let blob=new Blob(
-[JSON.stringify(backupData,null,2)],
-{type:"application/json"}
-);
+receipts.push(receipt);
 
-let a=document.createElement("a");
+/* ACCOUNTING ENTRY */
 
-a.href=URL.createObjectURL(blob);
+ledger.push({
 
-a.download="QuelouERPBackup.json";
-
-a.click();
-
-}
-
-/* =========================
-RESTORE
-========================= */
-
-function restore(){
-
-let input=document.createElement("input");
-
-input.type="file";
-
-input.onchange=e=>{
-
-let file=e.target.files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(evt){
-
-let data=JSON.parse(evt.target.result);
-
-Object.keys(data).forEach(k=>{
-
-save(k,data[k]);
+date:receipt.date,
+reference:receipt.orNo,
+account:"Cash",
+debit:amount,
+credit:0
 
 });
 
-alert("Restore Complete");
+ledger.push({
 
-location.reload();
+date:receipt.date,
+reference:receipt.orNo,
+account:"Accounts Receivable",
+debit:0,
+credit:amount
 
-};
+});
 
-reader.readAsText(file);
+save("receipts",receipts);
+save("ledger",ledger);
 
-};
+alert("Receipt Saved");
 
-input.click();
+closePopup();
+
+renderApp();
 
 }
 
 /* =========================
-AI
+PRINT INVOICE
 ========================= */
 
-function askAI(){
+function printInvoice(data){
 
-let q=document.getElementById("ai")
-.value
-.toLowerCase();
+let html=`
 
-if(q.includes("sales")){
+<div id="printSection">
+
+<div class="print-area">
+
+<div class="print-title">
+
+<h1>QUelou ERP</h1>
+
+<h2>SALES INVOICE</h2>
+
+</div>
+
+<div class="invoice-head">
+
+<div class="invoice-box">
+
+<b>Bill To:</b><br><br>
+
+${data.customer}<br>
+${data.address}<br>
+TIN: ${data.tin}
+
+</div>
+
+<div class="invoice-box">
+
+Invoice No: ${data.invoiceNo}<br>
+Date: ${data.date}<br>
+Terms: ${data.terms}
+
+</div>
+
+</div>
+
+<table>
+
+<tr>
+<th>Description</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+</tr>
+
+<tr>
+
+<td>${data.item}</td>
+<td>${data.qty}</td>
+<td>${money(data.price)}</td>
+<td>${money(data.subtotal)}</td>
+
+</tr>
+
+</table>
+
+<div class="total-box">
+
+<table>
+
+<tr>
+<td>Subtotal</td>
+<td>${money(data.subtotal)}</td>
+</tr>
+
+<tr>
+<td>VAT 12%</td>
+<td>${money(data.vat)}</td>
+</tr>
+
+<tr>
+<td><b>Grand Total</b></td>
+<td><b>${money(data.total)}</b></td>
+</tr>
+
+</table>
+
+</div>
+
+<br><br>
+
+Remarks:<br>
+${data.remarks}
+
+<br><br><br>
+
+_________________________<br>
+Authorized Signature
+
+</div>
+
+</div>
+
+`;
+
+let w=window.open("");
+
+w.document.write(html);
+
+w.document.close();
+
+w.print();
+
+}
+
+/* =========================
+PRINT RECEIPT
+========================= */
+
+function printReceipt(data){
+
+let html=`
+
+<div id="printSection">
+
+<div class="print-area">
+
+<div class="print-title">
+
+<h1>QUelou ERP</h1>
+
+<h2>OFFICIAL RECEIPT</h2>
+
+</div>
+
+<br>
+
+Receipt No: ${data.orNo}<br>
+Date: ${data.date}<br><br>
+
+Received From:<br>
+<b>${data.customer}</b>
+
+<br><br>
+
+Amount Received:
+<h2>${money(data.amount)}</h2>
+
+Payment Method:
+${data.payment}
+
+<br><br>
+
+Remarks:
+${data.remarks}
+
+<br><br><br>
+
+_________________________<br>
+Cashier Signature
+
+</div>
+
+</div>
+
+`;
+
+let w=window.open("");
+
+w.document.write(html);
+
+w.document.close();
+
+w.print();
+
+}
+
+/* =========================
+REPORT
+========================= */
+
+function financialReport(){
+
+let sales=invoices.reduce((a,b)=>a+b.total,0);
+
+let collected=receipts.reduce((a,b)=>a+b.amount,0);
 
 alert(
 
-"Total Sales: "+
+"FINANCIAL REPORT\n\n"+
 
-money(
+"Total Sales: "+money(sales)+"\n"+
 
-invoices.reduce((a,b)=>a+b.total,0)
+"Cash Collection: "+money(collected)+"\n"+
 
-)
-
-);
-
-}
-
-else if(q.includes("pending")){
-
-let p=invoices
-.filter(i=>i.status==="Pending")
-.reduce((a,b)=>a+b.total,0);
-
-alert("Pending Receivables: "+money(p));
-
-}
-
-else if(q.includes("vat")){
-
-alert(
-
-"VAT Collected: "+
-
-money(
-
-invoices.reduce((a,b)=>a+b.vat,0)
-
-)
+"Accounts Receivable: "+
+money(sales-collected)
 
 );
-
-}
-
-else{
-
-alert(
-
-"AI Analysis\n\n"+
-
-"• Revenue performance stable\n"+
-"• Monitor pending invoices\n"+
-"• Inventory levels healthy\n"+
-"• Cashflow positive"
-
-);
-
-}
 
 }
 
