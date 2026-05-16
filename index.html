@@ -279,29 +279,174 @@ section{
             <!-- Social -->
             <div class="flex gap-5 mt-12">
 
+ <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<div class="social-wrap">
+
+    <!-- Facebook -->
     <a href="https://www.facebook.com/itsjackielou/" 
        target="_blank" 
        rel="noopener noreferrer"
-       class="glass social-icon">
+       class="glass social-icon facebook">
         <i class="fab fa-facebook-f"></i>
     </a>
 
-    <a href="#" class="glass social-icon">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-
-     <a href="https://www.instagram.com/jackielouac" 
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/jackielouac" 
        target="_blank" 
        rel="noopener noreferrer"
-       class="glass social-icon">
+       class="glass social-icon instagram">
         <i class="fab fa-instagram"></i>
     </a>
 
-
-    <a href="#" class="glass social-icon">
+    <!-- TikTok -->
+    <a href="#" class="glass social-icon tiktok">
         <i class="fab fa-tiktok"></i>
     </a>
 
+</div>
+
+<style>
+/* Background demo */
+body{
+    background:
+    radial-gradient(circle at top, #1e293b, #020617);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+}
+
+/* Container */
+.social-wrap{
+    display:flex;
+    gap:28px;
+}
+
+/* iPhone glass effect */
+.glass{
+    position:relative;
+    width:88px;
+    height:88px;
+    border-radius:28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,0.12);
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.35),
+        inset 0 1px 1px rgba(255,255,255,0.3),
+        inset 0 -4px 10px rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    overflow:hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+.glass:nth-child(2){
+    animation-delay:0.8s;
+}
+
+.glass:nth-child(3){
+    animation-delay:1.6s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* Shine effect */
+.glass::before{
+    content:'';
+    position:absolute;
+    top:-120%;
+    left:-40%;
+    width:60%;
+    height:300%;
+
+    background:rgba(255,255,255,0.35);
+
+    transform:rotate(25deg);
+
+    transition:0.7s;
+}
+
+.glass:hover::before{
+    left:130%;
+}
+
+/* Hover */
+.glass:hover{
+    transform:translateY(-12px) scale(1.08);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.45),
+        0 0 30px rgba(255,255,255,0.15);
+}
+
+/* Icon style */
+.social-icon i{
+    font-size:38px;
+    color:white;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.6),
+        0 0 20px rgba(255,255,255,0.3);
+
+    z-index:2;
+    transition:0.3s ease;
+}
+
+/* Brand glow colors */
+.facebook:hover{
+    background:rgba(24,119,242,0.25);
+}
+
+.instagram:hover{
+    background:rgba(225,48,108,0.22);
+}
+
+.tiktok:hover{
+    background:rgba(255,255,255,0.15);
+}
+
+/* Pulse glow */
+.glass::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    box-shadow:0 0 25px rgba(255,255,255,0.15);
+    opacity:0;
+    transition:0.4s;
+}
+
+.glass:hover::after{
+    opacity:1;
+}
+</style>
 </div>
 
             </div>
