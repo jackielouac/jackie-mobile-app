@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Jackielou Cadlum | Portfolio</title>
 
@@ -11,20 +11,22 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <!-- AOS -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
 
-<!-- Google Font -->
+<!-- IOS Style Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
+/* ========================= */
 /* RESET */
+/* ========================= */
 
 *{
     margin:0;
@@ -38,13 +40,15 @@ html{
 }
 
 body{
-    background:#060816;
+    background:#050816;
     color:white;
-    font-family:'Poppins',sans-serif;
+    font-family:'SF Pro Display',Arial,sans-serif;
     overflow-x:hidden;
 }
 
-/* Scrollbar */
+/* ========================= */
+/* SCROLLBAR */
+/* ========================= */
 
 ::-webkit-scrollbar{
     width:8px;
@@ -55,111 +59,165 @@ body{
     border-radius:20px;
 }
 
-/* Background Animation */
+/* ========================= */
+/* BACKGROUND */
+/* ========================= */
 
 .bg-animation{
-    background:linear-gradient(-45deg,#0f172a,#1e1b4b,#312e81,#111827);
+    background:
+    radial-gradient(circle at top left,#1d4ed8 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#7c3aed 0%,transparent 30%),
+    linear-gradient(-45deg,#050816,#0f172a,#111827,#1e1b4b);
+
     background-size:400% 400%;
+
     animation:gradient 12s ease infinite;
 }
 
 @keyframes gradient{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
 }
 
-/* Blur Balls */
+/* ========================= */
+/* GLASS */
+/* ========================= */
+
+.glass{
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,.35);
+}
+
+/* ========================= */
+/* BLUR BALLS */
+/* ========================= */
 
 .blur-ball{
     position:absolute;
+
     border-radius:999px;
-    filter:blur(90px);
-    opacity:.25;
+
+    filter:blur(100px);
+
+    opacity:.22;
+
     z-index:-1;
 }
 
-/* Glass */
-
-.glass{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-}
-
-/* Gradient Text */
-
-.gradient-text{
-    background:linear-gradient(to right,#60a5fa,#a855f7);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* Floating */
+/* ========================= */
+/* FLOAT */
+/* ========================= */
 
 .float{
     animation:float 5s ease-in-out infinite;
 }
 
 @keyframes float{
+
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
-        transform:translateY(-15px);
+        transform:translateY(-16px);
     }
+
 }
 
-/* Buttons */
+/* ========================= */
+/* GRADIENT TEXT */
+/* ========================= */
+
+.gradient-text{
+
+    background:linear-gradient(to right,#60a5fa,#a855f7);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
 
 .btn-main{
-    padding:14px 28px;
-    min-width:180px;
+
+    padding:15px 28px;
 
     border-radius:18px;
 
     font-weight:600;
 
-    transition:.3s;
+    transition:.35s ease;
+
+    min-width:190px;
 }
 
 .btn-main:hover{
-    transform:translateY(-4px);
-}
 
-/* Glow */
+    transform:translateY(-5px);
+
+}
 
 .glow{
     box-shadow:0 0 40px rgba(59,130,246,.4);
 }
 
-/* Cards */
+/* ========================= */
+/* CARDS */
+/* ========================= */
 
 .card{
     transition:.35s ease;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 30px rgba(59,130,246,.15);
+
+    transform:translateY(-10px);
+
+    box-shadow:0 0 35px rgba(59,130,246,.18);
 }
 
-/* Typing */
+/* ========================= */
+/* TYPING */
+/* ========================= */
 
 .typing::after{
+
     content:"|";
-    animation:blink .7s infinite;
+
+    animation:blink .8s infinite;
 }
 
 @keyframes blink{
+
     50%{
         opacity:0;
     }
+
 }
 
-/* Marquee */
+/* ========================= */
+/* MARQUEE */
+/* ========================= */
 
 .marquee{
     overflow:hidden;
@@ -167,26 +225,32 @@ body{
 }
 
 .marquee-content{
+
     display:inline-block;
+
     animation:marquee 22s linear infinite;
 }
 
 @keyframes marquee{
+
     0%{
         transform:translateX(0);
     }
+
     100%{
         transform:translateX(-50%);
     }
+
 }
 
-/* iOS Social Icons */
+/* ========================= */
+/* SOCIAL */
+/* ========================= */
 
-.ios-social{
-    position:relative;
+.social-icon{
 
-    width:70px;
-    height:70px;
+    width:68px;
+    height:68px;
 
     display:flex;
     align-items:center;
@@ -194,97 +258,81 @@ body{
 
     border-radius:22px;
 
-    background:rgba(255,255,255,.08);
+    background:rgba(255,255,255,.06);
 
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.08);
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(16px);
+
+    position:relative;
 
     overflow:hidden;
 
-    text-decoration:none;
-
     transition:.35s ease;
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.35),
-        inset 0 1px 1px rgba(255,255,255,.08);
 }
 
-.ios-social::before{
+.social-icon::before{
+
     content:"";
 
     position:absolute;
 
-    width:200%;
-    height:200%;
+    width:180%;
+    height:180%;
 
     background:linear-gradient(
         120deg,
         transparent,
-        rgba(255,255,255,.25),
+        rgba(255,255,255,.18),
         transparent
     );
 
-    top:-150%;
-    left:-150%;
+    top:-120%;
+    left:-120%;
 
     transform:rotate(25deg);
 
     transition:.7s;
 }
 
-.ios-social:hover::before{
+.social-icon:hover::before{
+
     top:100%;
     left:100%;
 }
 
-.ios-social:hover{
+.social-icon:hover{
+
     transform:translateY(-8px) scale(1.05);
+
+    background:rgba(59,130,246,.16);
 }
 
-.ios-social i{
-    font-size:30px;
+.social-icon i{
+
+    font-size:28px;
+
     color:white;
+
     z-index:2;
 }
 
-.facebook:hover{
-    background:rgba(24,119,242,.2);
-}
-
-.instagram:hover{
-    background:rgba(225,48,108,.2);
-}
-
-.tiktok:hover{
-    background:rgba(255,255,255,.12);
-}
-
-/* Mobile Menu */
+/* ========================= */
+/* MOBILE */
+/* ========================= */
 
 .mobile-menu{
     display:none;
 }
 
-/* Images */
-
-img{
-    user-select:none;
-    -webkit-user-drag:none;
-}
-
-/* Responsive */
-
 @media(max-width:768px){
-
-    .mobile-menu{
-        display:flex;
-    }
 
     .desktop-menu{
         display:none;
+    }
+
+    .mobile-menu{
+        display:flex;
     }
 
     .hero-title{
@@ -292,13 +340,12 @@ img{
         line-height:1.1;
     }
 
-    .ios-social{
+    .social-icon{
         width:60px;
         height:60px;
-        border-radius:18px;
     }
 
-    .ios-social i{
+    .social-icon i{
         font-size:24px;
     }
 
@@ -310,13 +357,17 @@ img{
 
 <body>
 
-<!-- Blur Balls -->
+<!-- ========================= -->
+<!-- BLUR BACKGROUND -->
+<!-- ========================= -->
 
 <div class="blur-ball bg-blue-500 w-72 h-72 top-0 left-0"></div>
 
 <div class="blur-ball bg-purple-500 w-96 h-96 bottom-0 right-0"></div>
 
+<!-- ========================= -->
 <!-- NAVBAR -->
+<!-- ========================= -->
 
 <nav class="fixed top-0 w-full z-50 glass">
 
@@ -328,7 +379,7 @@ img{
 
         <!-- Desktop Menu -->
 
-        <div class="desktop-menu flex gap-8 text-sm uppercase tracking-wider">
+        <div class="desktop-menu flex gap-8 text-sm uppercase tracking-[3px]">
 
             <a href="#about" class="hover:text-blue-400 transition">About</a>
 
@@ -342,33 +393,41 @@ img{
 
         </div>
 
-        <!-- Mobile Button -->
+        <!-- Mobile -->
 
         <button id="menuBtn" class="mobile-menu text-2xl">
+
             <i class="fa-solid fa-bars"></i>
+
         </button>
 
     </div>
 
     <!-- Mobile Nav -->
 
-    <div id="mobileNav" class="hidden px-6 pb-6 space-y-4 glass">
+    <div id="mobileNav" class="hidden px-6 pb-6 glass">
 
-        <a href="#about" class="block hover:text-blue-400">About</a>
+        <div class="flex flex-col gap-4 text-sm uppercase tracking-[3px]">
 
-        <a href="#skills" class="block hover:text-blue-400">Skills</a>
+            <a href="#about" class="hover:text-blue-400">About</a>
 
-        <a href="#experience" class="block hover:text-blue-400">Experience</a>
+            <a href="#skills" class="hover:text-blue-400">Skills</a>
 
-        <a href="#services" class="block hover:text-blue-400">Services</a>
+            <a href="#experience" class="hover:text-blue-400">Experience</a>
 
-        <a href="#contact" class="block hover:text-blue-400">Contact</a>
+            <a href="#services" class="hover:text-blue-400">Services</a>
+
+            <a href="#contact" class="hover:text-blue-400">Contact</a>
+
+        </div>
 
     </div>
 
 </nav>
 
+<!-- ========================= -->
 <!-- HERO -->
+<!-- ========================= -->
 
 <section class="min-h-screen bg-animation flex items-center px-6 pt-28">
 
@@ -378,8 +437,8 @@ img{
 
         <div data-aos="fade-right">
 
-            <p class="text-blue-400 text-lg mb-4 tracking-widest">
-                HEY THERE! 👋
+            <p class="text-blue-400 tracking-[4px] uppercase text-sm mb-4">
+                HEY THERE 👋
             </p>
 
             <h1 class="hero-title text-5xl md:text-7xl font-bold leading-tight">
@@ -396,9 +455,9 @@ img{
                 class="text-2xl md:text-4xl mt-5 font-semibold typing min-h-[60px]">
             </h2>
 
-            <p class="text-gray-300 mt-8 text-lg leading-9">
+            <p class="text-gray-300 mt-8 text-lg leading-9 max-w-2xl">
 
-                Results-oriented Sales & Marketing Professional with experience in B2B appointment setting, CRM management, lead generation, ERP systems, and client coordination.
+                Results-oriented Sales & Marketing Professional with experience in B2B appointment setting, CRM management, ERP systems, lead generation, and business coordination.
 
             </p>
 
@@ -409,7 +468,9 @@ img{
                 <a href="#contact">
 
                     <button class="btn-main bg-blue-600 hover:bg-blue-700 glow">
+
                         💼 Hire Me
+
                     </button>
 
                 </a>
@@ -417,20 +478,22 @@ img{
                 <a href="#services">
 
                     <button class="btn-main bg-white text-black hover:bg-gray-200">
+
                         ✨ View Services
+
                     </button>
 
                 </a>
 
             </div>
 
-            <!-- Social Icons -->
+            <!-- Social -->
 
             <div class="flex gap-5 mt-12">
 
                 <a href="https://www.facebook.com/itsjackielou/"
                    target="_blank"
-                   class="ios-social facebook">
+                   class="social-icon">
 
                     <i class="fab fa-facebook-f"></i>
 
@@ -438,7 +501,7 @@ img{
 
                 <a href="https://www.instagram.com/jackielouac"
                    target="_blank"
-                   class="ios-social instagram">
+                   class="social-icon">
 
                     <i class="fab fa-instagram"></i>
 
@@ -446,9 +509,16 @@ img{
 
                 <a href="https://www.tiktok.com/"
                    target="_blank"
-                   class="ios-social tiktok">
+                   class="social-icon">
 
                     <i class="fab fa-tiktok"></i>
+
+                </a>
+
+                <a href="mailto:cadlumjackielou23@gmail.com"
+                   class="social-icon">
+
+                    <i class="fa-solid fa-envelope"></i>
 
                 </a>
 
@@ -458,7 +528,8 @@ img{
 
         <!-- RIGHT -->
 
-        <div class="flex justify-center items-center relative" data-aos="fade-left">
+        <div class="flex justify-center items-center relative"
+             data-aos="fade-left">
 
             <div class="absolute w-[350px] h-[350px] bg-blue-500 rounded-full blur-[120px] opacity-30 animate-pulse"></div>
 
@@ -486,9 +557,9 @@ img{
                     src="me.jpg.png"
                     alt="Jackielou Cadlum"
                     class="relative z-20 w-[340px] md:w-[440px] rounded-[40px] border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.35)] float"
-                />
+                >
 
-                <!-- Side Card -->
+                <!-- Side -->
 
                 <div class="absolute top-1/2 -right-10 glass px-5 py-4 rounded-3xl z-30 shadow-2xl">
 
@@ -524,20 +595,490 @@ img{
 
 </section>
 
+<!-- ========================= -->
+<!-- MARQUEE -->
+<!-- ========================= -->
+
+<section class="py-10 border-y border-gray-800">
+
+    <div class="marquee">
+
+        <div class="marquee-content text-xl md:text-2xl font-semibold flex gap-16">
+
+            <span>✅ Lead Generation</span>
+            <span>✅ CRM Management</span>
+            <span>✅ Appointment Setting</span>
+            <span>✅ ERP Systems</span>
+            <span>✅ Sales Coordination</span>
+            <span>✅ Client Communication</span>
+            <span>✅ Marketing Assistance</span>
+            <span>✅ Canva & Presentations</span>
+
+            <span>✅ Lead Generation</span>
+            <span>✅ CRM Management</span>
+            <span>✅ Appointment Setting</span>
+            <span>✅ ERP Systems</span>
+            <span>✅ Sales Coordination</span>
+            <span>✅ Client Communication</span>
+            <span>✅ Marketing Assistance</span>
+            <span>✅ Canva & Presentations</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- ABOUT -->
+<!-- ========================= -->
+
+<section id="about" class="py-28 px-6">
+
+    <div class="max-w-6xl mx-auto">
+
+        <div class="glass rounded-[40px] p-12 card"
+             data-aos="fade-up">
+
+            <p class="text-blue-400 uppercase tracking-[4px] mb-4">
+                About Me
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+
+                Helping Businesses Grow Through
+
+                <span class="gradient-text">
+                    Smart Digital Solutions
+                </span>
+
+            </h2>
+
+            <p class="text-gray-300 leading-10 text-lg mt-8">
+
+                Currently working as an Assist. Sales Manager supporting ERP software solutions, CRM workflows, client coordination, appointment setting, lead generation, and business operations.
+
+                Passionate about helping businesses improve customer engagement, sales growth, and operational efficiency through modern digital tools and communication strategies.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SKILLS -->
+<!-- ========================= -->
+
+<section id="skills" class="py-28 px-6">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-16">
+
+            <p class="text-blue-400 uppercase tracking-[4px] mb-4">
+                Expertise
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold">
+
+                Skills &
+                <span class="gradient-text">
+                    Expertise
+                </span>
+
+            </h2>
+
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- CARD -->
+
+            <div class="glass p-8 rounded-[35px] card"
+                 data-aos="zoom-in">
+
+                <div class="w-20 h-20 rounded-3xl bg-blue-500/10 flex items-center justify-center">
+
+                    <i class="fa-solid fa-chart-line text-4xl text-blue-400"></i>
+
+                </div>
+
+                <h3 class="text-3xl font-bold mt-6">
+                    Sales & Marketing
+                </h3>
+
+                <p class="text-gray-300 mt-5 leading-8">
+
+                    B2B campaigns, appointment setting, lead generation, and client engagement.
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="glass p-8 rounded-[35px] card"
+                 data-aos="zoom-in">
+
+                <div class="w-20 h-20 rounded-3xl bg-purple-500/10 flex items-center justify-center">
+
+                    <i class="fa-solid fa-users text-4xl text-purple-400"></i>
+
+                </div>
+
+                <h3 class="text-3xl font-bold mt-6">
+                    CRM Management
+                </h3>
+
+                <p class="text-gray-300 mt-5 leading-8">
+
+                    Workflow management, lead tracking, follow-ups, and customer databases.
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="glass p-8 rounded-[35px] card"
+                 data-aos="zoom-in">
+
+                <div class="w-20 h-20 rounded-3xl bg-pink-500/10 flex items-center justify-center">
+
+                    <i class="fa-solid fa-laptop text-4xl text-pink-400"></i>
+
+                </div>
+
+                <h3 class="text-3xl font-bold mt-6">
+                    Digital Support
+                </h3>
+
+                <p class="text-gray-300 mt-5 leading-8">
+
+                    Canva editing, reports, presentations, and digital marketing assistance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- EXPERIENCE -->
+<!-- ========================= -->
+
+<section id="experience" class="py-28 px-6">
+
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-20">
+
+            <p class="text-blue-400 uppercase tracking-[4px] mb-4">
+                Career Journey
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold">
+
+                Work
+                <span class="gradient-text">
+                    Experience
+                </span>
+
+            </h2>
+
+        </div>
+
+        <div class="space-y-10">
+
+            <!-- EXP -->
+
+            <div class="glass rounded-[35px] p-10 card"
+                 data-aos="fade-right">
+
+                <div class="flex flex-col md:flex-row md:justify-between gap-5">
+
+                    <div>
+
+                        <h3 class="text-3xl font-bold text-blue-400">
+                            Integr8 Software Solutions
+                        </h3>
+
+                        <p class="text-gray-400 mt-2">
+                            June 2023 – Present
+                        </p>
+
+                    </div>
+
+                    <div class="glass px-5 py-3 rounded-2xl h-fit">
+
+                        💼 Assist. Sales Manager
+
+                    </div>
+
+                </div>
+
+                <ul class="mt-8 text-gray-300 leading-10 text-lg">
+
+                    <li>• Managed CRM workflows and client coordination</li>
+
+                    <li>• Supported ERP software presentations and onboarding</li>
+
+                    <li>• Assisted sales operations and follow-ups</li>
+
+                    <li>• Conducted client communication and demos</li>
+
+                    <li>• Supported lead generation and marketing efforts</li>
+
+                </ul>
+
+            </div>
+
+            <!-- EXP -->
+
+            <div class="glass rounded-[35px] p-10 card"
+                 data-aos="fade-left">
+
+                <div class="flex flex-col md:flex-row md:justify-between gap-5">
+
+                    <div>
+
+                        <h3 class="text-3xl font-bold text-purple-400">
+                            IVoice Outsourcing
+                        </h3>
+
+                        <p class="text-gray-400 mt-2">
+                            Aug 2022 – May 2023
+                        </p>
+
+                    </div>
+
+                    <div class="glass px-5 py-3 rounded-2xl h-fit">
+
+                        📞 Appointment Setter
+
+                    </div>
+
+                </div>
+
+                <ul class="mt-8 text-gray-300 leading-10 text-lg">
+
+                    <li>• B2B outbound appointment setting</li>
+
+                    <li>• Lead qualification and scheduling</li>
+
+                    <li>• Customer relationship building</li>
+
+                    <li>• CRM monitoring and updates</li>
+
+                    <li>• Team coordination and support</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SERVICES -->
+<!-- ========================= -->
+
+<section id="services" class="py-28 px-6">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-16">
+
+            <p class="text-blue-400 uppercase tracking-[4px] mb-4">
+                Services
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold">
+
+                What I
+                <span class="gradient-text">
+                    Offer
+                </span>
+
+            </h2>
+
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+
+            <div class="glass p-8 rounded-[35px] text-center card">
+
+                <div class="text-5xl mb-6">📞</div>
+
+                <h3 class="text-2xl font-bold">
+                    Appointment Setting
+                </h3>
+
+            </div>
+
+            <div class="glass p-8 rounded-[35px] text-center card">
+
+                <div class="text-5xl mb-6">📈</div>
+
+                <h3 class="text-2xl font-bold">
+                    Lead Generation
+                </h3>
+
+            </div>
+
+            <div class="glass p-8 rounded-[35px] text-center card">
+
+                <div class="text-5xl mb-6">💻</div>
+
+                <h3 class="text-2xl font-bold">
+                    CRM Support
+                </h3>
+
+            </div>
+
+            <div class="glass p-8 rounded-[35px] text-center card">
+
+                <div class="text-5xl mb-6">🎨</div>
+
+                <h3 class="text-2xl font-bold">
+                    Marketing Assistance
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- CONTACT -->
+<!-- ========================= -->
+
+<section id="contact" class="py-28 px-6">
+
+    <div class="max-w-5xl mx-auto">
+
+        <div class="glass rounded-[45px] p-14 text-center card"
+             data-aos="zoom-in">
+
+            <p class="text-blue-400 uppercase tracking-[4px] mb-4">
+                Contact Me
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+
+                Let's Work
+                <span class="gradient-text">
+                    Together 🚀
+                </span>
+
+            </h2>
+
+            <p class="text-gray-300 text-lg leading-9 max-w-2xl mx-auto">
+
+                Open for freelance collaborations, remote work, sales support, business coordination, and marketing opportunities.
+
+            </p>
+
+            <!-- Buttons -->
+
+            <div class="flex flex-wrap justify-center gap-6 mt-12">
+
+                <a href="mailto:cadlumjackielou23@gmail.com">
+
+                    <button class="btn-main bg-blue-600 hover:bg-blue-700 glow">
+
+                        📩 Email Me
+
+                    </button>
+
+                </a>
+
+                <a href="tel:+639999016426">
+
+                    <button class="btn-main bg-green-500 hover:bg-green-600">
+
+                        📞 Call Me
+
+                    </button>
+
+                </a>
+
+                <a href="https://wa.me/639999016426"
+                   target="_blank">
+
+                    <button class="btn-main bg-emerald-500 hover:bg-emerald-600">
+
+                        💬 WhatsApp
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            <!-- Info -->
+
+            <div class="mt-12 text-gray-400 leading-10">
+
+                <p>📍 Dasmariñas, Cavite, Philippines</p>
+
+                <p>📞 +63 999 901 6426</p>
+
+                <p>✉️ cadlumjackielou23@gmail.com</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer class="py-10 text-center border-t border-gray-800 text-gray-500">
+
+    © 2026 Jackielou Cadlum • Portfolio
+
+</footer>
+
+<!-- ========================= -->
 <!-- AOS -->
+<!-- ========================= -->
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
 
+/* ========================= */
 /* AOS */
+/* ========================= */
 
 AOS.init({
+
     duration:1000,
     once:true
+
 });
 
-/* Typing */
+/* ========================= */
+/* TYPING */
+/* ========================= */
 
 const text = [
 
@@ -580,7 +1121,9 @@ let letter = "";
 
 })();
 
-/* Mobile Menu */
+/* ========================= */
+/* MOBILE MENU */
+/* ========================= */
 
 const menuBtn = document.getElementById("menuBtn");
 
