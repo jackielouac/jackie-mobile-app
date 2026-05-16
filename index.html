@@ -2,21 +2,36 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Jackielou Cadlum | Portfolio</title>
 
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 <!-- AOS -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
 
 html{
     scroll-behavior:smooth;
@@ -24,12 +39,24 @@ html{
 
 body{
     background:#060816;
-    font-family:Arial,sans-serif;
-    overflow-x:hidden;
     color:white;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
 }
 
-/* Animated Background */
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563eb;
+    border-radius:20px;
+}
+
+/* Background Animation */
+
 .bg-animation{
     background:linear-gradient(-45deg,#0f172a,#1e1b4b,#312e81,#111827);
     background-size:400% 400%;
@@ -42,79 +69,8 @@ body{
     100%{background-position:0% 50%;}
 }
 
-/* Floating */
-.float{
-    animation:float 5s ease-in-out infinite;
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-18px);}
-    100%{transform:translateY(0);}
-}
-
-/* Glass */
-.glass{
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.08);
-}
-
-/* Glow */
-.glow{
-    box-shadow:0 0 40px rgba(59,130,246,.4);
-}
-
-/* Card Hover */
-.card{
-    transition:.4s;
-}
-
-.card:hover{
-    transform:translateY(-10px) scale(1.02);
-    box-shadow:0 0 30px rgba(59,130,246,.2);
-}
-
-/* Typing */
-.typing::after{
-    content:"|";
-    animation:blink .7s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:0;}
-}
-
-/* Marquee Skills */
-.marquee{
-    overflow:hidden;
-    white-space:nowrap;
-    position:relative;
-}
-
-.marquee-content{
-    display:inline-block;
-    animation:marquee 22s linear infinite;
-}
-
-@keyframes marquee{
-    0%{transform:translateX(0);}
-    100%{transform:translateX(-50%);}
-}
-
-/* Buttons */
-.btn-main{
-    padding:15px 30px;
-    border-radius:18px;
-    font-weight:bold;
-    transition:.3s;
-}
-
-.btn-main:hover{
-    transform:scale(1.05);
-}
-
 /* Blur Balls */
+
 .blur-ball{
     position:absolute;
     border-radius:999px;
@@ -123,48 +79,203 @@ body{
     z-index:-1;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar{
-    width:8px;
-}
+/* Glass */
 
-::-webkit-scrollbar-thumb{
-    background:#2563eb;
-    border-radius:20px;
+.glass{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 }
 
 /* Gradient Text */
+
 .gradient-text{
     background:linear-gradient(to right,#60a5fa,#a855f7);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-/* Section Spacing */
-section{
-    position:relative;
+/* Floating */
+
+.float{
+    animation:float 5s ease-in-out infinite;
 }
 
-/* Social Icons */
-.social-icon{
-    width:55px;
-    height:55px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+/* Buttons */
+
+.btn-main{
+    padding:14px 28px;
+    min-width:180px;
+
     border-radius:18px;
+
+    font-weight:600;
+
     transition:.3s;
 }
 
-.social-icon:hover{
-    transform:translateY(-5px) scale(1.08);
-    background:#2563eb;
+.btn-main:hover{
+    transform:translateY(-4px);
+}
+
+/* Glow */
+
+.glow{
+    box-shadow:0 0 40px rgba(59,130,246,.4);
+}
+
+/* Cards */
+
+.card{
+    transition:.35s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 30px rgba(59,130,246,.15);
+}
+
+/* Typing */
+
+.typing::after{
+    content:"|";
+    animation:blink .7s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* Marquee */
+
+.marquee{
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.marquee-content{
+    display:inline-block;
+    animation:marquee 22s linear infinite;
+}
+
+@keyframes marquee{
+    0%{
+        transform:translateX(0);
+    }
+    100%{
+        transform:translateX(-50%);
+    }
+}
+
+/* iOS Social Icons */
+
+.ios-social{
+    position:relative;
+
+    width:70px;
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    transition:.35s ease;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35),
+        inset 0 1px 1px rgba(255,255,255,.08);
+}
+
+.ios-social::before{
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+    top:-150%;
+    left:-150%;
+
+    transform:rotate(25deg);
+
+    transition:.7s;
+}
+
+.ios-social:hover::before{
+    top:100%;
+    left:100%;
+}
+
+.ios-social:hover{
+    transform:translateY(-8px) scale(1.05);
+}
+
+.ios-social i{
+    font-size:30px;
+    color:white;
+    z-index:2;
+}
+
+.facebook:hover{
+    background:rgba(24,119,242,.2);
+}
+
+.instagram:hover{
+    background:rgba(225,48,108,.2);
+}
+
+.tiktok:hover{
+    background:rgba(255,255,255,.12);
 }
 
 /* Mobile Menu */
+
 .mobile-menu{
     display:none;
 }
+
+/* Images */
+
+img{
+    user-select:none;
+    -webkit-user-drag:none;
+}
+
+/* Responsive */
 
 @media(max-width:768px){
 
@@ -181,6 +292,16 @@ section{
         line-height:1.1;
     }
 
+    .ios-social{
+        width:60px;
+        height:60px;
+        border-radius:18px;
+    }
+
+    .ios-social i{
+        font-size:24px;
+    }
+
 }
 
 </style>
@@ -189,11 +310,14 @@ section{
 
 <body>
 
-<!-- Blur Background -->
+<!-- Blur Balls -->
+
 <div class="blur-ball bg-blue-500 w-72 h-72 top-0 left-0"></div>
+
 <div class="blur-ball bg-purple-500 w-96 h-96 bottom-0 right-0"></div>
 
 <!-- NAVBAR -->
+
 <nav class="fixed top-0 w-full z-50 glass">
 
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -203,17 +327,23 @@ section{
         </h1>
 
         <!-- Desktop Menu -->
+
         <div class="desktop-menu flex gap-8 text-sm uppercase tracking-wider">
 
             <a href="#about" class="hover:text-blue-400 transition">About</a>
+
             <a href="#skills" class="hover:text-blue-400 transition">Skills</a>
+
             <a href="#experience" class="hover:text-blue-400 transition">Experience</a>
+
             <a href="#services" class="hover:text-blue-400 transition">Services</a>
+
             <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
 
         </div>
 
-        <!-- Mobile -->
+        <!-- Mobile Button -->
+
         <button id="menuBtn" class="mobile-menu text-2xl">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -221,12 +351,17 @@ section{
     </div>
 
     <!-- Mobile Nav -->
+
     <div id="mobileNav" class="hidden px-6 pb-6 space-y-4 glass">
 
         <a href="#about" class="block hover:text-blue-400">About</a>
+
         <a href="#skills" class="block hover:text-blue-400">Skills</a>
+
         <a href="#experience" class="block hover:text-blue-400">Experience</a>
+
         <a href="#services" class="block hover:text-blue-400">Services</a>
+
         <a href="#contact" class="block hover:text-blue-400">Contact</a>
 
     </div>
@@ -234,237 +369,105 @@ section{
 </nav>
 
 <!-- HERO -->
+
 <section class="min-h-screen bg-animation flex items-center px-6 pt-28">
 
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         <!-- LEFT -->
+
         <div data-aos="fade-right">
 
             <p class="text-blue-400 text-lg mb-4 tracking-widest">
                 HEY THERE! 👋
             </p>
 
-            <h1 class="hero-title text-6xl md:text-7xl font-bold leading-tight">
+            <h1 class="hero-title text-5xl md:text-7xl font-bold leading-tight">
 
                 Jackielou
+
                 <span class="gradient-text">
                     Cadlum
                 </span>
 
             </h1>
 
-            <h2 class="text-2xl md:text-4xl mt-5 font-semibold typing min-h-[60px]" id="typing"></h2>
+            <h2 id="typing"
+                class="text-2xl md:text-4xl mt-5 font-semibold typing min-h-[60px]">
+            </h2>
 
             <p class="text-gray-300 mt-8 text-lg leading-9">
-                Results-oriented Sales & Marketing Professional with experience in B2B appointment setting, CRM management, lead generation, ERP systems, and client coordination. Helping businesses grow through smart digital solutions, modern communication, and customer-focused strategies 🚀
+
+                Results-oriented Sales & Marketing Professional with experience in B2B appointment setting, CRM management, lead generation, ERP systems, and client coordination.
+
             </p>
+
+            <!-- Buttons -->
 
             <div class="flex flex-wrap gap-5 mt-10">
 
                 <a href="#contact">
+
                     <button class="btn-main bg-blue-600 hover:bg-blue-700 glow">
                         💼 Hire Me
                     </button>
+
                 </a>
 
                 <a href="#services">
+
                     <button class="btn-main bg-white text-black hover:bg-gray-200">
                         ✨ View Services
                     </button>
+
                 </a>
 
             </div>
 
-            <!-- Social -->
+            <!-- Social Icons -->
+
             <div class="flex gap-5 mt-12">
 
- <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+                <a href="https://www.facebook.com/itsjackielou/"
+                   target="_blank"
+                   class="ios-social facebook">
 
-<div class="social-wrap">
+                    <i class="fab fa-facebook-f"></i>
 
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/itsjackielou/" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       class="glass social-icon facebook">
-        <i class="fab fa-facebook-f"></i>
-    </a>
+                </a>
 
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/jackielouac" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       class="glass social-icon instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
+                <a href="https://www.instagram.com/jackielouac"
+                   target="_blank"
+                   class="ios-social instagram">
 
-    <!-- TikTok -->
-    <a href="#" class="glass social-icon tiktok">
-        <i class="fab fa-tiktok"></i>
-    </a>
+                    <i class="fab fa-instagram"></i>
 
-</div>
+                </a>
 
-<style>
-/* Background demo */
-body{
-    background:
-    radial-gradient(circle at top, #1e293b, #020617);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial, sans-serif;
-}
+                <a href="https://www.tiktok.com/"
+                   target="_blank"
+                   class="ios-social tiktok">
 
-/* Container */
-.social-wrap{
-    display:flex;
-    gap:28px;
-}
+                    <i class="fab fa-tiktok"></i>
 
-/* iPhone glass effect */
-.glass{
-    position:relative;
-    width:88px;
-    height:88px;
-    border-radius:28px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-decoration:none;
-
-    background:rgba(255,255,255,0.12);
-
-    border:1px solid rgba(255,255,255,0.25);
-
-    box-shadow:
-        0 8px 32px rgba(0,0,0,0.35),
-        inset 0 1px 1px rgba(255,255,255,0.3),
-        inset 0 -4px 10px rgba(255,255,255,0.06);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    overflow:hidden;
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        background 0.35s ease;
-
-    animation: float 4s ease-in-out infinite;
-}
-
-/* Floating animation */
-.glass:nth-child(2){
-    animation-delay:0.8s;
-}
-
-.glass:nth-child(3){
-    animation-delay:1.6s;
-}
-
-@keyframes float{
-    0%,100%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-10px);
-    }
-}
-
-/* Shine effect */
-.glass::before{
-    content:'';
-    position:absolute;
-    top:-120%;
-    left:-40%;
-    width:60%;
-    height:300%;
-
-    background:rgba(255,255,255,0.35);
-
-    transform:rotate(25deg);
-
-    transition:0.7s;
-}
-
-.glass:hover::before{
-    left:130%;
-}
-
-/* Hover */
-.glass:hover{
-    transform:translateY(-12px) scale(1.08);
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.45),
-        0 0 30px rgba(255,255,255,0.15);
-}
-
-/* Icon style */
-.social-icon i{
-    font-size:38px;
-    color:white;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,0.6),
-        0 0 20px rgba(255,255,255,0.3);
-
-    z-index:2;
-    transition:0.3s ease;
-}
-
-/* Brand glow colors */
-.facebook:hover{
-    background:rgba(24,119,242,0.25);
-}
-
-.instagram:hover{
-    background:rgba(225,48,108,0.22);
-}
-
-.tiktok:hover{
-    background:rgba(255,255,255,0.15);
-}
-
-/* Pulse glow */
-.glass::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    border-radius:inherit;
-    box-shadow:0 0 25px rgba(255,255,255,0.15);
-    opacity:0;
-    transition:0.4s;
-}
-
-.glass:hover::after{
-    opacity:1;
-}
-</style>
-</div>
+                </a>
 
             </div>
 
         </div>
 
         <!-- RIGHT -->
+
         <div class="flex justify-center items-center relative" data-aos="fade-left">
 
-            <!-- Background Glow -->
             <div class="absolute w-[350px] h-[350px] bg-blue-500 rounded-full blur-[120px] opacity-30 animate-pulse"></div>
 
             <div class="absolute w-[280px] h-[280px] bg-purple-500 rounded-full blur-[100px] opacity-20"></div>
 
-            <!-- Main Container -->
             <div class="relative">
 
-                <!-- Floating Badge -->
+                <!-- Badge -->
+
                 <div class="absolute -top-5 -left-8 glass px-5 py-4 rounded-3xl z-30 shadow-2xl float">
 
                     <p class="text-sm text-gray-300">
@@ -477,14 +480,16 @@ body{
 
                 </div>
 
-                <!-- YOUR PHOTO -->
+                <!-- Image -->
+
                 <img
-                    src="me.jpg.png"
+                    src="me.jpg"
                     alt="Jackielou Cadlum"
-                    class="relative z-20 w-[340px] md:w-[440px] h-auto rounded-[40px] object-cover border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.35)] float"
+                    class="relative z-20 w-[340px] md:w-[440px] rounded-[40px] border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.35)] float"
                 />
 
-                <!-- Right Floating Card -->
+                <!-- Side Card -->
+
                 <div class="absolute top-1/2 -right-10 glass px-5 py-4 rounded-3xl z-30 shadow-2xl">
 
                     <p class="text-sm text-gray-300">
@@ -497,7 +502,8 @@ body{
 
                 </div>
 
-                <!-- EXPERIENCE CARD -->
+                <!-- Experience -->
+
                 <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 glass px-7 py-5 rounded-3xl z-30 shadow-2xl">
 
                     <h3 class="font-bold text-2xl text-center">
@@ -505,7 +511,7 @@ body{
                     </h3>
 
                     <p class="text-gray-300 text-center mt-2">
-                        Sales • CRM • Marketing • Presentations
+                        Sales • CRM • Marketing
                     </p>
 
                 </div>
@@ -518,319 +524,21 @@ body{
 
 </section>
 
-<!-- MOVING SKILLS -->
-<section class="py-10 border-y border-gray-800">
-
-    <div class="marquee">
-
-        <div class="marquee-content text-2xl font-semibold text-white flex gap-16">
-
-            <span>✅ Lead Generation</span>
-            <span>✅ CRM Management</span>
-            <span>✅ Appointment Setting</span>
-            <span>✅ Sales Coordination</span>
-            <span>✅ ERP & Accounting Systems</span>
-            <span>✅ Client Communication</span>
-            <span>✅ Marketing Assistance</span>
-            <span>✅ Canva & Digital Content</span>
-
-            <span>✅ Lead Generation</span>
-            <span>✅ CRM Management</span>
-            <span>✅ Appointment Setting</span>
-            <span>✅ Sales Coordination</span>
-            <span>✅ ERP & Accounting Systems</span>
-            <span>✅ Client Communication</span>
-            <span>✅ Marketing Assistance</span>
-            <span>✅ Canva & Digital Content</span>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="py-28 px-6">
-
-    <div class="max-w-6xl mx-auto">
-
-        <div class="glass rounded-[40px] p-12" data-aos="fade-up">
-
-            <h2 class="text-5xl font-bold mb-10">
-                About Me ✨
-            </h2>
-
-            <p class="text-gray-300 leading-10 text-lg">
-
-                Currently working as an
-                <span class="text-blue-400 font-semibold">
-                    Assist. Sales Manager
-                </span>
-                supporting B2B software solutions, CRM workflows, client coordination, and sales operations.
-
-                Experienced in handling lead generation, appointment setting, customer communication, and marketing support in fast-paced business environments.
-
-                Passionate about helping businesses improve customer engagement, sales growth, and operational efficiency through practical digital solutions.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- STATS -->
-<section class="px-6 pb-10">
-
-    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-
-        <div class="glass p-8 rounded-[30px] text-center card">
-            <h3 class="text-5xl font-bold text-blue-400">50+</h3>
-            <p class="text-gray-300 mt-4">Clients Coordinated</p>
-        </div>
-
-        <div class="glass p-8 rounded-[30px] text-center card">
-            <h3 class="text-5xl font-bold text-purple-400">100+</h3>
-            <p class="text-gray-300 mt-4">Sales Meetings</p>
-        </div>
-
-        <div class="glass p-8 rounded-[30px] text-center card">
-            <h3 class="text-5xl font-bold text-pink-400">2+</h3>
-            <p class="text-gray-300 mt-4">Years Experience</p>
-        </div>
-
-        <div class="glass p-8 rounded-[30px] text-center card">
-            <h3 class="text-5xl font-bold text-green-400">24/7</h3>
-            <p class="text-gray-300 mt-4">Client Support</p>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="py-28 px-6">
-
-    <div class="max-w-7xl mx-auto">
-
-        <h2 class="text-5xl font-bold text-center mb-16">
-            Skills & Expertise 🚀
-        </h2>
-
-        <div class="grid md:grid-cols-3 gap-8">
-
-            <div class="glass p-8 rounded-[35px] card" data-aos="zoom-in">
-
-                <i class="fa-solid fa-chart-line text-5xl text-blue-400"></i>
-
-                <h3 class="text-3xl font-bold mt-6">
-                    Sales & Marketing
-                </h3>
-
-                <p class="text-gray-300 mt-5 leading-8">
-                    B2B campaigns, appointment setting, customer engagement, and sales coordination.
-                </p>
-
-            </div>
-
-            <div class="glass p-8 rounded-[35px] card" data-aos="zoom-in">
-
-                <i class="fa-solid fa-users text-5xl text-purple-400"></i>
-
-                <h3 class="text-3xl font-bold mt-6">
-                    CRM Management
-                </h3>
-
-                <p class="text-gray-300 mt-5 leading-8">
-                    Lead tracking, workflow management, customer databases, and coordination support.
-                </p>
-
-            </div>
-
-            <div class="glass p-8 rounded-[35px] card" data-aos="zoom-in">
-
-                <i class="fa-solid fa-laptop text-5xl text-pink-400"></i>
-
-                <h3 class="text-3xl font-bold mt-6">
-                    Digital Support
-                </h3>
-
-                <p class="text-gray-300 mt-5 leading-8">
-                    Canva editing, reports, online research, presentations, and administrative support.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="py-28 px-6">
-
-    <div class="max-w-6xl mx-auto">
-
-        <h2 class="text-5xl font-bold text-center mb-20">
-            Work Experience 💼
-        </h2>
-
-        <div class="space-y-10">
-
-            <div class="glass rounded-[35px] p-10 card" data-aos="fade-right">
-
-                <h3 class="text-3xl font-bold text-blue-400">
-                    Integr8 Software Solutions
-                </h3>
-
-                <p class="text-gray-400 mt-2">
-                    June 2023 – Present
-                </p>
-
-                <ul class="mt-6 text-gray-300 leading-10">
-
-                    <li>• Supported B2B software sales operations</li>
-                    <li>• Managed CRM workflows and client coordination</li>
-                    <li>• Assisted onboarding and sales follow-ups</li>
-                    <li>• Trained junior associates on CRM handling</li>
-                    <li>• Conducted market and competitor research</li>
-
-                </ul>
-
-            </div>
-
-            <div class="glass rounded-[35px] p-10 card" data-aos="fade-left">
-
-                <h3 class="text-3xl font-bold text-purple-400">
-                    IVoice Outsourcing
-                </h3>
-
-                <p class="text-gray-400 mt-2">
-                    August 2022 – May 2023
-                </p>
-
-                <ul class="mt-6 text-gray-300 leading-10">
-
-                    <li>• B2B outbound appointment setting</li>
-                    <li>• Lead qualification and scheduling</li>
-                    <li>• Client communication and relationship building</li>
-                    <li>• Maintained CRM accuracy and targets</li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="py-28 px-6">
-
-    <div class="max-w-7xl mx-auto">
-
-        <h2 class="text-5xl font-bold text-center mb-16">
-            Services ✨
-        </h2>
-
-        <div class="grid md:grid-cols-4 gap-8">
-
-            <div class="glass p-8 rounded-[35px] text-center card">
-                <h3 class="text-2xl font-bold">📞 Appointment Setting</h3>
-            </div>
-
-            <div class="glass p-8 rounded-[35px] text-center card">
-                <h3 class="text-2xl font-bold">📈 Lead Generation</h3>
-            </div>
-
-            <div class="glass p-8 rounded-[35px] text-center card">
-                <h3 class="text-2xl font-bold">💻 CRM Support</h3>
-            </div>
-
-            <div class="glass p-8 rounded-[35px] text-center card">
-                <h3 class="text-2xl font-bold">🎨 Marketing Assistance</h3>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="py-28 px-6">
-
-    <div class="max-w-5xl mx-auto">
-
-        <div class="glass rounded-[45px] p-14 text-center" data-aos="zoom-in">
-
-            <h2 class="text-5xl font-bold mb-8">
-                Let's Work Together 🚀
-            </h2>
-
-            <p class="text-gray-300 text-lg leading-9 max-w-2xl mx-auto">
-
-                Open for freelance collaborations, remote work, business coordination, sales support, and marketing-related opportunities.
-
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-6 mt-12">
-
-                <a href="mailto:cadlumjackielou23@gmail.com">
-
-                    <button class="btn-main bg-blue-600 hover:bg-blue-700 glow">
-                        📩 Email Me
-                    </button>
-
-                </a>
-
-                <a href="tel:+639999016426">
-
-                    <button class="btn-main bg-green-500 hover:bg-green-600">
-                        📞 Call Me
-                    </button>
-
-                </a>
-
-            </div>
-
-            <div class="mt-12 text-gray-400 leading-10">
-
-                <p>📍 Dasmariñas, Cavite, Philippines</p>
-                <p>📞 +63 999 901 6426</p>
-                <p>✉ cadlumjackielou23@gmail.com</p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- FOOTER -->
-<footer class="py-10 text-center border-t border-gray-800 text-gray-500">
-
-    © 2026 Jackielou Cadlum • Portfolio.
-
-</footer>
-
 <!-- AOS -->
+
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
 
 /* AOS */
+
 AOS.init({
     duration:1000,
     once:true
 });
 
-/* Typing Effect */
+/* Typing */
+
 const text = [
 
     "Sales & Marketing Professional 🚀",
@@ -852,6 +560,7 @@ let letter = "";
     }
 
     currentText = text[count];
+
     letter = currentText.slice(0, ++index);
 
     document.getElementById("typing").textContent = letter;
@@ -872,7 +581,9 @@ let letter = "";
 })();
 
 /* Mobile Menu */
+
 const menuBtn = document.getElementById("menuBtn");
+
 const mobileNav = document.getElementById("mobileNav");
 
 menuBtn.addEventListener("click", () => {
